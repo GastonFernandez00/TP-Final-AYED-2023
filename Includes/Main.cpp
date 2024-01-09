@@ -10,7 +10,7 @@ int main(int argc, char const *argv[])
 {
     Lista<int> *p = new Lista<int>();
     //Lista<int>* p = new Lista<int>();
-    for (int i = 0; i < 10; i++){ p->add(i); }
+    for (int i = 0; i < 10; i++){ p->add(10); }
 
     cout<<"\n-------------\n";
     cout<<p->size();

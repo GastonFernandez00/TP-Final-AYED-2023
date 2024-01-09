@@ -14,7 +14,7 @@ template <class T>
 void Lista<T>::add(T a){
     Nodo<T>* nuevo = new Nodo<T>(a);
     nuevo->setNext(czo);
-    nuevo = czo;
+    czo = nuevo;
 }
 
 template <class T>
