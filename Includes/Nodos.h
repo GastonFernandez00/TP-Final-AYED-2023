@@ -21,5 +21,7 @@ public:
 
     T        getDato();
     Nodo<T>* getNext();
+
+    bool    nodoIsEmpty();
 }; 
 #endif

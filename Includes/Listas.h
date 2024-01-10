@@ -13,11 +13,24 @@ class  Lista{
 private:
     Nodo<T>* czo;
     int pSize(Nodo<T>*);
+    void imprimirLista(Nodo<T>*);
+    bool checkDato(T,Nodo<T>*);
+    void borrarDatop(T, Nodo<T>*,Nodo<T>*);
 public:
     Lista();
+    Lista(Nodo<T>*);
     ~Lista();
 
     void add(T);
-    int  size(); 
+    int  size();
+    T cabeza(); 
+    bool isEmpty();
+    Lista<T>* resto();
+    void printLista();
+    string toPrint(string);
+    bool esta(T);
+    void borrarDato(T);
+    
+
 };
 #endif
