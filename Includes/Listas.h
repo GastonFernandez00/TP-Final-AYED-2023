@@ -16,6 +16,8 @@ private:
     void imprimirLista(Nodo<T>*);
     bool checkDato(T,Nodo<T>*);
     void borrarDatop(T, Nodo<T>*,Nodo<T>*);
+    void borrarLastp(Nodo<T>*,Nodo<T>*);
+    T lastp(Nodo<T>*, Nodo<T>*);
 public:
     Lista();
     Lista(Nodo<T>*);
@@ -30,7 +32,11 @@ public:
     string toPrint(string);
     bool esta(T);
     void borrarDato(T);
-    
-
+    void borrarCabeza();
+    void borrarLast();
+    void concat(Lista<T>*);
+    Lista<T>* copy();
+    void tomar(int);
+    T last();
 };
 #endif

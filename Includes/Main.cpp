@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
     cout<<"\n-------------\n";
     p->printLista();
 
-    p->borrarDato(6334);
+    /*p->borrarDato(6334);
     p->borrarDato(19169);
     p->borrarDato(41);
     p->borrarDato(11478);
@@ -25,11 +25,22 @@ int main(int argc, char const *argv[])
 
     p->borrarDato(-5);
 
-    p->borrarDato(26962);
+    p->borrarDato(26962);*/
+
+    //for(int i = 0; i< 5; i++) p->borrarCabeza();
+
+    //for(int i = 0; i< 8; i++) p->borrarLast();
+
+    p->tomar(0);
+
+    cout<<"\n----\n";
+
+    cout<<p->last();
 
     cout<<"\n----\n";
 
     p->printLista();
+    //cout<<p->cabeza();
 
 
     /*if(p->esta(63304)){
