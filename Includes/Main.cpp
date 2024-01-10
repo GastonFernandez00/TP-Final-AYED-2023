@@ -2,13 +2,46 @@
 #include <stdio.h>
 #include <iostream>
 //#include "Nodos.hpp"
-#include "Listas.h"
+//#include "Listas.h"
+#include    "Colas.h"
 
 using namespace std;
 
-int main(int argc, char const *argv[])
-{
-    Lista<int> *p = new Lista<int>();
+int main(int argc, char const *argv[]){
+    int count = 10;   
+    
+    
+    Cola<int> c[10];
+    
+    for (int i = 0; i < count; i++){
+        int x = rand()%10;
+        for (int j = 0; j < x; j++){
+            c[i].encolar(rand());
+        }        
+    }
+
+    for (int i = 0; i < count; i++){
+        cout<<"\n---------------------------\nCola N: "<<i+1<<endl;
+        //cout<<c[i].sizeCola();
+        c[i].printCola();
+    }
+    
+    
+
+    
+    
+    
+    
+    /*Cola<string> *c = new Cola<string>();
+    for(int i = 0 ; i<10; i++) c->encolar("Gaston");
+    c->printCola();
+
+    cout<<"\n\n\n"<<c->sizeCola();
+    
+
+
+
+   /* Lista<int> *p = new Lista<int>();
     //Lista<int>* p = new Lista<int>();
     for (int i = 0; i < 10; i++){ p->add(rand()); }
 
@@ -31,7 +64,7 @@ int main(int argc, char const *argv[])
 
     //for(int i = 0; i< 8; i++) p->borrarLast();
 
-    p->tomar(0);
+    /*p->tomar(0);
 
     cout<<"\n----\n";
 

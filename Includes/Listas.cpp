@@ -176,6 +176,6 @@ Lista<T>::*/
 
 template class Lista<int>;
 template class Lista<float>;
-template class Nodo<double>;
-template class Nodo<char>;
-template class Nodo<string>;
+template class Lista<double>;
+template class Lista<char>;
+template class Lista<string>;
