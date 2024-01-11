@@ -173,7 +173,6 @@ T Lista<T>::lastp(Nodo<T>* inicio,Nodo<T>* anterior){
 /*template <class T>
 Lista<T>::*/
 
-
 template class Lista<int>;
 template class Lista<float>;
 template class Lista<double>;
