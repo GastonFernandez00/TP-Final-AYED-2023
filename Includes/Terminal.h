@@ -11,6 +11,7 @@ public:
     ~Terminal();
 
     void empaquetado(Pagina *,Cola<int>*);
+    void envio(Cola<int>*);
 
 };
 #endif
