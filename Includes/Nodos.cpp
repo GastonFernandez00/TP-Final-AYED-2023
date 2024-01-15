@@ -26,6 +26,7 @@ template <class T>
 bool    Nodo<T>::nodoIsEmpty(){ return next == NULL; }
 
 template class Nodo<int>;
+template class Nodo<Nodo<int>*>;
 template class Nodo<float>;
 template class Nodo<double>;
 template class Nodo<char>;

@@ -26,6 +26,16 @@ public:
     /*Destructor de Clase*/
     ~Router();
 
+    /*  Devuelve el ID del router actual 
+        @returns int
+    */
+    int getIDRouter();
+
+    /*  Devuelve la posicion pseudo-fisica del router actual
+        @returns int
+    */
+    int getPosicionRouter();
+
     void Recepcion(Cola<int>*);
 
 

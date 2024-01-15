@@ -174,6 +174,7 @@ T Lista<T>::lastp(Nodo<T>* inicio,Nodo<T>* anterior){
 Lista<T>::*/
 
 template class Lista<int>;
+template class Lista<Lista<int>*>;
 template class Lista<float>;
 template class Lista<double>;
 template class Lista<char>;
