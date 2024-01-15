@@ -8,8 +8,8 @@ private:
         Si: Determinante == 1 -> Receptor
     */
     bool determinante;
-
 public:
+    
 
     /*  Constructor de la clase terminal, define si una 
         pc es emisor o receptor de forma aleatoria

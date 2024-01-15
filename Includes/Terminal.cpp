@@ -28,8 +28,8 @@ void Terminal::empaquetado(Pagina *p,Cola<int>* c){
 bool Terminal::getDeterminante(){ return determinante; }
 
 void Terminal::envio(Cola<int>* c, int id_Router){
-
-    
+    c->cambiarEstado();
+    c->setIDDestino(id_Router);    
 }
 
 /*int main(int argc, char const *argv[])

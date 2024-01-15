@@ -14,7 +14,10 @@ template <class T>
 class Cola /*: public Lista<T> POSIBLE HERENCIA*/{
 private:
     int id_Cola = -1;
+    int id_Destino = -1;
+    bool estado = false;
     Lista<T>* c;
+
 public:
     //  Constructor de Clase: Genera una nueva cola tipo FIFO
     Cola();
@@ -57,6 +60,24 @@ public:
         @param int
     */
     void setIDCola(int);
+
+    /*  Establede el ID de destino de la cola
+        @param int
+    */
+   void setIDDestino(int);
+
+    /*Cambia el estado de la cola, segun este lista para enviarse o no*/
+    void cambiarEstado();
+
+    /*  Devuelve el Id de del router a donde debe ir la cola
+        @returns int
+    */
+    int getIDDestino();
+
+    /*  Devuelve el Id de la cola
+        @returns int
+    */
+    int getIDCola();
     
 };
 #endif

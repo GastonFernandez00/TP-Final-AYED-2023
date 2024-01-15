@@ -33,8 +33,19 @@ int Cola<T>::sizeCola(){ return c->size(); }
 template <class T>
 void Cola<T>::setIDCola(int i){ id_Cola = i; }
 
+template <class T>
+void Cola<T>::cambiarEstado(){ if(estado == false){ estado = true; } else{ estado = false; }}
+
+template <class T>
+int Cola<T>::getIDDestino(){ return id_Destino; }
+
+template <class T>
+int Cola<T>::getIDCola(){ return id_Cola; }
+
 template class Cola<int>;
+template class Cola<Cola<int>*>;
 template class Cola<float>;
 template class Cola<double>;
 template class Cola<char>;
 template class Cola<string>;
+
