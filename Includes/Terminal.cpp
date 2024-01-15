@@ -2,10 +2,19 @@
 
 using namespace std;
 
-Terminal::Terminal(){}
+Terminal::Terminal(){
+    int x = rand()%2;
+    determinante = x;
+}
+Terminal::Terminal(bool b){ determinante = b;}
 Terminal::~Terminal(){}
 
 void Terminal::empaquetado(Pagina *p,Cola<int>* c){
+        if(this->getDeterminante()){ 
+            cout<<"[ERROR]: PC RECEPTOR, NO EMISOR";    
+            return (void)0;
+        }
+        c->setIDCola(p->getID());
         while(p->getTamanio() >= 50){
             c->encolar(50);
             p->setTamanio(p->getTamanio()-50);
@@ -16,15 +25,27 @@ void Terminal::empaquetado(Pagina *p,Cola<int>* c){
         }
 }
 
+bool Terminal::getDeterminante(){ return determinante; }
 
+void Terminal::envio(Cola<int>* c, int id_Router){
 
-int main(int argc, char const *argv[])
+    
+}
+
+/*int main(int argc, char const *argv[])
 {
-    Cola<int> c[256];
+    Cola<int> cEnvio[128],cRecibido[128];
     Pagina p[100];
-    Terminal t;
+    Terminal t[10];
 
-    for(int i = 0; i < size(p); i++){
+    
+
+   
+
+
+    
+
+    /*for(int i = 0; i < size(p); i++){
         t.empaquetado(&p[i],&c[i]);
     }
 
@@ -49,7 +70,7 @@ int main(int argc, char const *argv[])
     c->printCola();
 
     cout<<endl<<endl<<c->sizeCola();
-*/
+
     return 0;
-}
+}*/
 

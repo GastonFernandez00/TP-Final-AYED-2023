@@ -5,7 +5,14 @@
 //Es un tipo de Dato
 class Pagina{
 private:
-    int tamanio;//MAX = 500
+    int id_pagina;
+    int tamanio;//MAX = 500 //Tambien es la informacion en si misma
+
+    /* Establece el id de la pagina
+       @param int 
+    */
+    void setID(int);
+
 public:
 
     /*  Constructor de Clase*/
@@ -27,6 +34,11 @@ public:
     /*  Establece el Tamanio de la Pagina <= 500
         @param int
     */
-    void setTamanio(int);
+    void setTamanio(int);  
+    
+    /*  Devuelve el ID de la pagina
+        @returns int
+    */
+    int getID();
 };
 #endif

@@ -30,6 +30,9 @@ void Cola<T>::printCola(){ c->printLista(); }
 template <class T>
 int Cola<T>::sizeCola(){ return c->size(); }
 
+template <class T>
+void Cola<T>::setIDCola(int i){ id_Cola = i; }
+
 template class Cola<int>;
 template class Cola<float>;
 template class Cola<double>;

@@ -13,6 +13,7 @@ using namespace std;
 template <class T>
 class Cola /*: public Lista<T> POSIBLE HERENCIA*/{
 private:
+    int id_Cola = -1;
     Lista<T>* c;
 public:
     //  Constructor de Clase: Genera una nueva cola tipo FIFO
@@ -51,6 +52,11 @@ public:
     //  Devuelve el tamaño de la Cola
     //  @returns int
     int sizeCola();
+
+    /*Establece el id de la cola
+        @param int
+    */
+    void setIDCola(int);
     
 };
 #endif
