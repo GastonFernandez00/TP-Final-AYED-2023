@@ -61,6 +61,14 @@ void Cola<T>::setidDestinoTerminal(){ id_Destino_Terminal = rand()%256; }
 template <class T>
 int Cola<T>::getIDDestinoTerminal(){ return id_Destino_Terminal; }
 
+template <class T>
+void Cola<T>::vaciaCola(){
+    if(this->sizeCola() > 0){
+        this->descolar();
+        return vaciaCola();        
+    }
+}
+
 
 template class Cola<int>;
 template class Cola<Cola<int>*>;

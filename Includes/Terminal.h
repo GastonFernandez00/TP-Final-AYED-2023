@@ -25,6 +25,9 @@ public:
     /*Destructor de Clase*/
     ~Terminal();
 
+    /*  Establece el Determinante */
+    void setDeterminante(bool);
+
     /*  Devuelve del Determinante
         @returns bool
     */
@@ -37,10 +40,11 @@ public:
     void empaquetado(Pagina *,Cola<int>*);
 
     /*  Establece que X cola esta lista para ser enviada (levanta un flag) y 
-        asocia un id de router a donde debe ser enviado
+        asocia un id de router y terminal a donde debe ser enviado
         @param Cola<int>*, int
     */
     void envio(Cola<int>* /*,int*/);
+
 
 };
 #endif

@@ -11,7 +11,7 @@ using namespace std;
 *   @param T
 */
 template <class T>
-class Cola /*: public Lista<T> POSIBLE HERENCIA*/{
+class Cola /*: public Lista<T> /*POSIBLE HERENCIA*/{
 private:
     int id_Cola = -1;
     int id_Destino = -1;
@@ -103,6 +103,9 @@ public:
         @returns int
     */
     int getIDDestinoTerminal();
+
+    /*  Vacia la cola  */
+   void vaciaCola();
 
 };
 #endif

@@ -25,6 +25,8 @@ void Terminal::empaquetado(Pagina *p,Cola<int>* c){
         }
 }
 
+void Terminal::setDeterminante(bool D){ determinante = D; }
+
 bool Terminal::getDeterminante(){ return determinante; }
 
 void Terminal::envio(Cola<int>* c/*, int id_Router*/){
