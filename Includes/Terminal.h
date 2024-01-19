@@ -40,7 +40,7 @@ public:
         asocia un id de router a donde debe ser enviado
         @param Cola<int>*, int
     */
-    void envio(Cola<int>*,int);
+    void envio(Cola<int>* /*,int*/);
 
 };
 #endif

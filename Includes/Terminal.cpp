@@ -27,9 +27,13 @@ void Terminal::empaquetado(Pagina *p,Cola<int>* c){
 
 bool Terminal::getDeterminante(){ return determinante; }
 
-void Terminal::envio(Cola<int>* c, int id_Router){
+void Terminal::envio(Cola<int>* c/*, int id_Router*/){
+    //id_Router podria ser ingresado por usuario, mejor si no.
+    int id_Router = rand()%256;
+    int id_destino_terminal = rand()%256;
     c->cambiarEstado();
-    c->setIDDestino(id_Router);    
+    c->setIDDestino(id_Router); 
+    c->setidDestinoTerminal(id_destino_terminal);   
 }
 
 /*int main(int argc, char const *argv[])

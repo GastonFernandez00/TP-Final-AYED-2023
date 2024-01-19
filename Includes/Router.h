@@ -7,7 +7,8 @@ private:
     int id_Router = -1;
     int posicion = -1;
 
-    Cola<Cola<int>*> buffer;
+    Cola<Cola<int>*>* buffer = new Cola<Cola<int>*>();
+    Cola<Cola<int>*>* buffer_Redireccion = new Cola<Cola<int>*>();
 public:
     
     /*  Constructor de Clase, asocia una posicion e ID random*/

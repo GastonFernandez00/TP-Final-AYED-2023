@@ -15,6 +15,7 @@ class Cola /*: public Lista<T> POSIBLE HERENCIA*/{
 private:
     int id_Cola = -1;
     int id_Destino = -1;
+    int id_Destino_Terminal = -1;
     bool estado = false;
     Lista<T>* c;
 
@@ -61,10 +62,14 @@ public:
     */
     void setIDCola(int);
 
-    /*  Establede el ID de destino de la cola
+    /*  Establece el ID de destino de la cola
         @param int
     */
    void setIDDestino(int);
+
+    /*  Establece el ID de destino de la cola, pero sin parametros, aleatoriamente
+    */
+   void setIDDestino();
 
     /*Cambia el estado de la cola, segun este lista para enviarse o no*/
     void cambiarEstado();
@@ -79,5 +84,25 @@ public:
     */
     int getIDCola();
     
+    /*  Establece el Id de la computadora de destino.
+        Si cada router tiene 256 (0 - 255) computadoras, cada una 
+        esta numerada de esa forma, independiente de las otras que esten conectadas
+        a otros routers
+        @param int
+    */
+    void setidDestinoTerminal(int);
+
+    /*  Establece el Id de la computadora de destino.
+        Si cada router tiene 256 (0 - 255) computadoras, cada una 
+        esta numerada de esa forma, independiente de las otras que esten conectadas
+        a otros routers. Pero sin parametros.
+    */
+    void setidDestinoTerminal();
+
+    /*  Devuelve el ID del terminal a donde debe ir la cola
+        @returns int
+    */
+    int getIDDestinoTerminal();
+
 };
 #endif
