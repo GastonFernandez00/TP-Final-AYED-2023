@@ -36,9 +36,12 @@ int main(int argc, char const *argv[])
 
     /*
     Ver:
-        Como crear multiples objetos, que todos tengan los mismos parametros
-        Como acceder a los objetos dentro de cada buffer
-    
+        >Como crear multiples objetos, que todos tengan los mismos parametros
+        
+        >Como acceder a los objetos dentro de cada buffer
+        
+        >Ver que no haya 2 routers con la misma id ni posicion. Puede mandarse el arreglo a una funcion que checkee
+        cada uno de los elementos, y revise si hay alguno igual
     
     
     */
