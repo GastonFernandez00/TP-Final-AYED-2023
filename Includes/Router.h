@@ -27,6 +27,26 @@ public:
     /*Destructor de Clase*/
     ~Router();
 
+    /*  Establece el Valor de ID del router
+        @param Router*
+    */
+   void setIDRouter(Router *);
+
+    /*   Establece la Posicion del Router
+        @param Router*
+    */
+   void setRouterPosicion(Router *);
+
+   /*  Establece el Valor de ID del router con Parametros
+        @param Router* , int
+    */
+   void setIDRouter(Router *,int);
+
+    /*   Establece la Posicion del Router con Parametros
+        @param Router* , int
+    */
+   void setRouterPosicion(Router *,int);
+
     /*  Devuelve el ID del router actual 
         @returns int
     */
@@ -47,13 +67,20 @@ public:
     */
     void Recepcion(Cola<int>*);
 
-    /*Pregunta si la cola del router tiene algun elemento*/
+    /*  Pregunta si la cola del router tiene algun elemento*/
     bool routerEmpty();
 
-    /*Pregunta si la cola de redireccion tiene algun elemento*/
+    /*  Pregunta si la cola de redireccion tiene algun elemento*/
     bool routerRedireccionEmpty();
 
+    /*  Checkea que los routers sea unicos, y no haya repetidos
+        @param Router*
+    */
+    void checkIDRouter(Router *);
 
+    /*
+    */
+    void cambiarRouterID(Router*,Router*);
 
 
 
