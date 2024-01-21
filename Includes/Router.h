@@ -9,6 +9,7 @@ private:
 
     Cola<Cola<int>*>* buffer = new Cola<Cola<int>*>();
     Cola<Cola<int>*>* buffer_Redireccion = new Cola<Cola<int>*>();
+    void checkIDRouterPriv(Router *, Router *);
 public:
     
     /*  Constructor de Clase, asocia una posicion e ID random*/
@@ -76,7 +77,7 @@ public:
     /*  Checkea que los routers sea unicos, y no haya repetidos
         @param Router*
     */
-    void checkIDRouter(Router *);
+    void checkIDRouter();
 
     /*
     */

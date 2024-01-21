@@ -43,25 +43,58 @@ void Router::cambiarRouterID(Router* ref, Router* inicial){
     //}
 }
 
-void Router::checkIDRouter(Router *r){
-    Router *prev = r;
+void Router::checkIDRouter(){ checkIDRouterPriv(this, this);}
+    /*
+    Router *a = this, *b = this;
+    b++;
+
+    if(a->getIDRouter() != b->getIDRouter()){ b++; }
+
+
+
+
+
+
+
+
+    /*
+    for(int i = 1; i < 256; i++){
+        for(int j = 0; j < 256-1; j++){
+            if(b->getIDRouter() != NULL){
+                if(a->getIDRouter() != b->getIDRouter()){
+                    b++;
+                }
+                else{
+                    b->setIDRouter(b->getIDRouter()+1);
+                    b++;
+                }
+            }
+        }
+        a++;b = this; b+=i;
+    }
+
+
+
+
+    /*
+    Router *prev = this;
     prev--;
     do{
-        if(prev->getIDRouter() == r->getIDRouter() || prev->getPosicionRouter() == r->getPosicionRouter()){
-            cambiarRouterID(prev,r);
-            return checkIDRouter(r);
+        if(prev->getIDRouter() == this->getIDRouter() || prev->getPosicionRouter() == this->getPosicionRouter()){
+            cambiarRouterID(prev,this);
+            return this->checkIDRouter();
         }
         else prev--;
 
     }while(prev->getIDRouter() != NULL || prev->getPosicionRouter() != NULL);
 
-    Router *post = r;
+    Router *post = this;
     post++;
 
     do{
-        if(post->getIDRouter() == r->getIDRouter() || post->getPosicionRouter() == r->getPosicionRouter()){
-            cambiarRouterID(post,r);
-            return checkIDRouter(r);
+        if(post->getIDRouter() == this->getIDRouter() || post->getPosicionRouter() == this->getPosicionRouter()){
+            cambiarRouterID(post,this);
+            return this->checkIDRouter();
         }
         else prev--;
 
@@ -71,7 +104,24 @@ void Router::checkIDRouter(Router *r){
 
         
         return checkIDRouter(post);
-    }*/
+    }
+}*/
+
+void Router::checkIDRouterPriv(Router *a, Router *b){
+    b++;
+    if(b == NULL){
+        a++;b = a; b++;
+        return checkIDRouterPriv(a,b);
+    }
+    else if(a->getIDRouter() != b->getIDRouter()){
+        b++;
+        return checkIDRouterPriv(a,b);
+    }
+    else{
+        b->setIDRouter(b->getIDRouter()+1);
+        b++;
+        checkIDRouterPriv(a,b); 
+    }
 }
 
 
@@ -87,8 +137,7 @@ int main(int argc, char const *argv[])
         >Ver que no haya 2 routers con la misma id ni posicion. Puede mandarse el arreglo a una funcion que checkee
         cada uno de los elementos, y revise si hay alguno igual
 
-        >Modificar checkIDRouter para que no reciban un 
-        parametro Router
+        >Ver que cada Termianl tenga un unico ID
     
     
     */
@@ -97,10 +146,12 @@ int main(int argc, char const *argv[])
     Cola<int> c[1000];
     Pagina p[100];
     Terminal emisores[100];
-    Router r[100],*pr; 
+    Router r[10],*pr; 
 
+
+    
     pr = r;
-    for(int rout = 0; rout < 256; rout++){
+    for(int rout = 0; rout < size(r); rout++){
         if(pr->getIDRouter() != NULL){
         cout<<rout<<" -> "<<pr->getIDRouter()<<endl;
         pr++;}
@@ -111,7 +162,7 @@ int main(int argc, char const *argv[])
     cout<<"\n----------------------------------\n"
     <<"CHECKEANDO\n----------------------------------\n";
     
-
+    r->checkIDRouter();cout<<endl;
     /*pr = r;
     for(int i = 0; i < 256; i++){
         pr->checkIDRouter(pr);
@@ -121,7 +172,7 @@ int main(int argc, char const *argv[])
     
 
     pr = r;
-    for(int rout = 0; rout < 256; rout++){
+    for(int rout = 0; rout < size(r); rout++){
         if(pr->getIDRouter() != NULL){
         cout<<rout<<" -> "<<pr->getIDRouter()<<endl;
         pr++;}
