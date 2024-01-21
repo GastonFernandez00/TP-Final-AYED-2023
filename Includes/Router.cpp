@@ -37,7 +37,7 @@ bool Router::routerEmpty(){ return buffer->colaEmpty(); }
 
 bool Router::routerRedireccionEmpty(){ return buffer_Redireccion->colaEmpty(); }
 
-void Router::cambiarRouterID(Router* ref, Router* inicial){
+void Router::cambiarRouterID(Router* ref, Router* inicial){//POSIBLE ELMINAR
     //if(ref->getIDRouter() > inicial->getIDRouter()){
         inicial->setIDRouter(inicial->getIDRouter()+1);
     //}
@@ -107,34 +107,11 @@ void Router::checkIDRouter(){ checkIDRouterPriv(this, this/*,0,1*/);}
     }
 }*/
 
-void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){
-    /*b++;
-    if(i == 225) return (void)0;
+void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){ 
 
-    if(j == 225){
-        i++;j = i; j++;
-        a++;b = a; 
-        return checkIDRouterPriv(a,b,i,j);
-    }
-
-    if(a->getIDRouter() == b->getIDRouter()){
-        b->setIDRouter(b->getIDRouter()+1);
-        return this->checkIDRouterPriv(a,b,i,j+1);
-    }
-
-    if(a->getIDRouter() != b->getIDRouter()){
-        return this->checkIDRouterPriv(a,b,i,j+1);
-    }
-    */
-    
-    
-    
-    
-    
-    
     b++;
     if( a->getIDRouter() == NULL) return (void)0;
-    if(b->getIDRouter() == NULL){
+    else if( b->getIDRouter() == NULL){
         a++;b = a;
         return checkIDRouterPriv(a,b);
     }
@@ -143,7 +120,9 @@ void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){
     }
     else{
         b->setIDRouter(b->getIDRouter()+1);
-        checkIDRouterPriv(a,b); 
+        return checkIDRouterPriv(this,this);
+        // return this->checkIDRouter();
+        // return checkIDRouterPriv(a,b); 
     }
 }
 
@@ -169,17 +148,17 @@ int main(int argc, char const *argv[])
     Cola<int> c[1000];
     Pagina p[100];
     Terminal emisores[100];
-    Router r[100],*pr; 
+    Router r[75],*pr; 
 
 
     
-    pr = r;
+   /* pr = r;
     for(int rout = 0; rout < size(r); rout++){
         if(pr->getIDRouter() != NULL){
         cout<<rout<<" -> "<<pr->getIDRouter()<<endl;
         pr++;}
     }
-
+*/
     // r[2].setIDRouter(64);
     // r[3].setIDRouter(64);
     // r[0].setIDRouter(64);
@@ -197,9 +176,10 @@ int main(int argc, char const *argv[])
     
 
     pr = r;
-    for(int rout = 0; rout < size(r); rout++){
+    for(int rout = 1; rout < size(r)+1; rout++){
         if(pr->getIDRouter() != NULL){
-        cout<<rout<<" -> "<<pr->getIDRouter()<<endl;
+        cout<<rout<<" -> "<<pr->getIDRouter()<<" ";
+        if(rout%6 == 0) cout<<endl;
         pr++;}
     }
 
@@ -240,6 +220,6 @@ int main(int argc, char const *argv[])
         cout<<"\nEsta Vacio\n";
     }    */
 
-    //system("pause");
+    system("pause");
     return 0;
 }
