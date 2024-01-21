@@ -30,22 +30,22 @@ public:
     /*  Establece el Valor de ID del router
         @param Router*
     */
-   void setIDRouter(Router *);
+   void setIDRouter();
 
     /*   Establece la Posicion del Router
         @param Router*
     */
-   void setRouterPosicion(Router *);
+   void setRouterPosicion();
 
    /*  Establece el Valor de ID del router con Parametros
         @param Router* , int
     */
-   void setIDRouter(Router *,int);
+   void setIDRouter(int);
 
     /*   Establece la Posicion del Router con Parametros
         @param Router* , int
     */
-   void setRouterPosicion(Router *,int);
+   void setRouterPosicion(int);
 
     /*  Devuelve el ID del router actual 
         @returns int

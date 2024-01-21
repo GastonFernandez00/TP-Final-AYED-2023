@@ -1,19 +1,19 @@
 #include "Router.h"
 using namespace std;
 
-Router::Router(){ setIDRouter(this); setRouterPosicion(this);  }
-Router::Router(int i){ setIDRouter(this,i); setRouterPosicion(this);}
-Router::Router(int i, int p){ setIDRouter(this,i); setRouterPosicion(this,p); }
+Router::Router(){ this->setIDRouter(); this->setRouterPosicion();  }
+Router::Router(int i){ this->setIDRouter(i); this->setRouterPosicion();}
+Router::Router(int i, int p){ this->setIDRouter(i); this->setRouterPosicion(p); }
 
 Router::~Router(){ }
 
-void Router::setIDRouter(Router *r){ r->id_Router = rand()%256; }
+void Router::setIDRouter(){ id_Router = rand()%256; }
 
-void Router::setRouterPosicion(Router *r){ r->posicion = rand()%1000; }
+void Router::setRouterPosicion(){ posicion = rand()%1000; }
 
-void Router::setIDRouter(Router *r,int i){ r->id_Router = i%256; }
+void Router::setIDRouter(int i){ id_Router = i%256; }
 
-void Router::setRouterPosicion(Router *r,int p){ r->posicion = p%1000; }
+void Router::setRouterPosicion(int p){ posicion = p%1000; }
 
 int Router::getIDRouter(){ return id_Router; }
 
@@ -39,7 +39,7 @@ bool Router::routerRedireccionEmpty(){ return buffer_Redireccion->colaEmpty(); }
 
 void Router::cambiarRouterID(Router* ref, Router* inicial){
     //if(ref->getIDRouter() > inicial->getIDRouter()){
-        setIDRouter(inicial,inicial->getIDRouter()+1);
+        inicial->setIDRouter(inicial->getIDRouter()+1);
     //}
 }
 
@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
         >Ver que no haya 2 routers con la misma id ni posicion. Puede mandarse el arreglo a una funcion que checkee
         cada uno de los elementos, y revise si hay alguno igual
 
-        >Modificar las funciones set posicion, ID y checkIDRouter para que no reciban un 
+        >Modificar checkIDRouter para que no reciban un 
         parametro Router
     
     
@@ -106,16 +106,17 @@ int main(int argc, char const *argv[])
         pr++;}
     }
 
-    r[2].setIDRouter(&r[2],64);
+    r[2].setIDRouter(64);
 
     cout<<"\n----------------------------------\n"
     <<"CHECKEANDO\n----------------------------------\n";
     
-    pr = r;
+
+    /*pr = r;
     for(int i = 0; i < 256; i++){
         pr->checkIDRouter(pr);
         pr++;
-    }
+    }*/
 
     
 
@@ -163,6 +164,6 @@ int main(int argc, char const *argv[])
         cout<<"\nEsta Vacio\n";
     }    */
 
-    system("pause");
+    //system("pause");
     return 0;
 }
