@@ -9,7 +9,7 @@ private:
 
     Cola<Cola<int>*>* buffer = new Cola<Cola<int>*>();
     Cola<Cola<int>*>* buffer_Redireccion = new Cola<Cola<int>*>();
-    void checkIDRouterPriv(Router *, Router *);
+    void checkIDRouterPriv(Router *, Router */*,int,int*/);
 public:
     
     /*  Constructor de Clase, asocia una posicion e ID random*/

@@ -43,7 +43,7 @@ void Router::cambiarRouterID(Router* ref, Router* inicial){
     //}
 }
 
-void Router::checkIDRouter(){ checkIDRouterPriv(this, this);}
+void Router::checkIDRouter(){ checkIDRouterPriv(this, this/*,0,1*/);}
     /*
     Router *a = this, *b = this;
     b++;
@@ -107,19 +107,42 @@ void Router::checkIDRouter(){ checkIDRouterPriv(this, this);}
     }
 }*/
 
-void Router::checkIDRouterPriv(Router *a, Router *b){
+void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){
+    /*b++;
+    if(i == 225) return (void)0;
+
+    if(j == 225){
+        i++;j = i; j++;
+        a++;b = a; 
+        return checkIDRouterPriv(a,b,i,j);
+    }
+
+    if(a->getIDRouter() == b->getIDRouter()){
+        b->setIDRouter(b->getIDRouter()+1);
+        return this->checkIDRouterPriv(a,b,i,j+1);
+    }
+
+    if(a->getIDRouter() != b->getIDRouter()){
+        return this->checkIDRouterPriv(a,b,i,j+1);
+    }
+    */
+    
+    
+    
+    
+    
+    
     b++;
-    if(b == NULL){
-        a++;b = a; b++;
+    if( a->getIDRouter() == NULL) return (void)0;
+    if(b->getIDRouter() == NULL){
+        a++;b = a;
         return checkIDRouterPriv(a,b);
     }
     else if(a->getIDRouter() != b->getIDRouter()){
-        b++;
         return checkIDRouterPriv(a,b);
     }
     else{
         b->setIDRouter(b->getIDRouter()+1);
-        b++;
         checkIDRouterPriv(a,b); 
     }
 }
@@ -146,7 +169,7 @@ int main(int argc, char const *argv[])
     Cola<int> c[1000];
     Pagina p[100];
     Terminal emisores[100];
-    Router r[10],*pr; 
+    Router r[100],*pr; 
 
 
     
@@ -157,7 +180,9 @@ int main(int argc, char const *argv[])
         pr++;}
     }
 
-    r[2].setIDRouter(64);
+    // r[2].setIDRouter(64);
+    // r[3].setIDRouter(64);
+    // r[0].setIDRouter(64);
 
     cout<<"\n----------------------------------\n"
     <<"CHECKEANDO\n----------------------------------\n";
