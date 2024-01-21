@@ -140,6 +140,9 @@ int main(int argc, char const *argv[])
         cada uno de los elementos, y revise si hay alguno igual
 
         >Ver que cada Termianl tenga un unico ID
+
+        >Ver que el check id funciona cuando el arreglo es de HASTA 75.
+        Revisar porque
     
     
     */
