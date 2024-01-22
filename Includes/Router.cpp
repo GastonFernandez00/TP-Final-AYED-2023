@@ -3,21 +3,21 @@ using namespace std;
 
 Router::Router(){ this->setIDRouter(); this->setRouterPosicion();  }
 Router::Router(int i){ this->setIDRouter(i); this->setRouterPosicion();}
-Router::Router(int i, int p){ this->setIDRouter(i); this->setRouterPosicion(p); }
+Router::Router(int i, int x, int y){ this->setIDRouter(i); this->setRouterPosicion(x,y); }
 
 Router::~Router(){ }
 
 void Router::setIDRouter(){ id_Router = rand()%256; }
 
-void Router::setRouterPosicion(){ posicion = rand()%1000; }
+void Router::setRouterPosicion(){ posicion[rand()%tamanio_Posicion][rand()%tamanio_Posicion] = 1; }
 
 void Router::setIDRouter(int i){ id_Router = i%256; }
 
-void Router::setRouterPosicion(int p){ posicion = p%1000; }
+void Router::setRouterPosicion(int x, int y){ posicion[y%tamanio_Posicion][x%tamanio_Posicion] = 1; }
 
 int Router::getIDRouter(){ return id_Router; }
 
-int Router::getPosicionRouter(){ return posicion; }
+int Router::getPosicionRouter(){ return posicion[0][0]; } //CAMBIAR ESTO
 
 void Router::Recepcion(Cola<int>* c){
     
@@ -107,8 +107,30 @@ void Router::checkIDRouter(){ checkIDRouterPriv(this, this/*,0,1*/);}
     }
 }*/
 
+/*
 void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){ 
+    /*int i = 1;
+    while(a->getIDRouter() != NULL){
+        cout<<i<<" -> "<<a->getIDRouter()<<endl;
+        a++;i++;
+    }
 
+    /*
+    bool flag = false;
+    Router *aux_a = a, *aux_b = b;
+    b++;
+    while(b->getIDRouter() != NULL && flag == false){
+        if(a->getIDRouter() != b->getIDRouter()){ b++; }
+        else if(a->getIDRouter() == b->getIDRouter()){
+            b->setIDRouter(b->getIDRouter()+1);
+            flag = true;
+        }
+    }
+
+    if(flag == true){ return checkIDRouterPriv(aux_a,aux_b); }
+    else if(flag == false && a->getIDRouter() != NULL){ a++;b = a;return checkIDRouterPriv(a,b);}
+    else{}
+    /*
     b++;
     if( a->getIDRouter() == NULL) return (void)0;
     else if( b->getIDRouter() == NULL){
@@ -123,8 +145,8 @@ void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){
         return checkIDRouterPriv(this,this);
         // return this->checkIDRouter();
         // return checkIDRouterPriv(a,b); 
-    }
-}
+    }*/
+//}
 
 
 int main(int argc, char const *argv[])
@@ -141,9 +163,12 @@ int main(int argc, char const *argv[])
 
         >Ver que cada Termianl tenga un unico ID
 
-        >Ver que el check id funciona cuando el arreglo es de HASTA 75.
+        >Ver que el check id funciona cuando el arreglo es de HASTA 115.
         Revisar porque
     
+        >Cambiar la posicion por una forma matricial 100x100
+
+        >Crear un mapa y asociar una posicion a un router ó su ID
     
     */
 
@@ -151,7 +176,7 @@ int main(int argc, char const *argv[])
     Cola<int> c[1000];
     Pagina p[100];
     Terminal emisores[100];
-    Router r[75],*pr; 
+    Router r[200],*pr; 
 
 
     
@@ -169,7 +194,7 @@ int main(int argc, char const *argv[])
     cout<<"\n----------------------------------\n"
     <<"CHECKEANDO\n----------------------------------\n";
     
-    r->checkIDRouter();cout<<endl;
+    //r->checkIDRouter();cout<<endl;
     /*pr = r;
     for(int i = 0; i < 256; i++){
         pr->checkIDRouter(pr);
@@ -178,13 +203,22 @@ int main(int argc, char const *argv[])
 
     
 
-    pr = r;
+    // pr = r;
+    // for(int rout = 1; rout < size(r)+1; rout++){
+    //     if(pr->getIDRouter() != NULL){
+    //     cout<<rout<<" -> "<<pr->getIDRouter()<<" ";
+    //     if(rout%6 == 0) cout<<endl;
+    //     pr++;}
+    // }
+
+    pr = &r[0];
     for(int rout = 1; rout < size(r)+1; rout++){
-        if(pr->getIDRouter() != NULL){
-        cout<<rout<<" -> "<<pr->getIDRouter()<<" ";
-        if(rout%6 == 0) cout<<endl;
-        pr++;}
+        //if(pr->getIDRouter() != NULL){
+        cout<<rout<<" -> "<<pr->getIDRouter()<<endl;
+        //if(rout%15 == 0) cout<<endl;
+        pr++;//}
     }
+
 
     // int control = 0;
     // while(control<100){
@@ -223,6 +257,7 @@ int main(int argc, char const *argv[])
         cout<<"\nEsta Vacio\n";
     }    */
 
-    system("pause");
+    // while(1);
+    // system("pause");
     return 0;
 }

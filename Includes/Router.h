@@ -1,11 +1,12 @@
 #ifndef ROUTER_H
 #define ROUTER_H
 #include "Terminal.h"
+#define tamanio_Posicion 50
 
 class Router{
 private:
     int id_Router = -1;
-    int posicion = -1;
+    int posicion[tamanio_Posicion][tamanio_Posicion];
 
     Cola<Cola<int>*>* buffer = new Cola<Cola<int>*>();
     Cola<Cola<int>*>* buffer_Redireccion = new Cola<Cola<int>*>();
@@ -21,32 +22,32 @@ public:
     Router(int);
 
     /*  Constructor de Clase, asocia una posicion e ID por parametro
-        @param int int
+        @param int, int, int
     */
-    Router(int,int);
+    Router(int,int,int);
 
     /*Destructor de Clase*/
     ~Router();
 
     /*  Establece el Valor de ID del router
-        @param Router*
+        @param
     */
    void setIDRouter();
 
     /*   Establece la Posicion del Router
-        @param Router*
+        @param
     */
    void setRouterPosicion();
 
    /*  Establece el Valor de ID del router con Parametros
-        @param Router* , int
+        @param int
     */
    void setIDRouter(int);
 
     /*   Establece la Posicion del Router con Parametros
-        @param Router* , int
+        @param int, int
     */
-   void setRouterPosicion(int);
+   void setRouterPosicion(int,int);
 
     /*  Devuelve el ID del router actual 
         @returns int
@@ -75,7 +76,6 @@ public:
     bool routerRedireccionEmpty();
 
     /*  Checkea que los routers sea unicos, y no haya repetidos
-        @param Router*
     */
     void checkIDRouter();
 
