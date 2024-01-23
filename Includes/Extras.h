@@ -4,6 +4,7 @@
 
 void cambio(Router *,Router *);
 void burbuja_Router(Router *,Router *);
+void burbuja_Terminal(Terminal *, Terminal *);
 
 
 

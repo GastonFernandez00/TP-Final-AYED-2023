@@ -8,9 +8,11 @@ private:
     int id_Router = -1;
     int posicion[tamanio_Posicion][tamanio_Posicion];
 
+    Terminal receptores[256];
+    
     Cola<Cola<int>*>* buffer = new Cola<Cola<int>*>();
     Cola<Cola<int>*>* buffer_Redireccion = new Cola<Cola<int>*>();
-    void checkIDRouterPriv(Router *, Router */*,int,int*/);
+    void checkIDRouterPriv(Router *, Router *, int/*,int,int*/);
 public:
     
     /*  Constructor de Clase, asocia una posicion e ID random*/
@@ -79,13 +81,12 @@ public:
     */
     void checkIDRouter();
 
-    /*
-    */
-    void cambiarRouterID(Router*,Router*);
+    /*  Establece las terminales receptoras asociadas a este router */
+    void setReceptores();
 
-
-
-
+    /*  Devuelve un puntero al primer receptor del Router*/
+    Terminal* getReceptor();
+    
 
 };
 #endif

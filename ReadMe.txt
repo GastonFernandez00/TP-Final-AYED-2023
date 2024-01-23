@@ -1,23 +1,21 @@
 /*
     Ver:
-        >Como crear multiples objetos, que todos tengan los mismos parametros
         
         >Como acceder a los objetos dentro de cada buffer
-        
-        >Ver que no haya 2 routers con la misma id ni posicion. Puede mandarse el arreglo a una funcion que checkee
-        cada uno de los elementos, y revise si hay alguno igual
-
-        >Ver que cada Termianl tenga un unico ID
-
-        >Ver que el check id funciona cuando el arreglo es de HASTA 200.
+                
+        >Ver que el check id funciona cuando el arreglo es de HASTA 169.
         Revisar porque, y comprobar que funcione correctamente
     
         >Cambiar la posicion por una forma matricial 100x100
 
         >Crear un mapa y asociar una posicion a un router ó su ID
 
+        >La cola donde se acumulan los paquetes, deberian estar en el la terminal, no en el main
+
         >Tal vez el ID de terminal de destino deberia ir en la clase router (Probablemente no 
         implemente)
+
+        >>Como crear multiples objetos, que todos tengan los mismos parametros [CREO QUE ESTA SOLUCIONADO: Directamente llamo a una funcion]
     
     */
 

@@ -2,9 +2,9 @@
 #include "Router.h"
 using namespace std;
 
-Router::Router(){ this->setIDRouter(); this->setRouterPosicion();  }
-Router::Router(int i){ this->setIDRouter(i); this->setRouterPosicion();}
-Router::Router(int i, int x, int y){ this->setIDRouter(i); this->setRouterPosicion(x,y); }
+Router::Router(){ this->setIDRouter(); this->setRouterPosicion(); this->setReceptores(); }
+Router::Router(int i){ this->setIDRouter(i); this->setRouterPosicion();this->setReceptores();}
+Router::Router(int i, int x, int y){ this->setIDRouter(i); this->setRouterPosicion(x,y); this->setReceptores();}
 
 Router::~Router(){ }
 
@@ -38,13 +38,7 @@ bool Router::routerEmpty(){ return buffer->colaEmpty(); }
 
 bool Router::routerRedireccionEmpty(){ return buffer_Redireccion->colaEmpty(); }
 
-void Router::cambiarRouterID(Router* ref, Router* inicial){//POSIBLE ELMINAR
-    //if(ref->getIDRouter() > inicial->getIDRouter()){
-        inicial->setIDRouter(inicial->getIDRouter()+1);
-    //}
-}
-
-void Router::checkIDRouter(){ checkIDRouterPriv(this, this/*,0,1*/);}
+void Router::checkIDRouter(){ checkIDRouterPriv(this, this, 0/*,0,1*/);}
     /*
     Router *a = this, *b = this;
     b++;
@@ -108,9 +102,9 @@ void Router::checkIDRouter(){ checkIDRouterPriv(this, this/*,0,1*/);}
     }
 }*/
 
-void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){ 
-    
-    for(int i = 0; i < 5; i++){
+void Router::checkIDRouterPriv(Router *a, Router *b, int control/*,int i,int j*/){ 
+    if(control == 5){ return (void)0; }
+    //for(int i = 0; i < 5; i++){
         burbuja_Router(a,b);
         //b++;
         //cambio_Prueba(a,b);
@@ -135,8 +129,8 @@ void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){
             a++;b = a; b++; veces = 0;
         }
 
-
-    }
+    checkIDRouterPriv(this,this,control+1);
+    //}
    
    /* b++;int veces = 0;
     for(int i = 0; i < 256; i++){
@@ -206,113 +200,152 @@ void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){
     }*/
 }
 
+void Router::setReceptores(){
+    for(int i = 0; i < size(receptores);i++){ 
+        receptores[i].setDeterminante(1); 
+    }
+    receptores->checkIDTerminal();
+}
+
+Terminal* Router::getReceptor(){ return &receptores[0]; }
+
+
 
 int main(int argc, char const *argv[])
 {
 
     Cola<int> c[1000];
     Pagina p[100];
-    Terminal emisores[100];
-    Router r[200],*pr; 
-    
-    r->setRouterPosicion(0,0);
-    cout<<"POSICION R[0] "<<r->getPosicionRouter()<<endl;
+    //Terminal emisores[100],*pEmis = emisores,receptores[65536], *pRecep;
+    Router r[169],*pr = r; 
 
 
-   /* pr = r;
-    for(int rout = 0; rout < size(r); rout++){
-        if(pr->getIDRouter() != NULL){
-        cout<<rout<<" -> "<<pr->getIDRouter()<<endl;
-        pr++;}
+    Terminal *t = pr->getReceptor();
+    cout<<endl;
+    for(int j = 0; j < size(r); j++){
+        for(int i= 0; i < 256; i++){
+            cout<<t->getIDTerminal()<<"  ";
+            if((i+1)%10 == 0){ cout<<endl;}
+            t++;
+        }
+    pr++;
+    t = pr->getReceptor();
     }
-*/
-    pr = r;
-    for(int rout = 0; rout < size(r); rout++){
-        //if(pr->getIDRouter() != NULL){
-        cout<<pr->getIDRouter()<<"  ";
-        if((rout+1)%10 == 0){cout<<endl;}
+    // for(int i = 0; i < 100; i++){pEmis->setDeterminante(0);pEmis++;}
+    // for(int i = 0; i < 65536; i++){pRecep->setDeterminante(1);pRecep++;}
 
-        pr++;//}
-    }
+    // pEmis = emisores;
+    // pRecep = receptores;
+    
+    // for(int i = 0; i < 100; i++){cout<<pEmis->getDeterminante();if((i+1)%10)cout<<endl;pEmis++;}
+    cout<<endl<<"-----------------------------------------------"<<endl;
+    // for(int i = 0; i < 100; i++){cout<<pRecep->getDeterminante();if((i+1)%10)cout<<endl;pRecep++;}
+//     r->setRouterPosicion(0,0);
+//     cout<<"POSICION R[0] "<<r->getPosicionRouter()<<endl;
 
 
-    // r[2].setIDRouter(64);
-    // r[3].setIDRouter(64);
-    // r[0].setIDRouter(64);
+//    /* pr = r;
+//     for(int rout = 0; rout < size(r); rout++){
+//         if(pr->getIDRouter() != NULL){
+//         cout<<rout<<" -> "<<pr->getIDRouter()<<endl;
+//         pr++;}
+//     }
+// */
+//     pr = r;
+//     for(int rout = 0; rout < size(r); rout++){
+//         //if(pr->getIDRouter() != NULL){
+//         cout<<pr->getIDRouter()<<"  ";
+//         if((rout+1)%10 == 0){cout<<endl;}
+
+//         pr++;//}
+//     }
+
+
+//     // r[2].setIDRouter(64);
+//     // r[3].setIDRouter(64);
+//     // r[0].setIDRouter(64);
 
     
-    cout<<"\n----------------------------------\n"
-    <<"CHECKEANDO\n----------------------------------\n";
-    r->checkIDRouter();cout<<endl;
+//     cout<<"\n----------------------------------\n"
+//     <<"CHECKEANDO\n----------------------------------\n";
+//     r->checkIDRouter();cout<<endl;
 
 
-    cout<<"POSICION R[0] "<<r->getPosicionRouter()<<endl;
-    r->getPosicionRouter();
+//     cout<<"POSICION R[0] "<<r->getPosicionRouter()<<endl;
+//     r->getPosicionRouter();
     
-    /*pr = r;
-    for(int i = 0; i < 256; i++){
-        pr->checkIDRouter(pr);
-        pr++;
-    }*/
+//     /*pr = r;
+//     for(int i = 0; i < 256; i++){
+//         pr->checkIDRouter(pr);
+//         pr++;
+//     }*/
 
     
 
-    // pr = r;
-    // for(int rout = 1; rout < size(r)+1; rout++){
-    //     if(pr->getIDRouter() != NULL){
-    //     cout<<rout<<" -> "<<pr->getIDRouter()<<" ";
-    //     if(rout%6 == 0) cout<<endl;
-    //     pr++;}
-    // }
+//     // pr = r;
+//     // for(int rout = 1; rout < size(r)+1; rout++){
+//     //     if(pr->getIDRouter() != NULL){
+//     //     cout<<rout<<" -> "<<pr->getIDRouter()<<" ";
+//     //     if(rout%6 == 0) cout<<endl;
+//     //     pr++;}
+//     // }
 
-    pr = r;
-    for(int rout = 0; rout < size(r); rout++){
-        //if(pr->getIDRouter() != NULL){
-        cout<<pr->getIDRouter()<<"  ";
-        if((rout+1)%10 == 0){cout<<endl;}
+//     pr = r;
+//     for(int rout = 0; rout < size(r); rout++){
+//         //if(pr->getIDRouter() != NULL){
+//         cout<<pr->getIDRouter()<<"  ";
+//         if((rout+1)%10 == 0){cout<<endl;}
 
-        pr++;//}
-    }
+//         pr++;//}
+//     }
 
+//     emisores->empaquetado(p,c);
 
-    // int control = 0;
-    // while(control<100){
-    //     cout<<endl<<emisores[control].getDeterminante()<<endl;
-    //     control++;
-    // }
+//     if(r->routerEmpty()){
+//         cout<<"\nVACIO\n";
+//     }
+//     else{
+//         cout<<"\nCONTIENE\n";
+//     }
+
+//     // int control = 0;
+//     // while(control<100){
+//     //     cout<<endl<<emisores[control].getDeterminante()<<endl;
+//     //     control++;
+//     // }
     
-    /*emisores->empaquetado(p,c);
-    emisores->envio(c);
+//     /*emisores->empaquetado(p,c);
+//     emisores->envio(c);
     
-    //c->
+//     //c->
 
-    cout<<r[0].getPosicionRouter()<<endl;
-    cout<<r[0].getIDRouter();
-    cout<<"\n\n\n\n";
-    c->printCola();
-    cout<<endl<<c->getIDDestino()<<endl<<r->getIDRouter()<<endl;
+//     cout<<r[0].getPosicionRouter()<<endl;
+//     cout<<r[0].getIDRouter();
+//     cout<<"\n\n\n\n";
+//     c->printCola();
+//     cout<<endl<<c->getIDDestino()<<endl<<r->getIDRouter()<<endl;
 
-    cout<<"\n\n\n\n";
-    r[0].Recepcion(c);
+//     cout<<"\n\n\n\n";
+//     r[0].Recepcion(c);
 
-    cout<<endl<<endl<<c->sizeCola()<<endl;
+//     cout<<endl<<endl<<c->sizeCola()<<endl;
 
-    if(!(r[0].routerEmpty())){
-        cout<<"\nTiene algo\n";
-    }
-    else{
-        cout<<"\nEsta Vacio\n";
-    }
+//     if(!(r[0].routerEmpty())){
+//         cout<<"\nTiene algo\n";
+//     }
+//     else{
+//         cout<<"\nEsta Vacio\n";
+//     }
 
-    cout<<"\n\n\n\n";
-     if(!(r[0].routerRedireccionEmpty())){
-        cout<<"\nTiene algo\n";
-    }
-    else{
-        cout<<"\nEsta Vacio\n";
-    }    */
+//     cout<<"\n\n\n\n";
+//      if(!(r[0].routerRedireccionEmpty())){
+//         cout<<"\nTiene algo\n";
+//     }
+//     else{
+//         cout<<"\nEsta Vacio\n";
+//     }    */
 
-    // while(1);
-    system("pause");
+//     // while(1);
+//     system("pause");
     return 0;
 }

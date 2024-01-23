@@ -1,12 +1,13 @@
 #include "Terminal.h"
-
+#include "Extras.h"
 using namespace std;
 
 Terminal::Terminal(){
-    int x = rand()%2;
-    determinante = x;
+    // int x = rand()%2;
+    // determinante = x;
+    this->setIDTerminal();
 }
-Terminal::Terminal(bool b){ determinante = b;}
+Terminal::Terminal(bool b){ determinante = b; if(determinante == 1) this->setIDTerminal();}
 Terminal::~Terminal(){}
 
 void Terminal::empaquetado(Pagina *p,Cola<int>* c){
@@ -38,6 +39,45 @@ void Terminal::envio(Cola<int>* c/*, int id_Router*/){
     c->setidDestinoTerminal(id_destino_terminal);   
 }
 
+void Terminal::setIDTerminal(){ id_TERMINAL = rand()%256; }
+
+void Terminal::setIDTerminal(int t){ id_TERMINAL = t%256; }
+
+int Terminal::getIDTerminal(){ return id_TERMINAL; }
+
+void Terminal::checkIDTerminal(){ checkIDTerminalPriv(this,this,0); }
+
+void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control){
+    if(control == 5){ return (void)0; }
+
+    //for(int i = 0; i < 10; i++){
+        burbuja_Terminal(a,b);
+        //b++;
+        //cambio_Prueba(a,b);
+    //}
+
+        b++;int veces = 0;
+        for(int i = 0; i < 256; i++){
+            
+            if(a->getIDTerminal() > 256 || a->getIDTerminal() < 0){ return (void)0; }
+
+            for(int j = 1; j < 256-1; j++){
+                if(b->getIDTerminal() < 256 && b->getIDTerminal() >= 0){
+                    if(a->getIDTerminal() == b->getIDTerminal()){
+                        veces+=1;
+                        b->setIDTerminal(b->getIDTerminal()+veces);
+                    }    
+                    b++;
+                }
+
+            }
+
+            a++;b = a; b++; veces = 0;
+        }
+
+        checkIDTerminalPriv(this,this,control+1);
+//    }
+}
 /*int main(int argc, char const *argv[])
 {
     Cola<int> cEnvio[128],cRecibido[128];
