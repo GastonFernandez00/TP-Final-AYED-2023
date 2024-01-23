@@ -7,7 +7,7 @@ void cambio(Router *a, Router *b){
     delete aux;
 }
 
-void burbuja(Router *a, Router *b){
+void burbuja_Router(Router *a, Router *b){
     int contador = 0;
     int fores = 200;
     Router *aux_a = a, *aux_b = b;

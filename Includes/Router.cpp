@@ -111,7 +111,7 @@ void Router::checkIDRouter(){ checkIDRouterPriv(this, this/*,0,1*/);}
 void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){ 
     
     for(int i = 0; i < 5; i++){
-        burbuja(a,b);
+        burbuja_Router(a,b);
         //b++;
         //cambio_Prueba(a,b);
     //}

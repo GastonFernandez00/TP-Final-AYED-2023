@@ -3,7 +3,7 @@
 #include "Router.h"
 
 void cambio(Router *,Router *);
-void burbuja(Router *,Router *);
+void burbuja_Router(Router *,Router *);
 
 
 
