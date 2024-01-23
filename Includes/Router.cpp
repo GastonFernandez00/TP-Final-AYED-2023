@@ -1,3 +1,4 @@
+#include "Extras.h"
 #include "Router.h"
 using namespace std;
 
@@ -107,10 +108,67 @@ void Router::checkIDRouter(){ checkIDRouterPriv(this, this/*,0,1*/);}
     }
 }*/
 
-/*
 void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){ 
+    
+    for(int i = 0; i < 5; i++){
+        burbuja(a,b);
+        //b++;
+        //cambio_Prueba(a,b);
+    //}
+
+        b++;int veces = 0;
+        for(int i = 0; i < 256; i++){
+            
+            if(a->getIDRouter() > 256 || a->getIDRouter() < 0){ return (void)0; }
+
+            for(int j = 0; j < 256; j++){
+                if(b->getIDRouter() < 256 && b->getIDRouter() >= 0){
+                    if(a->getIDRouter() == b->getIDRouter()){
+                        veces+=1;
+                        b->setIDRouter(b->getIDRouter()+veces);
+                    }    
+                    b++;
+                }
+
+            }
+
+            a++;b = a; b++; veces = 0;
+        }
+
+
+    }
+   
+   /* b++;int veces = 0;
+    for(int i = 0; i < 256; i++){
+        
+        if(a->getIDRouter() > 256 || a->getIDRouter() < 0){ return (void)0; }
+
+        for(int j = 0; j < 256; j++){
+            if(b->getIDRouter() < 256 && b->getIDRouter() >= 0){
+                if(a->getIDRouter() == b->getIDRouter()){
+                    veces+=1;
+                    b->setIDRouter(b->getIDRouter()+veces);
+                }    
+                b++;
+            }
+
+        }
+
+        a++;b = a; b++; veces = 0;
+    }
+        
+    /*b++;
+    if(a->getIDRouter() > 265){ return (void)0; }
+    else if(b->getIDRouter() > 256){ a++;b = a; return checkIDRouterPriv(a,b);   }
+    else if(a->getIDRouter() != b->getIDRouter()){ return checkIDRouterPriv(a,b); }
+    else{
+        b->setIDRouter(b->getIDRouter()+1);
+        return checkIDRouterPriv(this,this);
+    }
+    
+    
     /*int i = 1;
-    while(a->getIDRouter() != NULL){
+    while(a->getIDRouter() < 256){
         cout<<i<<" -> "<<a->getIDRouter()<<endl;
         a++;i++;
     }
@@ -146,40 +204,21 @@ void Router::checkIDRouterPriv(Router *a, Router *b/*,int i,int j*/){
         // return this->checkIDRouter();
         // return checkIDRouterPriv(a,b); 
     }*/
-//}
+}
 
 
 int main(int argc, char const *argv[])
 {
 
-    /*
-    Ver:
-        >Como crear multiples objetos, que todos tengan los mismos parametros
-        
-        >Como acceder a los objetos dentro de cada buffer
-        
-        >Ver que no haya 2 routers con la misma id ni posicion. Puede mandarse el arreglo a una funcion que checkee
-        cada uno de los elementos, y revise si hay alguno igual
-
-        >Ver que cada Termianl tenga un unico ID
-
-        >Ver que el check id funciona cuando el arreglo es de HASTA 115.
-        Revisar porque
-    
-        >Cambiar la posicion por una forma matricial 100x100
-
-        >Crear un mapa y asociar una posicion a un router ó su ID
-    
-    */
-
-
     Cola<int> c[1000];
     Pagina p[100];
     Terminal emisores[100];
     Router r[200],*pr; 
-
-
     
+    r->setRouterPosicion(0,0);
+    cout<<"POSICION R[0] "<<r->getPosicionRouter()<<endl;
+
+
    /* pr = r;
     for(int rout = 0; rout < size(r); rout++){
         if(pr->getIDRouter() != NULL){
@@ -187,14 +226,29 @@ int main(int argc, char const *argv[])
         pr++;}
     }
 */
+    pr = r;
+    for(int rout = 0; rout < size(r); rout++){
+        //if(pr->getIDRouter() != NULL){
+        cout<<pr->getIDRouter()<<"  ";
+        if((rout+1)%10 == 0){cout<<endl;}
+
+        pr++;//}
+    }
+
+
     // r[2].setIDRouter(64);
     // r[3].setIDRouter(64);
     // r[0].setIDRouter(64);
 
+    
     cout<<"\n----------------------------------\n"
     <<"CHECKEANDO\n----------------------------------\n";
+    r->checkIDRouter();cout<<endl;
+
+
+    cout<<"POSICION R[0] "<<r->getPosicionRouter()<<endl;
+    r->getPosicionRouter();
     
-    //r->checkIDRouter();cout<<endl;
     /*pr = r;
     for(int i = 0; i < 256; i++){
         pr->checkIDRouter(pr);
@@ -211,11 +265,12 @@ int main(int argc, char const *argv[])
     //     pr++;}
     // }
 
-    pr = &r[0];
-    for(int rout = 1; rout < size(r)+1; rout++){
+    pr = r;
+    for(int rout = 0; rout < size(r); rout++){
         //if(pr->getIDRouter() != NULL){
-        cout<<rout<<" -> "<<pr->getIDRouter()<<endl;
-        //if(rout%15 == 0) cout<<endl;
+        cout<<pr->getIDRouter()<<"  ";
+        if((rout+1)%10 == 0){cout<<endl;}
+
         pr++;//}
     }
 
@@ -258,6 +313,6 @@ int main(int argc, char const *argv[])
     }    */
 
     // while(1);
-    // system("pause");
+    system("pause");
     return 0;
 }
