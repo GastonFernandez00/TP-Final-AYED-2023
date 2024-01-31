@@ -4,24 +4,19 @@
         >Probablemente hagan falta IDs para saber a donde tiene que ir cada paquete,
         mismas funciones que en "Paginas" probablemente
 
+        >Tal vez no necesito hacer Cola un template, sino simplemente que las colas sean de Paquetes
+
         >Se Tiene que enviar Paquete por paquete
         
         >Como acceder a los objetos dentro de cada buffer
                 
-        >Ver que el check id funciona cuando el arreglo es de HASTA 169.
-        Revisar porque, y comprobar que funcione correctamente
-    
         >Cambiar la posicion por una forma matricial 100x100
 
-        >Crear un mapa y asociar una posicion a un router ó su ID
+        >Crear un mapa y asociar una posicion a un router ó su ID// Esto no tiene sentido, tiene que ser por ancho de banda
+        ó sea, el "peso"  (tamanio de la cola buffer redestino) de cada router
 
         >La cola donde se acumulan los paquetes, deberian estar en el la terminal, no en el main
-
-        >Tal vez el ID de terminal de destino deberia ir en la clase router (Probablemente no 
-        implemente)
-
-        >>Como crear multiples objetos, que todos tengan los mismos parametros [CREO QUE ESTA SOLUCIONADO: Directamente llamo a una funcion]
-    
+   
     */
 
 

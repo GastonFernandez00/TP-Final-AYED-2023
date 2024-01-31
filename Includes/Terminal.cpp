@@ -2,10 +2,6 @@
 #include "Extras.h"
 using namespace std;
 
-Paquete crearPaquete(){
-    Paquete r; return r;
-}
-
 Terminal::Terminal(){
     // int x = rand()%2;
     // determinante = x;
@@ -24,14 +20,14 @@ void Terminal::empaquetado(Pagina *p,Cola<Paquete> *pak){
         
         while(p->getTamanio() >= 50){
             numero_de_paquete++;
-            Paquete aux = crearPaquete();
+            Paquete aux;
             aux.setDato(50);aux.setIds(p); aux.setPackNumero(numero_de_paquete);
             p->setTamanio(p->getTamanio()-50);
             pkg.encolar(aux);
         }
         if(p->getTamanio() < 50 && p->getTamanio() > 0){
             numero_de_paquete++;
-            Paquete aux = crearPaquete();
+            Paquete aux;
             aux.setIds(p); aux.setPackNumero(numero_de_paquete);
             aux.setDato(p->getTamanio());
             p->setTamanio(0);
@@ -103,17 +99,32 @@ int main(int argc, char const *argv[])
     for(int i = 0; i < size(p); i ++ ){ t.empaquetado(&p[i],&pak);}
     //t.empaquetado(p,&pkg);
     Cola<Paquete> pkg = t.getPaquetes();
+    
+    while(pkg.sizeCola() > 0 && pkg.getPrimero().getIdPertenencia() != pkg.getUltimo().getIdPertenencia()){
     cout<<"Tamanio: "<<pkg.sizeCola()<<endl;
     cout<<"Dato: "<<pkg.getPrimero().getDato()<<endl;
     cout<<"Ultimo Dato: "<<pkg.getUltimo().getDato()<<endl;
     cout<<"ID destino: "<<pkg.getPrimero().getIDDestino()<<endl;
     cout<<"ID destino final: "<<pkg.getPrimero().getIDDestinoTerminal()<<endl;
     cout<<"ID de pertenencia: "<<pkg.getPrimero().getIdPertenencia()<<endl;
-    cout<<"--------------------------------------------------\n";
+    
     cout<<"ID destino: "<<pkg.getUltimo().getIDDestino()<<endl;
     cout<<"ID destino final: "<<pkg.getUltimo().getIDDestinoTerminal()<<endl;
     cout<<"ID de pertenencia: "<<pkg.getUltimo().getIdPertenencia()<<endl;
 
+
+    cout<<"Descolando: "<<endl;pkg.desencolar();
+    cout<<"--------------------------------------------------\n";
+    if(pkg.getPrimero().getIdPertenencia() == pkg.getUltimo().getIdPertenencia()){
+        cout<<"\n--------------------------------------------------\nHUBO MATCH\n";
+    }
+
+    // int Espera = 0;
+    // while(Espera == 0){
+    //     cout<<"Para continuar presione cualquier numero: ";cin>>Espera;
+    // }
+
+}
     pkg.vaciarCola();
     cout<<"Tamanio: "<<pkg.sizeCola()<<endl;
 

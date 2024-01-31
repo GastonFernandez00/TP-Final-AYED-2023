@@ -11,16 +11,16 @@ Pagina::~Pagina(){ }
 void Pagina::setTamanio(int n){ tamanio = n%501; }
 int Pagina::getTamanio(){ return tamanio; }
 
-void Pagina::setID(int n){ id_pagina = n; }
+void Pagina::setID(int n){ id_pagina = (rand()%31571)*(n%168); }
 int Pagina::getID(){ return id_pagina; }
 
-void Pagina::setIDDestino(int d){ id_Destino = d; }
+void Pagina::setIDDestino(int d){ id_Destino = d%256; }
 
-void Pagina::setidDestinoTerminal(int d){ id_Destino_Terminal = d; }
+void Pagina::setidDestinoTerminal(int d){ id_Destino_Terminal = d%256; }
 
-void Pagina::setIDDestino(){ id_Destino = rand(); }
+void Pagina::setIDDestino(){ id_Destino = rand()%256; }
 
-void Pagina::setidDestinoTerminal(){ id_Destino_Terminal = rand(); }
+void Pagina::setidDestinoTerminal(){ id_Destino_Terminal = rand()%256; }
 
 int Pagina::getIDDestino(){ return id_Destino; }
 
