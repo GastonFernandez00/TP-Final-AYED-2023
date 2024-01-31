@@ -6,6 +6,7 @@
 class Terminal{
 private:
 
+    Cola<Paquete> pkg;
     int id_TERMINAL = -1;
 
     /*  Si: Determinante == 0 -> Emisor
@@ -51,7 +52,7 @@ public:
         y separa la pagina en nodos de tamanio 50
         @param Pagina *, Cola<int>*
     */
-    void empaquetado(Pagina *,Cola<int>*);
+    void empaquetado(Pagina *,Cola<Paquete> *);
 
     /*  Establece que X cola esta lista para ser enviada (levanta un flag) y 
         asocia un id de router y terminal a donde debe ser enviado
@@ -68,6 +69,9 @@ public:
     /*  Checkea que los terminales sea unicos, y no haya repetidos
     */
     void checkIDTerminal();
+
+    /*  Devuelve los paquetes almacenados en la terminal*/
+    Cola<Paquete> getPaquetes();
 
 
 };

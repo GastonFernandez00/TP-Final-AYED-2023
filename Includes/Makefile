@@ -1,4 +1,4 @@
-all: compile link execute 
+all: compile link execute clean
 # all2: recompilarTodo linkTodo execute
 # clean:
 # 	rm -f *.o *.exe
@@ -13,7 +13,7 @@ execute:
 	.\prog.exe
 
 clean:
-	rm -f *.o 
+	rm -f *.o
 
 # recompilarTodo:
 # 	g++ Cola.cpp Paquete.cpp Paginas.cpp Terminal.cpp Router.cpp Extras.cpp -c

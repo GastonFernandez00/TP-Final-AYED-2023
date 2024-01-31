@@ -2,6 +2,10 @@
 #include "Extras.h"
 using namespace std;
 
+Paquete crearPaquete(){
+    Paquete r; return r;
+}
+
 Terminal::Terminal(){
     // int x = rand()%2;
     // determinante = x;
@@ -10,19 +14,28 @@ Terminal::Terminal(){
 Terminal::Terminal(bool b){ determinante = b; if(determinante == 1) this->setIDTerminal();}
 Terminal::~Terminal(){}
 
-void Terminal::empaquetado(Pagina *p,Cola<int>* c){
-        if(this->getDeterminante()){ 
+void Terminal::empaquetado(Pagina *p,Cola<Paquete> *pak){
+        int numero_de_paquete = 0;
+
+        if(this->getDeterminante() == 1){ 
             cout<<"[ERROR]: PC RECEPTOR, NO EMISOR";    
             return (void)0;
         }
-        c->setIDCola(p->getID());
+        
         while(p->getTamanio() >= 50){
-            c->encolar(50);
+            numero_de_paquete++;
+            Paquete aux = crearPaquete();
+            aux.setDato(50);aux.setIds(p); aux.setPackNumero(numero_de_paquete);
             p->setTamanio(p->getTamanio()-50);
+            pkg.encolar(aux);
         }
         if(p->getTamanio() < 50 && p->getTamanio() > 0){
-            c->encolar(p->getTamanio());
+            numero_de_paquete++;
+            Paquete aux = crearPaquete();
+            aux.setIds(p); aux.setPackNumero(numero_de_paquete);
+            aux.setDato(p->getTamanio());
             p->setTamanio(0);
+            pkg.encolar(aux);
         }
 }
 
@@ -31,12 +44,12 @@ void Terminal::setDeterminante(bool D){ determinante = D; }
 bool Terminal::getDeterminante(){ return determinante; }
 
 void Terminal::envio(Cola<int>* c/*, int id_Router*/){
-    //id_Router podria ser ingresado por usuario, mejor si no.
-    int id_Router = rand()%256;
-    int id_destino_terminal = rand()%256;
-    c->cambiarEstado();
-    c->setIDDestino(id_Router); 
-    c->setidDestinoTerminal(id_destino_terminal);   
+    // //id_Router podria ser ingresado por usuario, mejor si no.
+    // int id_Router = rand()%256;
+    // int id_destino_terminal = rand()%256;
+    // c->cambiarEstado();
+    // c->setIDDestino(id_Router); 
+    // c->setidDestinoTerminal(id_destino_terminal);   
 }
 
 void Terminal::setIDTerminal(){ id_TERMINAL = rand()%256; }
@@ -78,41 +91,34 @@ void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control){
         checkIDTerminalPriv(this,this,control+1);
 //    }
 }
+
+Cola<Paquete> Terminal::getPaquetes(){ return pkg; }
+
 int main(int argc, char const *argv[])
 {
-    Cola<int> cEnvio[128],cRecibido[128];
     Pagina p[100];
-    Terminal t[10];
+    Cola<Paquete> pak;
+    Terminal t;
+    //vector<Paquete> pkg;
+    for(int i = 0; i < size(p); i ++ ){ t.empaquetado(&p[i],&pak);}
+    //t.empaquetado(p,&pkg);
+    Cola<Paquete> pkg = t.getPaquetes();
+    cout<<"Tamanio: "<<pkg.sizeCola()<<endl;
+    cout<<"Dato: "<<pkg.getPrimero().getDato()<<endl;
+    cout<<"Ultimo Dato: "<<pkg.getUltimo().getDato()<<endl;
+    cout<<"ID destino: "<<pkg.getPrimero().getIDDestino()<<endl;
+    cout<<"ID destino final: "<<pkg.getPrimero().getIDDestinoTerminal()<<endl;
+    cout<<"ID de pertenencia: "<<pkg.getPrimero().getIdPertenencia()<<endl;
+    cout<<"--------------------------------------------------\n";
+    cout<<"ID destino: "<<pkg.getUltimo().getIDDestino()<<endl;
+    cout<<"ID destino final: "<<pkg.getUltimo().getIDDestinoTerminal()<<endl;
+    cout<<"ID de pertenencia: "<<pkg.getUltimo().getIdPertenencia()<<endl;
 
-        
-    
+    pkg.vaciarCola();
+    cout<<"Tamanio: "<<pkg.sizeCola()<<endl;
 
-    /*for(int i = 0; i < size(p); i++){
-        t.empaquetado(&p[i],&c[i]);
-    }
+            
+    cout<<"--------------------------------------------------\n";
 
-    for(int i = 0; i < size(c); i++){
-        if(!(c[i].colaEmpty())) 
-        cout<<"Cola N"<<i+1<<" -> "<<c[i].sizeCola()<<endl; 
-    }
-
-    for(int i = 0; i < size(c); i++){
-        if(!(c[i].colaEmpty())){
-        cout<<"Cola N"<<i+1<<"\n";
-        c[i].printCola();
-        cout<<"\n----------\n";
-        } 
-    }
-
-    //p->setTamanio(143);
-    /*Terminal t;
-
-    t.empaquetado(&p[0],&c[0]);
-
-    c->printCola();
-
-    cout<<endl<<endl<<c->sizeCola();
-
-    return 0;
-*/}
+}
 

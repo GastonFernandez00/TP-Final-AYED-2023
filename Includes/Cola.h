@@ -3,6 +3,7 @@
 #include <iostream>
 #include <queue>
 #include <random>
+#include "Paquete.h"
 using namespace std;
 
 /*  Clase Cola
@@ -14,8 +15,6 @@ class Cola{
 private:
     std::queue<T> c;
     int id_Cola = -1;
-    int id_Destino = -1;
-    int id_Destino_Terminal = -1;
     bool estado = false;
 
 public:
@@ -35,28 +34,6 @@ public:
         @param int
     */
     void setIDCola(int);
-
-    /*  Establece el ID de destino de la cola, pero sin parametros, aleatoriamente
-    */
-    void setIDDestino();    
-    
-    /*  Establece el ID de destino de la cola
-        @param int
-    */
-   void setIDDestino(int);
-    
-    /*  Devuelve el ID del terminal a donde debe ir la cola
-        @returns int
-    */
-    void setidDestinoTerminal();
-
-    /*  Establece el Id de la computadora de destino.
-        Si cada router tiene 256 (0 - 255) computadoras, cada una 
-        esta numerada de esa forma, independiente de las otras que esten conectadas
-        a otros routers
-        @param int
-    */
-    void setidDestinoTerminal(int);
 
     /*Cambia el estado de la cola, segun este lista para enviarse o no*/
     void cambiarEstado();
@@ -89,18 +66,6 @@ public:
         @returns int
     */
     int getIDCola();
-
-     /*  Devuelve el Id de del router a donde debe ir la cola
-        @returns int
-    */
-    int getIDDestino();
-
-    /*  Establece el Id de la computadora de destino.
-        Si cada router tiene 256 (0 - 255) computadoras, cada una 
-        esta numerada de esa forma, independiente de las otras que esten conectadas
-        a otros routers. Pero sin parametros.
-    */
-    int getIDDestinoTerminal();
 
     //  Pregunta si la Cola esta vacia
     //  @returns Boolean

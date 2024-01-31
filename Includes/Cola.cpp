@@ -1,7 +1,7 @@
 #include "Cola.h"
 
 template <class T>
-Cola<T>::Cola(){ setIDCola(); setIDDestino(); setidDestinoTerminal(); }
+Cola<T>::Cola(){ setIDCola(); }
 
 template <class T>
 Cola<T>::~Cola(){ }
@@ -10,19 +10,7 @@ template <class T>
 void Cola<T>::setIDCola(){ id_Cola = rand(); }
 
 template <class T>
-void Cola<T>::setIDDestino(){ id_Destino = rand(); }
-
-template <class T>
-void Cola<T>::setidDestinoTerminal(){ id_Destino_Terminal = rand(); }
-
-template <class T>
 void Cola<T>::setIDCola(int d){ id_Cola = d; }
-
-template <class T>
-void Cola<T>::setIDDestino(int d){ id_Destino = d; }
-
-template <class T>
-void Cola<T>::setidDestinoTerminal(int d){ id_Destino_Terminal = d; }
 
 template <class T>
 void Cola<T>::cambiarEstado(){ (estado == false)? (estado = true):(estado = false);}
@@ -44,13 +32,14 @@ void Cola<T>::vaciarCola(){
 
 template <class T>
 void Cola<T>::imprimirCola(){
-    if(c.empty()){ return (void)0; }
-    queue<T> aux = c;
-    while(aux.size() > 0){
-    cout<<aux.front()<<endl;
-    aux.pop();
-    }
-    cout<<endl;
+    cout<<-1;
+    // if(c.empty()){ return (void)0; }
+    // queue<T> aux = c;
+    // while(aux.size() > 0){
+    // cout<<aux.front()<<endl;
+    // aux.pop();
+    // }
+    // cout<<endl;
 }
 
 template <class T>
@@ -64,12 +53,6 @@ T Cola<T>::getUltimo(){ return c.back(); }
 
 template <class T>
 int Cola<T>::getIDCola(){ return id_Cola; }
-
-template <class T>
-int Cola<T>::getIDDestino(){ return id_Destino; }
-
-template <class T>
-int Cola<T>::getIDDestinoTerminal(){ return id_Destino_Terminal;}
 
 template <class T>
 bool Cola<T>::colaEmpty(){ return c.empty(); }
@@ -86,6 +69,7 @@ template class Cola<float>;
 template class Cola<double>;
 template class Cola<char>;
 template class Cola<string>;
+template class Cola<Paquete>;
 
 
 ///////////////////PRUEBA DE FUNCIONES
