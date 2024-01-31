@@ -8,9 +8,11 @@ using namespace std;
 /*  Clase Cola
 *   @param T
 */
+
+template <class T>
 class Cola{
 private:
-    std::queue<int> c;
+    std::queue<T> c;
     int id_Cola = -1;
     int id_Destino = -1;
     int id_Destino_Terminal = -1;
@@ -61,7 +63,7 @@ public:
     
     //  Encolar: Introduce un nuevo dato a la cola
     //  @param   T
-    void encolar(int);
+    void encolar(T);
 
     //  Elimina el dato mas antiguo de la cola
     void desencolar();
@@ -73,15 +75,15 @@ public:
     void imprimirCola();
 
     //  Devuelve la Cola
-    queue<int> getCola();
+    queue<T> getCola();
 
     //  Devuelve el dato mas antiguo de la cola, pero no lo elimina.
     //  @returns T
-    int getPrimero();
+    T getPrimero();
 
     //  Devuelve el dato mas reciente de la cola, pero no lo elimina
     //  @returns T
-    int getUltimo();
+    T getUltimo();
 
     /*  Devuelve el Id de la cola
         @returns int

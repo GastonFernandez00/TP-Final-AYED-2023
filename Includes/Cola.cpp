@@ -1,29 +1,40 @@
 #include "Cola.h"
 
+template <class T>
+Cola<T>::Cola(){ setIDCola(); setIDDestino(); setidDestinoTerminal(); }
 
-Cola::Cola(){ setIDCola(); setIDDestino(); setidDestinoTerminal(); }
+template <class T>
+Cola<T>::~Cola(){ }
 
-Cola::~Cola(){ }
+template <class T>
+void Cola<T>::setIDCola(){ id_Cola = rand(); }
 
-void Cola::setIDCola(){ id_Cola = rand(); }
+template <class T>
+void Cola<T>::setIDDestino(){ id_Destino = rand(); }
 
-void Cola::setIDDestino(){ id_Destino = rand(); }
+template <class T>
+void Cola<T>::setidDestinoTerminal(){ id_Destino_Terminal = rand(); }
 
-void Cola::setidDestinoTerminal(){ id_Destino_Terminal = rand(); }
+template <class T>
+void Cola<T>::setIDCola(int d){ id_Cola = d; }
 
-void Cola::setIDCola(int d){ id_Cola = d; }
+template <class T>
+void Cola<T>::setIDDestino(int d){ id_Destino = d; }
 
-void Cola::setIDDestino(int d){ id_Destino = d; }
+template <class T>
+void Cola<T>::setidDestinoTerminal(int d){ id_Destino_Terminal = d; }
 
-void Cola::setidDestinoTerminal(int d){ id_Destino_Terminal = d; }
+template <class T>
+void Cola<T>::cambiarEstado(){ (estado == false)? (estado = true):(estado = false);}
 
-void Cola::cambiarEstado(){ (estado == false)? (estado = true):(estado = false);}
+template <class T>
+void Cola<T>::encolar(T e){ c.push(e); }
 
-void Cola::encolar(int e){ c.push(e); }
+template <class T>
+void Cola<T>::desencolar(){ c.pop(); }
 
-void Cola::desencolar(){ c.pop(); }
-
-void Cola::vaciarCola(){
+template <class T>
+void Cola<T>::vaciarCola(){
     if(c.size() > 0){
         c.pop();
         return vaciarCola();
@@ -31,9 +42,10 @@ void Cola::vaciarCola(){
     else cout<<"\nCola Vaciada\n";
 }
 
-void Cola::imprimirCola(){
+template <class T>
+void Cola<T>::imprimirCola(){
     if(c.empty()){ return (void)0; }
-    queue<int> aux = c;
+    queue<T> aux = c;
     while(aux.size() > 0){
     cout<<aux.front()<<endl;
     aux.pop();
@@ -41,27 +53,42 @@ void Cola::imprimirCola(){
     cout<<endl;
 }
 
-queue<int> Cola::getCola(){ return c; }
+template <class T>
+queue<T> Cola<T>::getCola(){ return c; }
 
-int Cola::getPrimero(){ return c.front(); }
+template <class T>
+T Cola<T>::getPrimero(){ return c.front(); }
 
-int Cola::getUltimo(){ return c.back(); }
+template <class T>
+T Cola<T>::getUltimo(){ return c.back(); }
 
-int Cola::getIDCola(){ return id_Cola; }
+template <class T>
+int Cola<T>::getIDCola(){ return id_Cola; }
 
-int Cola::getIDDestino(){ return id_Destino; }
+template <class T>
+int Cola<T>::getIDDestino(){ return id_Destino; }
 
-int Cola::getIDDestinoTerminal(){ return id_Destino_Terminal;}
+template <class T>
+int Cola<T>::getIDDestinoTerminal(){ return id_Destino_Terminal;}
 
-bool Cola::colaEmpty(){ return c.empty(); }
+template <class T>
+bool Cola<T>::colaEmpty(){ return c.empty(); }
 
-int Cola::sizeCola(){ return c.size(); }
+template <class T>
+int Cola<T>::sizeCola(){ return c.size(); }
 
-bool Cola::getEstado(){ return estado; }
+template <class T>
+bool Cola<T>::getEstado(){ return estado; }
+
+template class Cola<int>;
+template class Cola<Cola<int>*>;
+template class Cola<float>;
+template class Cola<double>;
+template class Cola<char>;
+template class Cola<string>;
 
 
-
-
+///////////////////PRUEBA DE FUNCIONES
 /*int main(int argc, char const *argv[])
 {
     Cola c;

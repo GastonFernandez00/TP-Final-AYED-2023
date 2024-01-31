@@ -1,6 +1,9 @@
 /*
     Ver:
         
+        >Probablemente hagan falta IDs para saber a donde tiene que ir cada paquete,
+        mismas funciones que en "Paginas" probablemente
+
         >Se Tiene que enviar Paquete por paquete
         
         >Como acceder a los objetos dentro de cada buffer

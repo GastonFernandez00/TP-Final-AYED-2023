@@ -78,17 +78,13 @@ void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control){
         checkIDTerminalPriv(this,this,control+1);
 //    }
 }
-/*int main(int argc, char const *argv[])
+int main(int argc, char const *argv[])
 {
     Cola<int> cEnvio[128],cRecibido[128];
     Pagina p[100];
     Terminal t[10];
 
-    
-
-   
-
-
+        
     
 
     /*for(int i = 0; i < size(p); i++){
@@ -118,5 +114,5 @@ void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control){
     cout<<endl<<endl<<c->sizeCola();
 
     return 0;
-}*/
+*/}
 

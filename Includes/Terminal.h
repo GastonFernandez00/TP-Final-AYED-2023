@@ -1,7 +1,8 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 #include "Paginas.h"
-#include "Colas.h"
+#include "Cola.h"
+#include "Paquete.h"
 class Terminal{
 private:
 

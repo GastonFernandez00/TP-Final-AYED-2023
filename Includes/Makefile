@@ -1,13 +1,13 @@
 all: compile link execute 
-all2: recompilarTodo linkTodo executeTodo
-cleanTodo:
-	rm -f *.o *.exe
+# all2: recompilarTodo linkTodo execute
+# clean:
+# 	rm -f *.o *.exe
 
 compile:
-	g++ -c
+	g++ Cola.cpp Paquete.cpp Paginas.cpp Terminal.cpp Extras.cpp -c
 
 link: 
-	g++  -o prog.exe
+	g++ Cola.o Paquete.o Paginas.o Terminal.o Extras.o -o prog.exe
 
 execute:
 	.\prog.exe
@@ -15,11 +15,9 @@ execute:
 clean:
 	rm -f *.o 
 
-recompilarTodo:
-	g++ Colas.cpp Nodos.cpp Listas.cpp Paquete.cpp Extras.cpp Paginas.cpp Router.cpp Terminal.cpp -c
+# recompilarTodo:
+# 	g++ Cola.cpp Paquete.cpp Paginas.cpp Terminal.cpp Router.cpp Extras.cpp -c
 
-linkTodo:
-	g++ Colas.o Nodos.o Listas.o Paquete.o Extras.o Paginas.o Router.o Terminal.o -o prog
+# linkTodo:
+# 	g++ Cola.o Paquete.o Extras.o Paginas.o Router.o Terminal.o -o prog
 
-executeTodo:
-	.\prog.exe
