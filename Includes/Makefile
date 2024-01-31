@@ -1,26 +1,25 @@
-all1: compile link execute 
-all2: compile_cola link_cola execute_cola clean_cola
+all: compile link execute 
+all2: recompilarTodo linkTodo executeTodo
+cleanTodo:
+	rm -f *.o *.exe
 
-compile: 
-	g++ Terminal.cpp Router.cpp Extras.cpp -c
+compile:
+	g++ -c
 
-link:
-	g++ Nodos.o Listas.o Colas.o Paginas.o Terminal.o Router.o Extras.o -o prog
+link: 
+	g++  -o prog.exe
 
 execute:
 	.\prog.exe
 
 clean:
-	rm -f prog *.o *.ghc
+	rm -f *.o 
 
-compile_cola:
-	g++ Cola.cpp -c
+recompilarTodo:
+	g++ Colas.cpp Nodos.cpp Listas.cpp Paquete.cpp Extras.cpp Paginas.cpp Router.cpp Terminal.cpp -c
 
-link_cola:
-	g++ Cola.o -o Cola.exe
+linkTodo:
+	g++ Colas.o Nodos.o Listas.o Paquete.o Extras.o Paginas.o Router.o Terminal.o -o prog
 
-execute_cola:
-	.\Cola.exe
-
-clean_cola:
-	rm -f *.o *.ghc
+executeTodo:
+	.\prog.exe

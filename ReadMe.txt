@@ -1,6 +1,8 @@
 /*
     Ver:
         
+        >Se Tiene que enviar Paquete por paquete
+        
         >Como acceder a los objetos dentro de cada buffer
                 
         >Ver que el check id funciona cuando el arreglo es de HASTA 169.

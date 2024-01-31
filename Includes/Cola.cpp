@@ -11,6 +11,12 @@ void Cola::setIDDestino(){ id_Destino = rand(); }
 
 void Cola::setidDestinoTerminal(){ id_Destino_Terminal = rand(); }
 
+void Cola::setIDCola(int d){ id_Cola = d; }
+
+void Cola::setIDDestino(int d){ id_Destino = d; }
+
+void Cola::setidDestinoTerminal(int d){ id_Destino_Terminal = d; }
+
 void Cola::cambiarEstado(){ (estado == false)? (estado = true):(estado = false);}
 
 void Cola::encolar(int e){ c.push(e); }

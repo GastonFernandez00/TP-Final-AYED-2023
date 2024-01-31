@@ -29,14 +29,32 @@ public:
     */
     void setIDCola();
 
+    /*Establece el id de la cola
+        @param int
+    */
+    void setIDCola(int);
+
     /*  Establece el ID de destino de la cola, pero sin parametros, aleatoriamente
     */
-    void setIDDestino();
-
+    void setIDDestino();    
+    
+    /*  Establece el ID de destino de la cola
+        @param int
+    */
+   void setIDDestino(int);
+    
     /*  Devuelve el ID del terminal a donde debe ir la cola
         @returns int
     */
     void setidDestinoTerminal();
+
+    /*  Establece el Id de la computadora de destino.
+        Si cada router tiene 256 (0 - 255) computadoras, cada una 
+        esta numerada de esa forma, independiente de las otras que esten conectadas
+        a otros routers
+        @param int
+    */
+    void setidDestinoTerminal(int);
 
     /*Cambia el estado de la cola, segun este lista para enviarse o no*/
     void cambiarEstado();
