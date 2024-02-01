@@ -1,10 +1,7 @@
 /*
     Ver:
         
-        >Probablemente hagan falta IDs para saber a donde tiene que ir cada paquete,
-        mismas funciones que en "Paginas" probablemente
-
-        >Tal vez no necesito hacer Cola un template, sino simplemente que las colas sean de Paquetes
+        >Para simular la aleatoriedad puedo usar la libreria de time, en concreto la funcion time(NULL), que devuelve los segundos desde EPOCH
 
         >Se Tiene que enviar Paquete por paquete
         

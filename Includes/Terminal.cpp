@@ -1,3 +1,4 @@
+#include <time.h>
 #include "Terminal.h"
 #include "Extras.h"
 using namespace std;
@@ -62,14 +63,38 @@ void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control,int cant
     if(control == 10){ return (void)0; }
 
         burbuja_Terminal(a,b,cantTerminales);
+        
+        b++; int veces = 0,contador_a = 0,contador_b = 1;
 
-        for(int i = 0; i < cantTerminales; i ++){
-            cout<<a->getIDTerminal()<<" ";
-            if((i+1)%10 == 0) cout<<endl;
-            a++;
+        for(int i = 0; i < cantTerminales-1; i++){// 0 -> n-1
+            
+            // if(contador_a > cantTerminales || a->getIDTerminal() < 0){
+            //      return checkIDTerminalPriv(this,this,control+1,cantTerminales);
+            // }
+            
+            for(int j = 1; j < cantTerminales; j++){//    1 -> n
+
+                if( contador_b < cantTerminales && b->getIDTerminal() >= 0){
+
+                    if( a->getIDTerminal() == b->getIDTerminal()){ 
+                        b->setMaximaCantDeTerminales(cantTerminales);
+                        veces++;
+                        b->setIDTerminal(b->getIDTerminal()+veces);
+                    }
+                    b++;contador_b++;
+                }
+            }
+
+            a++; b = a; b++; veces = 0; contador_a++;contador_b = 1;
         }
+        return checkIDTerminalPriv(this,this,control+1,cantTerminales);
+        // for(int i = 0; i < cantTerminales; i ++){
+        //     cout<<a->getIDTerminal()<<" ";
+        //     if((i+1)%10 == 0) cout<<endl;
+        //     a++;
+        // }
 
-        cout<<endl<<endl<<endl<<endl<<endl;
+        // cout<<endl<<endl<<endl<<endl<<endl;
         // b++;int veces = 0;
         // for(int i = 0; i < cantTerminales; i++){
             
@@ -100,7 +125,7 @@ Terminal crearTerminal(){ Terminal t; return t;}
 
 int main(int argc, char const *argv[]){
     
-    int numero_de_terminales = rand()%256;
+    int numero_de_terminales = (rand()*time(nullptr))%256;
     vector<Terminal> t;
     for(int i= 0; i < numero_de_terminales; i++){t.push_back(crearTerminal());}
     t.at(0).checkIDTerminal(t.size());
@@ -110,37 +135,37 @@ int main(int argc, char const *argv[]){
     }
 
     cout<<endl<<endl;
-    int contador = 0;
+    int contadorter = 0;
     for(int i = 0; i < numero_de_terminales-1; i++){
         for(int j = 1+i; j < numero_de_terminales; j++ ){
-            if(t.at(i).getIDTerminal() == t.at(j).getIDTerminal()){ contador++;cout<<t.at(j).getIDTerminal()<<" ";}
+            if(t.at(i).getIDTerminal() == t.at(j).getIDTerminal()){ contadorter++;cout<<t.at(j).getIDTerminal()<<" ";}
         }
     }
-    cout<<"\n\nRepetidos: "<<contador<<endl;
+    cout<<"\n\nRepetidos: "<<contadorter<<endl;
     
 
 //     //PRUEBA PAGINAS / TERMINAL -> EMPAQUETADO
-//     int tamanio = 4861;
-//     Pagina p[tamanio];
-//     Terminal t;
-//     //vector<Paquete> pkg;
-//     for(int i = 0; i < tamanio; i ++ ){ t.empaquetado(&p[i]);}
-//     //t.empaquetado(p,&pkg);
-//     Cola<Paquete> pkg = t.getPaquetes();
+    int tamanio = (time(NULL)*rand())%5000;
+    Pagina p[tamanio];
+    
+    //vector<Paquete> pkg;
+    for(int i = 0; i < tamanio; i ++ ){ t.at(0).empaquetado(&p[i]); }
+    //t.empaquetado(p,&pkg);
+    Cola<Paquete> pkg = t.at(0).getPaquetes();
 
-//     p->checkIDPaginas(tamanio);
-//     for(int i= 0; i < tamanio; i++){
-//         cout<<p[i].getID()<<" ";
-//         if((i+1)%10 == 0) cout<<endl;
-//     }
-//     cout<<endl<<endl;
-//     int contador = 0;
-//     for(int i = 0; i < tamanio-1; i++){
-//         for(int j = 1+i; j < tamanio; j++ ){
-//             if(p[i].getID() == p[j].getID()){ contador++;cout<<p[j].getID()<<" ";}
-//         }
-//     }
-//     cout<<"\n\nRepetidos: "<<contador<<endl;
+    p->checkIDPaginas(tamanio);
+    for(int i= 0; i < tamanio; i++){
+        cout<<p[i].getID()<<" ";
+        if((i+1)%10 == 0) cout<<endl;
+    }
+    cout<<endl<<endl;
+    int contador = 0;
+    for(int i = 0; i < tamanio-1; i++){
+        for(int j = 1+i; j < tamanio; j++ ){
+            if(p[i].getID() == p[j].getID()){ contador++;cout<<p[j].getID()<<" ";}
+        }
+    }
+    cout<<"\n\nRepetidos: "<<contador<<endl;
 
     
 //     while(pkg.sizeCola() > 0 ){
