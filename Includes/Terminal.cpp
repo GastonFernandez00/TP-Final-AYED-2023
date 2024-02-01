@@ -125,47 +125,57 @@ Terminal crearTerminal(){ Terminal t; return t;}
 
 int main(int argc, char const *argv[]){
     
-    int numero_de_terminales = (rand()*time(nullptr))%256;
-    vector<Terminal> t;
-    for(int i= 0; i < numero_de_terminales; i++){t.push_back(crearTerminal());}
-    t.at(0).checkIDTerminal(t.size());
-    for(int i = 0; i < t.size(); i++){
-        cout<<t.at(i).getIDTerminal()<<" ";
-        if((i+1)%10 == 0) cout<<endl;
-    }
 
-    cout<<endl<<endl;
-    int contadorter = 0;
-    for(int i = 0; i < numero_de_terminales-1; i++){
-        for(int j = 1+i; j < numero_de_terminales; j++ ){
-            if(t.at(i).getIDTerminal() == t.at(j).getIDTerminal()){ contadorter++;cout<<t.at(j).getIDTerminal()<<" ";}
-        }
-    }
-    cout<<"\n\nRepetidos: "<<contadorter<<endl;
+
+
+
+
+
+
+
+    
+    //PRUEBA CHECK TERMINALES
+    // int numero_de_terminales = (rand()*time(nullptr))%256;
+    // vector<Terminal> t;
+    // for(int i= 0; i < numero_de_terminales; i++){t.push_back(crearTerminal());}
+    // t.at(0).checkIDTerminal(t.size());
+    // for(int i = 0; i < t.size(); i++){
+    //     cout<<t.at(i).getIDTerminal()<<" ";
+    //     if((i+1)%10 == 0) cout<<endl;
+    // }
+
+    // cout<<endl<<endl;
+    // int contadorter = 0;
+    // for(int i = 0; i < numero_de_terminales-1; i++){
+    //     for(int j = 1+i; j < numero_de_terminales; j++ ){
+    //         if(t.at(i).getIDTerminal() == t.at(j).getIDTerminal()){ contadorter++;cout<<t.at(j).getIDTerminal()<<" ";}
+    //     }
+    // }
+    // cout<<"\n\nRepetidos: "<<contadorter<<endl;
     
 
 //     //PRUEBA PAGINAS / TERMINAL -> EMPAQUETADO
-    int tamanio = (time(NULL)*rand())%5000;
-    Pagina p[tamanio];
+    // int tamanio = (time(NULL)*rand())%5000;
+    // Pagina p[tamanio];
     
-    //vector<Paquete> pkg;
-    for(int i = 0; i < tamanio; i ++ ){ t.at(0).empaquetado(&p[i]); }
-    //t.empaquetado(p,&pkg);
-    Cola<Paquete> pkg = t.at(0).getPaquetes();
+    // //vector<Paquete> pkg;
+    // for(int i = 0; i < tamanio; i ++ ){ t.at(0).empaquetado(&p[i]); }
+    // //t.empaquetado(p,&pkg);
+    // Cola<Paquete> pkg = t.at(0).getPaquetes();
 
-    p->checkIDPaginas(tamanio);
-    for(int i= 0; i < tamanio; i++){
-        cout<<p[i].getID()<<" ";
-        if((i+1)%10 == 0) cout<<endl;
-    }
-    cout<<endl<<endl;
-    int contador = 0;
-    for(int i = 0; i < tamanio-1; i++){
-        for(int j = 1+i; j < tamanio; j++ ){
-            if(p[i].getID() == p[j].getID()){ contador++;cout<<p[j].getID()<<" ";}
-        }
-    }
-    cout<<"\n\nRepetidos: "<<contador<<endl;
+    // p->checkIDPaginas(tamanio);
+    // for(int i= 0; i < tamanio; i++){
+    //     cout<<p[i].getID()<<" ";
+    //     if((i+1)%10 == 0) cout<<endl;
+    // }
+    // cout<<endl<<endl;
+    // int contador = 0;
+    // for(int i = 0; i < tamanio-1; i++){
+    //     for(int j = 1+i; j < tamanio; j++ ){
+    //         if(p[i].getID() == p[j].getID()){ contador++;cout<<p[j].getID()<<" ";}
+    //     }
+    // }
+    // cout<<"\n\nRepetidos: "<<contador<<endl;
 
     
 //     while(pkg.sizeCola() > 0 ){

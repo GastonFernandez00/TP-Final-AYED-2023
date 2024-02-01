@@ -1,8 +1,6 @@
 /*
     Ver:
         
-        >Para simular la aleatoriedad puedo usar la libreria de time, en concreto la funcion time(NULL), que devuelve los segundos desde EPOCH
-
         >Se Tiene que enviar Paquete por paquete
         
         >Como acceder a los objetos dentro de cada buffer
@@ -13,6 +11,8 @@
         ó sea, el "peso"  (tamanio de la cola buffer redestino) de cada router
 
         >La cola donde se acumulan los paquetes, deberian estar en el la terminal, no en el main
+
+        >Para simular la aleatoriedad puedo usar la libreria de time, en concreto la funcion time(NULL), que devuelve los segundos desde EPOCH
    
     */
 
