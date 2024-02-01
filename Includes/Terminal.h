@@ -59,7 +59,7 @@ public:
         asocia un id de router y terminal a donde debe ser enviado
         @param Cola<int>*, int
     */
-    void envio(Cola<int>* /*,int*/);
+    Cola<Paquete> envio();
 
     /*  Establece el ID del Terminal */
     void setIDTerminal();

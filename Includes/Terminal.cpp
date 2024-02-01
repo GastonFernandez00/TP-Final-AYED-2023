@@ -40,7 +40,9 @@ void Terminal::setDeterminante(bool D){ determinante = D; }
 
 bool Terminal::getDeterminante(){ return determinante; }
 
-void Terminal::envio(Cola<int>* c/*, int id_Router*/){
+Cola<Paquete> Terminal::envio(){
+    // pkg.cambiarEstado();
+    // return this->getPaquetes();
     // //id_Router podria ser ingresado por usuario, mejor si no.
     // int id_Router = rand()%256;
     // int id_destino_terminal = rand()%256;
@@ -126,14 +128,27 @@ Terminal crearTerminal(){ Terminal t; return t;}
 int main(int argc, char const *argv[]){
     
 
+    //PRUEBA CREACION DE PAGINA, TERMINAL, Y RECEPCION
+    // int cantPaginas = (rand()*time(nullptr))%1024;
+    // Pagina p[cantPaginas];
+    // p->checkIDPaginas(cantPaginas);
 
+    // int tamanioTerminal = (rand()*time(nullptr))%256;
+    // vector<Terminal> t;
+    // for(int i = 0; i < tamanioTerminal; i++) t.push_back(crearTerminal());
+    // t.at(0).checkIDTerminal(t.size());
 
+    // for(int i = 0; i < t.size(); i++){
+    //     for(int j = 0; j < cantPaginas/256; j++){
+    //         t.at(i).empaquetado(&p[j]);
+    //     }
+    // }
 
-
-
-
-
-    
+    // Cola<Paquete> Recibidos[tamanioTerminal];
+    // for(int i = 0; i < tamanioTerminal; i++){
+    //     Recibidos[i] = t.at(i).getPaquetes();
+    // }
+       
     //PRUEBA CHECK TERMINALES
     // int numero_de_terminales = (rand()*time(nullptr))%256;
     // vector<Terminal> t;
