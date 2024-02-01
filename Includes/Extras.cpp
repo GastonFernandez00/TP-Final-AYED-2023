@@ -37,9 +37,9 @@ void cambio(Pagina *a, Pagina *b){
 //     //cout<<"Contador: "<<contador;
 // }
 
-void burbuja_Terminal(Terminal* a,Terminal* b){
+void burbuja_Terminal(Terminal* a,Terminal* b,int cantTerminales){
     int contador = 0;
-    int fores = 256;
+    int fores = cantTerminales;
     Terminal *aux_a = a, *aux_b = b;
     b++;
     for(int i = 1; i < fores; i++){

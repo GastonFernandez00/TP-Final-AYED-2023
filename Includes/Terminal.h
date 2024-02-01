@@ -13,8 +13,9 @@ private:
         Si: Determinante == 1 -> Receptor
     */
     bool determinante;
-
-    void checkIDTerminalPriv(Terminal *, Terminal *,int/*,int,int*/);
+    int MaximaCantDeTerminales = 256;
+    void setMaximaCantDeTerminales(int);
+    void checkIDTerminalPriv(Terminal *, Terminal *,int,int/*,int,int*/);
 public:
     
 
@@ -68,7 +69,7 @@ public:
 
     /*  Checkea que los terminales sea unicos, y no haya repetidos
     */
-    void checkIDTerminal();
+    void checkIDTerminal(int);
 
     /*  Devuelve los paquetes almacenados en la terminal*/
     Cola<Paquete> getPaquetes();

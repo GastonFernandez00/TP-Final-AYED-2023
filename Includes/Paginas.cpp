@@ -34,20 +34,16 @@ void Pagina::checkIDPaginas(int cantpaginas){ checkIDPaginasPriv(this, this, 0,c
 void Pagina::checkIDPaginasPriv(Pagina *a, Pagina *b, int control,int cantpaginas){
         if(control == 10){ return (void)0; }
 
-    //for(int i = 0; i < 10; i++){
+    
         burbuja_Pagina(a,b,cantpaginas);
         
-        //b++;
-        //cambio_Prueba(a,b);
-    //}
-
         b++;int veces = 0;
-        for(int i = 0; i < 1000; i++){
+        for(int i = 0; i < cantpaginas; i++){
             
-            if(a->getID() > 1000 || a->getID() < 0){ return checkIDPaginasPriv(this,this,control+1,cantpaginas); }
+            if(a->getID() > cantpaginas || a->getID() < 0){ return checkIDPaginasPriv(this,this,control+1,cantpaginas); }
 
-            for(int j = 1; j < 1000-1; j++){
-                if(b->getID() < 1000 && b->getID() >= 0){
+            for(int j = 1; j < cantpaginas-1; j++){
+                if(b->getID() < cantpaginas && b->getID() >= 0){
                     if(a->getID() == b->getID()){
                         b->setMaximaCantDePaginas(cantpaginas);
                         veces+=1;
@@ -61,8 +57,8 @@ void Pagina::checkIDPaginasPriv(Pagina *a, Pagina *b, int control,int cantpagina
             a++;b = a; b++; veces = 0;
         }
 
-        
-//    }
+        return checkIDPaginasPriv(this,this,control+1,cantpaginas);
+
 }
 
 //  PRUEBA DE FUNCIONES
