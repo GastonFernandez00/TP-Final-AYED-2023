@@ -10,7 +10,7 @@ Terminal::Terminal(){
 Terminal::Terminal(bool b){ determinante = b; if(determinante == 1) this->setIDTerminal();}
 Terminal::~Terminal(){}
 
-void Terminal::empaquetado(Pagina *p,Cola<Paquete> *pak){
+void Terminal::empaquetado(Pagina *p){
         int numero_de_paquete = 0;
 
         if(this->getDeterminante() == 1){ 
@@ -84,23 +84,37 @@ void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control){
             a++;b = a; b++; veces = 0;
         }
 
-        checkIDTerminalPriv(this,this,control+1);
+        return checkIDTerminalPriv(this,this,control+1);
 //    }
 }
 
 Cola<Paquete> Terminal::getPaquetes(){ return pkg; }
 
-int main(int argc, char const *argv[])
-{
-    Pagina p[100];
-    Cola<Paquete> pak;
+int main(int argc, char const *argv[]){
+    int tamanio = rand()%10000;
+    Pagina p[tamanio];
     Terminal t;
     //vector<Paquete> pkg;
-    for(int i = 0; i < size(p); i ++ ){ t.empaquetado(&p[i],&pak);}
+    for(int i = 0; i < tamanio; i ++ ){ t.empaquetado(&p[i]);}
     //t.empaquetado(p,&pkg);
     Cola<Paquete> pkg = t.getPaquetes();
+
+    p->checkIDPaginas(tamanio);
+    for(int i= 0; i < tamanio; i++){
+        cout<<p[i].getID()<<" ";
+        if((i+1)%10 == 0) cout<<endl;
+    }
+    cout<<endl<<endl;
+    int contador = 0;
+    for(int i = 0; i < tamanio-1; i++){
+        for(int j = 1+i; j < tamanio; j++ ){
+            if(p[i].getID() == p[j].getID()){ contador++;cout<<p[j].getID()<<" ";}
+        }
+    }
+    cout<<"\n\nRepetidos: "<<contador<<endl;
+
     
-    while(pkg.sizeCola() > 0 && pkg.getPrimero().getIdPertenencia() != pkg.getUltimo().getIdPertenencia()){
+    /*while(pkg.sizeCola() > 0 && pkg.getPrimero().getIdPertenencia() != pkg.getUltimo().getIdPertenencia()){
     cout<<"Tamanio: "<<pkg.sizeCola()<<endl;
     cout<<"Dato: "<<pkg.getPrimero().getDato()<<endl;
     cout<<"Ultimo Dato: "<<pkg.getUltimo().getDato()<<endl;
@@ -116,7 +130,7 @@ int main(int argc, char const *argv[])
     cout<<"Descolando: "<<endl;pkg.desencolar();
     cout<<"--------------------------------------------------\n";
     if(pkg.getPrimero().getIdPertenencia() == pkg.getUltimo().getIdPertenencia()){
-        cout<<"\n--------------------------------------------------\nHUBO MATCH\n";
+        cout<<"\n--------------------------------------------------\nHUBO REPETIDO\n";
     }
 
     // int Espera = 0;
@@ -131,5 +145,5 @@ int main(int argc, char const *argv[])
             
     cout<<"--------------------------------------------------\n";
 
-}
+*/}
 

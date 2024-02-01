@@ -13,6 +13,12 @@ void cambio(Terminal *a, Terminal *b){
     delete aux;
 }
 
+void cambio(Pagina *a, Pagina *b){
+    Pagina *aux = new Pagina();
+    *aux = *a; *a = *b; *b = *aux;
+    delete aux;
+}
+
 // void burbuja_Router(Router *a, Router *b){
 //     int contador = 0;
 //     int fores = 199;
@@ -46,7 +52,25 @@ void burbuja_Terminal(Terminal* a,Terminal* b){
         }
         a = aux_a; b = aux_b; b++;
     }
-    cout<<"Contador: "<<contador;   
+    //cout<<"Contador: "<<contador;   
+}
+
+void burbuja_Pagina(Pagina* a,Pagina* b,int cantpaginas){
+    int contador = 0;
+    int fores = cantpaginas;
+    Pagina *aux_a = a, *aux_b = b;
+    b++;
+    for(int i = 1; i < fores; i++){
+        for(int j = 0; j < fores-1;j++){
+            if( (a->getID()) > (b->getID()) ){
+                contador++;
+                cambio(a,b);
+            }
+            a++;b++;
+        }
+        a = aux_a; b = aux_b; b++;
+    }
+    //cout<<"Contador: "<<contador;   
 }
 
 
