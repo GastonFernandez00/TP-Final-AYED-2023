@@ -7,9 +7,7 @@
 using namespace std;
 
 /*  Clase Cola
-*   @param T
-*/
-
+    @param T*/
 template <class T>
 class Cola{
 private:
@@ -77,8 +75,6 @@ public:
 
     /*  Devuelve el estado de la cola, si esta listo para enviarse o no*/
     bool getEstado();
-    
-
 
 };
 #endif

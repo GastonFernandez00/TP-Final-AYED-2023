@@ -3,11 +3,7 @@
 #include "Extras.h"
 using namespace std;
 
-Terminal::Terminal(){
-    // int x = rand()%2;
-    // determinante = x;
-    this->setIDTerminal();
-}
+Terminal::Terminal(){  this->setIDTerminal(); }
 Terminal::Terminal(bool b){ determinante = b; if(determinante == 1) this->setIDTerminal();}
 Terminal::~Terminal(){}
 
@@ -69,11 +65,7 @@ void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control,int cant
         b++; int veces = 0,contador_a = 0,contador_b = 1;
 
         for(int i = 0; i < cantTerminales-1; i++){// 0 -> n-1
-            
-            // if(contador_a > cantTerminales || a->getIDTerminal() < 0){
-            //      return checkIDTerminalPriv(this,this,control+1,cantTerminales);
-            // }
-            
+                       
             for(int j = 1; j < cantTerminales; j++){//    1 -> n
 
                 if( contador_b < cantTerminales && b->getIDTerminal() >= 0){
@@ -90,35 +82,7 @@ void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control,int cant
             a++; b = a; b++; veces = 0; contador_a++;contador_b = 1;
         }
         return checkIDTerminalPriv(this,this,control+1,cantTerminales);
-        // for(int i = 0; i < cantTerminales; i ++){
-        //     cout<<a->getIDTerminal()<<" ";
-        //     if((i+1)%10 == 0) cout<<endl;
-        //     a++;
-        // }
-
-        // cout<<endl<<endl<<endl<<endl<<endl;
-        // b++;int veces = 0;
-        // for(int i = 0; i < cantTerminales; i++){
-            
-        //     if(a->getIDTerminal() > cantTerminales || a->getIDTerminal() < 0){ return checkIDTerminalPriv(this,this,control+1,cantTerminales); }
-
-        //     for(int j = 1; j < cantTerminales-1; j++){
-        //         if(b->getIDTerminal() < cantTerminales && b->getIDTerminal() >= 0){
-        //             if(a->getIDTerminal() == b->getIDTerminal()){
-        //                 b->setMaximaCantDeTerminales(cantTerminales);
-        //                 veces+=1;
-        //                 b->setIDTerminal(b->getIDTerminal()+veces);
-        //             }    
-        //             b++;
-        //         }
-
-        //     }
-
-        //     a++;b = a; b++; veces = 0;
-        // }
-        // return checkIDTerminalPriv(this,this,control+1,cantTerminales);
         
-
 }
 
 Cola<Paquete> Terminal::getPaquetes(){ return pkg; }

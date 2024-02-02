@@ -1,7 +1,7 @@
 /*
     Ver:
         
-        >Posiblemente eliminar funcion "Envio" de "Terminal", ya no tiene sentido. 
+        >Posiblemente eliminar funcion "Envio" de "Terminal", "cambiarEstado" y su atributo "estado" de "Cola", ya no tiene sentido. 
 
         >Se Tiene que enviar Paquete por paquete
         
