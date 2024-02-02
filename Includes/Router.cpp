@@ -11,11 +11,11 @@ Router::~Router(){ }
 
 Terminal Router::crearNuevoReceptor(){ Terminal t; return t;}
 
-void Router::setIDRouter(){ id_Router = rand()%256; }
+void Router::setIDRouter(){ id_Router = rand()%MaximaCantDeRouters; }
 
 void Router::setRouterPosicion(){ posicion[rand()%tamanio_Posicion][rand()%tamanio_Posicion] = 1; }
 
-void Router::setIDRouter(int i){ id_Router = i%256; }
+void Router::setIDRouter(int i){ id_Router = i%MaximaCantDeRouters; }
 
 void Router::setRouterPosicion(int x, int y){ posicion[y%tamanio_Posicion][x%tamanio_Posicion] = 1; }
 
@@ -41,33 +41,28 @@ bool Router::routerEmpty(){ return buffer.colaEmpty(); }
 
 bool Router::routerRedireccionEmpty(){ return buffer_Redireccion.colaEmpty(); }
 
-void Router::checkIDRouter(){ checkIDRouterPriv(this, this, 0);}
+void Router::setMaximaCantDeRouters(int n){ MaximaCantDeRouters = n%256; }
 
-void Router::checkIDRouterPriv(Router *a, Router *b, int control/*,int i,int j*/){ 
-    if(control == 5){ return (void)0; }
-    
-        burbuja_Router(a,b);
-    
-        b++;int veces = 0;
-        for(int i = 0; i < 256; i++){
-            
-            if(a->getIDRouter() > 256 || a->getIDRouter() < 0){ return (void)0; }
+void Router::checkIDRouter(int n){ checkIDRouterPriv(this, this, 0,n);}
 
-            for(int j = 0; j < 256; j++){
-                if(b->getIDRouter() < 256 && b->getIDRouter() >= 0){
-                    if(a->getIDRouter() == b->getIDRouter()){
-                        veces+=1;
-                        b->setIDRouter(b->getIDRouter()+veces);
-                    }    
-                    b++;
-                }
+void Router::checkIDRouterPriv(Router *a, Router *b, int control, int cantdeRouters){ 
+    if(control == 10){ return (void)0; }
+        cout<<"\nEntro Burbuja"<<endl;
+        // burbuja_Router(a,b,cantdeRouters);
+        qsort(a,cantdeRouters,sizeof(Router),compare);
+        cout<<"\nSale Burbuja"<<endl;
+        //for(;;);
+        //cout<<"\nSale Sleep"<<endl;
 
-            }
+        b++; int veces = 0,contador_a = 0,contador_b = 1;
 
-            a++;b = a; b++; veces = 0;
+        for(int i = 0; i < cantdeRouters; i++){
+            cout<<a->getIDRouter()<<" ";
+            if((i+1)%10 == 0) cout<<endl;
+            a++;
         }
 
-    checkIDRouterPriv(this,this,control+1);
+        return checkIDRouterPriv(this,this,control+1,cantdeRouters);
 }
 
 void Router::setReceptores(){
@@ -83,7 +78,7 @@ void Router::setReceptores(){
 
 Terminal* Router::getReceptor(){ return &receptores[0]; }
 
-Router crearRouter(){ Router r; return r;}
+Router crearRouter(){ Router *r = new Router(); return *r;}
 
 int main(int argc, char const *argv[])
 {
@@ -98,24 +93,28 @@ int main(int argc, char const *argv[])
         }
     }
     vector<Router> r;
-
+    r.reserve(numeroDeRouter);
     for(int i = 0; i < numeroDeRouter; i++){ r.push_back(crearRouter()); }
+    
+    cout<<"\nEntraCheck\n";
+    r.at(0).checkIDRouter(r.size());
+    cout<<"\nSaleCheck\n";
 
-    for(int i = 0; i < numeroDeRouter; i++){
-        r.at(i).Recepcion(Emisores[i].getPaquetes());
-    }
-
-      for(int i = 0; i < numeroDeRouter; i++){
-        Terminal *det = r.at(i).getReceptor();
-        for(int j = 0; j < 256; j++){
-            if( det->getDeterminante() == 0){
-                cout<<"\nHubo un error en la asignacion del determinante\n";
+    for(int i = 0; i < r.size()-1; i++){
+        for(int j = 1+i; j < r.size(); j++){
+            if(r.at(i).getIDRouter() == r.at(j).getIDRouter()){
+                repetidos++;//cout<<r.at(j).getIDRouter()<<" ";
             }
         }
-      }
+    }
 
+    cout<<"\nIDs Repetidos: "<<repetidos<<endl;
 
-    cout<<endl<<sizeof(r);
-    cout<<"\nFin\n";
+    for(int i = 0; i < r.size();i++){
+        cout<<r.at(i).getIDRouter()<<" ";
+        if((i+1)%10 == 0) cout<<endl;
+    }
+
+  
     return 0;
 }

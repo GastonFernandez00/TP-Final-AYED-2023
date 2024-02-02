@@ -1,6 +1,11 @@
 #include "Extras.h"
 using namespace std;
 
+int compare (const void * a, const void * b)
+{
+  return ( *(int*)a - *(int*)b );
+}
+
 void cambio(Router *a, Router *b){
     Router *aux = new Router();
     *aux = *a; *a = *b; *b = *aux;
@@ -19,9 +24,9 @@ void cambio(Pagina *a, Pagina *b){
     delete aux;
 }
 
-void burbuja_Router(Router *a, Router *b){
+void burbuja_Router(Router *a, Router *b,int cantdeRouters){
     int contador = 0;
-    int fores = 199;
+    int fores = cantdeRouters;
     Router *aux_a = a, *aux_b = b;
     b++;
     for(int i = 1; i < fores; i++){
