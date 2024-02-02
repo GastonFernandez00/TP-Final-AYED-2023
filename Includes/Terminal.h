@@ -12,7 +12,7 @@ private:
     /*  Si: Determinante == 0 -> Emisor
         Si: Determinante == 1 -> Receptor
     */
-    bool determinante;
+    bool determinante = 0;
     int MaximaCantDeTerminales = 256;
     void setMaximaCantDeTerminales(int);
     void checkIDTerminalPriv(Terminal *, Terminal *,int,int/*,int,int*/);

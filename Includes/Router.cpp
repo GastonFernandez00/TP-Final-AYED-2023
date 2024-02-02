@@ -23,17 +23,17 @@ int Router::getIDRouter(){ return id_Router; }
 
 int Router::getPosicionRouter(){ return posicion[0][0]; } //CAMBIAR ESTO
 
-void Router::Recepcion(Cola<Paquete> *& c){
+void Router::Recepcion(Cola<Paquete> c){
     
-    if(c->colaEmpty()){ return (void)0; }
+    if(c.colaEmpty()){ return (void)0; }
 
-    if(c->getPrimero().getIDDestino() == this->getIDRouter()){
-        buffer.encolar(c->getPrimero());
-        c->desencolar();
+    if(c.getPrimero().getIDDestino() == this->getIDRouter()){
+        buffer.encolar(c.getPrimero());
+        c.desencolar();
     }
     else{
-        buffer_Redireccion.encolar(c->getPrimero());
-        c->desencolar();
+        buffer_Redireccion.encolar(c.getPrimero());
+        c.desencolar();
     }
 }
 
@@ -81,7 +81,7 @@ void Router::setReceptores(){
     receptores[0].checkIDTerminal(size(receptores));
 }
 
-Terminal Router::getReceptor(){ return receptores; }
+Terminal* Router::getReceptor(){ return &receptores[0]; }
 
 Router crearRouter(){ Router r; return r;}
 
@@ -89,9 +89,33 @@ int main(int argc, char const *argv[])
 {
     int numeroDeRouter = 256,repetidos = 0;
     // Cola<int> c[1000];
-    Pagina p[100];
-    Router r[256];
+    Pagina p[1000];
+    Terminal Emisores[256];
 
-    cout<<"fin";
+    for(int j = 0; j < size(p); j++){
+        for(int i = 0; i < size(p)/size(Emisores); i++){
+            Emisores[i].empaquetado(&p[j]);
+        }
+    }
+    vector<Router> r;
+
+    for(int i = 0; i < numeroDeRouter; i++){ r.push_back(crearRouter()); }
+
+    for(int i = 0; i < numeroDeRouter; i++){
+        r.at(i).Recepcion(Emisores[i].getPaquetes());
+    }
+
+      for(int i = 0; i < numeroDeRouter; i++){
+        Terminal *det = r.at(i).getReceptor();
+        for(int j = 0; j < 256; j++){
+            if( det->getDeterminante() == 0){
+                cout<<"\nHubo un error en la asignacion del determinante\n";
+            }
+        }
+      }
+
+
+    cout<<endl<<sizeof(r);
+    cout<<"\nFin\n";
     return 0;
 }

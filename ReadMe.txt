@@ -24,7 +24,7 @@
 /*
     Known Problems:
 
-        >>Aparentemente la creacion de routers genera problemas, ver por que
+        >>¡A veces! la creacion de routers ó de routers+terminales genera problemas, aparentemente de memoria
         
         >La funcion checkID de "Terminal", "Pagina" ó "Router" crea algun problema con los punteros a veces. Si hay tiempo, checkear, 
         no es inminente

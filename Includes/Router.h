@@ -72,7 +72,7 @@ public:
         router vecino.        
         @param Cola<int>*
     */
-    void Recepcion(Cola<Paquete> *&);
+    void Recepcion(Cola<Paquete> );
 
     /*  Pregunta si la cola del router tiene algun elemento*/
     bool routerEmpty();
@@ -88,7 +88,7 @@ public:
     void setReceptores();
 
     /*  Devuelve un vector de los receptores del Router asociado*/
-    Terminal getReceptor();
+    Terminal* getReceptor();
 
     Terminal crearNuevoReceptor();
     
