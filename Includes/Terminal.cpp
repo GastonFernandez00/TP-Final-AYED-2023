@@ -37,6 +37,9 @@ void Terminal::setDeterminante(bool D){ determinante = D; }
 bool Terminal::getDeterminante(){ return determinante; }
 
 Cola<Paquete> Terminal::envio(){
+    cout<<"No implementado, funcion vieja";
+    Cola<Paquete> p;
+    return p;
     // pkg.cambiarEstado();
     // return this->getPaquetes();
     // //id_Router podria ser ingresado por usuario, mejor si no.
@@ -87,9 +90,9 @@ void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control,int cant
 
 Cola<Paquete> Terminal::getPaquetes(){ return pkg; }
 
-Terminal crearTerminal(){ Terminal t; return t;}
+//Terminal crearTerminal(){ Terminal t; return t;} SOLO PARA TESTING
 
-int main(int argc, char const *argv[]){
+/*int main(int argc, char const *argv[]){
     
 
     //PRUEBA CREACION DE PAGINA, TERMINAL, Y RECEPCION
@@ -189,5 +192,5 @@ int main(int argc, char const *argv[]){
             
 //     cout<<"\n--------------------------------------------------\n";
 
-}
+}*/
 

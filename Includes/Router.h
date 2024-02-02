@@ -9,9 +9,12 @@ private:
     int posicion[tamanio_Posicion][tamanio_Posicion];
 
     Terminal receptores[256];
-    
-    Cola<Cola<int>*>* buffer = new Cola<Cola<int>*>();
-    Cola<Cola<int>*>* buffer_Redireccion = new Cola<Cola<int>*>();
+    // int cantidadDeReceptores = 256;
+    // vector<Terminal> receptores;
+
+
+    Cola<Paquete> buffer;
+    Cola<Paquete> buffer_Redireccion;
     void checkIDRouterPriv(Router *, Router *, int/*,int,int*/);
 public:
     
@@ -69,7 +72,7 @@ public:
         router vecino.        
         @param Cola<int>*
     */
-    void Recepcion(Cola<int>*);
+    void Recepcion(Cola<Paquete> *&);
 
     /*  Pregunta si la cola del router tiene algun elemento*/
     bool routerEmpty();
@@ -84,8 +87,10 @@ public:
     /*  Establece las terminales receptoras asociadas a este router */
     void setReceptores();
 
-    /*  Devuelve un puntero al primer receptor del Router*/
-    Terminal* getReceptor();
+    /*  Devuelve un vector de los receptores del Router asociado*/
+    Terminal getReceptor();
+
+    Terminal crearNuevoReceptor();
     
 
 };

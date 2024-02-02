@@ -1,6 +1,9 @@
 /*
     Ver:
-        
+      
+        >En la clase Terminal, probablemente haga falta un Cola<Pagina> ó mejor un vector<Pagina>, y una funcion
+        que rearme las paginas a partir de los paquetes. Tal vez el rearmado se haga en el router
+
         >Posiblemente eliminar funcion "Envio" de "Terminal", "cambiarEstado" y su atributo "estado" de "Cola", ya no tiene sentido. 
 
         >Se Tiene que enviar Paquete por paquete
@@ -21,6 +24,8 @@
 /*
     Known Problems:
 
+        >>Aparentemente la creacion de routers genera problemas, ver por que
+        
         >La funcion checkID de "Terminal", "Pagina" ó "Router" crea algun problema con los punteros a veces. Si hay tiempo, checkear, 
         no es inminente
 

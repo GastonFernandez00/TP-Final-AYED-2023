@@ -4,10 +4,10 @@ all: compile link execute clean
 # 	rm -f *.o *.exe
 
 compile:
-	g++ Cola.cpp Paquete.cpp Paginas.cpp Terminal.cpp Extras.cpp -c
+	g++ Cola.cpp Paquete.cpp Paginas.cpp Terminal.cpp Extras.cpp Router.cpp -c
 
 link: 
-	g++ Cola.o Paquete.o Paginas.o Terminal.o Extras.o -o prog.exe
+	g++ Cola.o Paquete.o Paginas.o Terminal.o Extras.o Router.o -o prog.exe
 
 execute:
 	.\prog.exe
