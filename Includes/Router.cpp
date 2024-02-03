@@ -47,6 +47,7 @@ void Router::checkIDRouter(int n){ checkIDRouterPriv(this, this, 0,n);}
 
 void Router::checkIDRouterPriv(Router *a, Router *b, int control, int cantdeRouters){ 
     if(control == 10){ return (void)0; }
+        b = a;
         cout<<"\nEntro Burbuja"<<endl;
         // burbuja_Router(a,b,cantdeRouters);
         qsort(a,cantdeRouters,sizeof(Router),compare);
@@ -56,12 +57,29 @@ void Router::checkIDRouterPriv(Router *a, Router *b, int control, int cantdeRout
 
         b++; int veces = 0,contador_a = 0,contador_b = 1;
 
-        for(int i = 0; i < cantdeRouters; i++){
-            cout<<a->getIDRouter()<<" ";
-            if((i+1)%10 == 0) cout<<endl;
-            a++;
+        for(int i = 0; i < 256 -1; i++){
+            cout<<"i: "<<i;
+            for(int j = 1; j < 256; j++){
+                // if(cantdeRouters != 0){b->getIDRouter();}
+                if(b->getIDRouter() < 256 && b->getIDRouter() > 0){
+                    cout<<"\nEntro al if <256 && >= 0\n";
+                    if(a->getIDRouter() == b->getIDRouter()){
+                    //     b->setMaximaCantDeRouters(cantdeRouters);
+                    //     veces++;    b->setIDRouter(b->getIDRouter()+veces);    
+                    }
+                }
+                cout<<"j: "<<j;
+                b++;
+            }
+            a++; b = a; b++;veces =0;
         }
 
+        // cout<<"\nID A: "<<a->getIDRouter()<<"\nID B: "<<b->getIDRouter();
+        // b->setIDRouter(b->getIDRouter()+1);
+        // b++;b++;b++;
+        // cout<<"\nNuevo ID B: "<<b->getIDRouter();
+
+        cout<<"\nReingresa Check";
         return checkIDRouterPriv(this,this,control+1,cantdeRouters);
 }
 
@@ -84,14 +102,7 @@ int main(int argc, char const *argv[])
 {
     int numeroDeRouter = 256,repetidos = 0;
     // Cola<int> c[1000];
-    Pagina p[1000];
-    Terminal Emisores[256];
 
-    for(int j = 0; j < size(p); j++){
-        for(int i = 0; i < size(p)/size(Emisores); i++){
-            Emisores[i].empaquetado(&p[j]);
-        }
-    }
     vector<Router> r;
     r.reserve(numeroDeRouter);
     for(int i = 0; i < numeroDeRouter; i++){ r.push_back(crearRouter()); }
@@ -100,21 +111,20 @@ int main(int argc, char const *argv[])
     r.at(0).checkIDRouter(r.size());
     cout<<"\nSaleCheck\n";
 
-    for(int i = 0; i < r.size()-1; i++){
-        for(int j = 1+i; j < r.size(); j++){
+    for(int i = 0; i < numeroDeRouter-1; i++){
+        for(int j = 1+i; j < numeroDeRouter;j++){
             if(r.at(i).getIDRouter() == r.at(j).getIDRouter()){
-                repetidos++;//cout<<r.at(j).getIDRouter()<<" ";
+                repetidos++; cout<<r.at(j).getIDRouter()<<" ";
             }
         }
     }
+  
+    cout<<"\nRepetidos: "<<repetidos<<endl;
 
-    cout<<"\nIDs Repetidos: "<<repetidos<<endl;
-
-    for(int i = 0; i < r.size();i++){
+    for(int i = 0; i < numeroDeRouter; i++){
         cout<<r.at(i).getIDRouter()<<" ";
         if((i+1)%10 == 0) cout<<endl;
     }
 
-  
     return 0;
 }
