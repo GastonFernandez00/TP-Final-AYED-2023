@@ -16,7 +16,7 @@ private:
 
     Cola<Paquete> buffer;
     Cola<Paquete> buffer_Redireccion;
-    void checkIDRouterPriv(Router *, Router *, int, int);
+    void checkIDRouterPriv(vector<Router> &, int, int);
 public:
     
     /*  Constructor de Clase, asocia una posicion e ID random*/
@@ -83,7 +83,7 @@ public:
 
     /*  Checkea que los routers sea unicos, y no haya repetidos
     */
-    void checkIDRouter(int);
+    void checkIDRouter(vector<Router> &);
 
     /*  Establece las terminales receptoras asociadas a este router */
     void setReceptores();
