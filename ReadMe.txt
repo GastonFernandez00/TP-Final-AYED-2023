@@ -17,6 +17,18 @@
 
         >Para simular la aleatoriedad puedo usar la libreria de time, en concreto la funcion time(NULL), que devuelve los segundos desde EPOCH
    
+        >Ver de asociar una Bandwidth, que podría ser la cantidad de datos que puede descolarse a la vez. Tal vez funcion
+        tipo Cola<Paquete> Reenviar(){
+                Cola<Paquete> pkgReenviados;
+                for(){
+                    pkgReenviados.encolar(buffer.getPrimero());  
+                    buffer.descolar();
+                } 
+                return pkgReenviados;
+            }
+
+        --->>> Al terminar, limpiar clases, y comentar funciones apropiadamente
+
 */
 
 /*

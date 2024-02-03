@@ -93,7 +93,10 @@ public:
     vector<Terminal> getReceptor();
 
     void setMaximaCantDeRouters(int);
-    
+
+    Cola<Paquete> getBufferRouter();
+
+    Cola<Paquete> getBufferRedireccionRouter();   
 
 };
 #endif

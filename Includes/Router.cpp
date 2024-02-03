@@ -95,6 +95,10 @@ vector<Terminal> Router::getReceptor(){ return receptores; }
 
 Router crearRouter(){ Router *r = new Router(); return *r;}
 
+Cola<Paquete> Router::getBufferRouter(){ return buffer; }
+
+Cola<Paquete> Router::getBufferRedireccionRouter(){ return buffer_Redireccion; }
+
 
 //Prueba de Funciones
 // int main(int argc, char const *argv[]){

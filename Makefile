@@ -1,13 +1,16 @@
-all: compile link execute clean
+all: compile link clean clear execute
 
 compile:
-	g++ ./Includes/Cola.cpp ./Includes/Paquete.cpp ./Includes/Paginas.cpp ./Includes/Terminal.cpp ./Includes/Extras.cpp ./Includes/Router.cpp -c
+	g++ ./Includes/Mapa.cpp ./Includes/Cola.cpp ./Includes/Paquete.cpp ./Includes/Paginas.cpp ./Includes/Terminal.cpp ./Includes/Extras.cpp ./Includes/Router.cpp main.cpp -c
 
 link: 
-	g++ Cola.o Paquete.o Paginas.o Terminal.o Extras.o Router.o -o prog.exe
+	g++ Mapa.o Cola.o Paquete.o Paginas.o Terminal.o Extras.o Router.o main.o -o main.exe
 
 execute:
-	.\prog.exe
+	.\main.exe
 
 clean:
-	rm -f *.o *.exe
+	rm -f *.o 
+
+clear:
+	clear
