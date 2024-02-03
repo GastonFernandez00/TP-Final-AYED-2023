@@ -15,7 +15,7 @@ private:
     bool determinante = 0;
     int MaximaCantDeTerminales = 256;
     void setMaximaCantDeTerminales(int);
-    void checkIDTerminalPriv(Terminal *, Terminal *,int,int/*,int,int*/);
+    void checkIDTerminalPriv(vector<Terminal> &,int,int/*,int,int*/);
 public:
     
 
@@ -69,7 +69,7 @@ public:
 
     /*  Checkea que los terminales sea unicos, y no haya repetidos
     */
-    void checkIDTerminal(int);
+    void checkIDTerminal(vector<Terminal> &);
 
     /*  Devuelve los paquetes almacenados en la terminal*/
     Cola<Paquete> getPaquetes();

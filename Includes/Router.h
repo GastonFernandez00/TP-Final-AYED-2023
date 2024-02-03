@@ -9,14 +9,15 @@ private:
     int posicion[tamanio_Posicion][tamanio_Posicion];
 
     int MaximaCantDeRouters = 256;
-    Terminal receptores[256];
-    // int cantidadDeReceptores = 256;
-    // vector<Terminal> receptores;
+    //Terminal receptores[256];
+    int cantidadDeReceptores = 256;
+    vector<Terminal> receptores;
 
 
     Cola<Paquete> buffer;
     Cola<Paquete> buffer_Redireccion;
     void checkIDRouterPriv(vector<Router> &, int, int);
+    Terminal crearNuevoReceptor();
 public:
     
     /*  Constructor de Clase, asocia una posicion e ID random*/
@@ -89,9 +90,7 @@ public:
     void setReceptores();
 
     /*  Devuelve un vector de los receptores del Router asociado*/
-    Terminal* getReceptor();
-
-    Terminal crearNuevoReceptor();
+    vector<Terminal> getReceptor();
 
     void setMaximaCantDeRouters(int);
     

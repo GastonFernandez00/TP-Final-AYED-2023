@@ -46,6 +46,7 @@ void Router::setMaximaCantDeRouters(int n){ MaximaCantDeRouters = n; }
 void Router::checkIDRouter(vector<Router> &vr){ checkIDRouterPriv(vr, 0,vr.size());}
 
 void Router::checkIDRouterPriv(vector<Router> &r,int control, int cantdeRouters){ 
+    if(r.size() < 2){ return (void)0; }
     if(control == 10){ return (void)0; }
       
        
@@ -80,22 +81,45 @@ void Router::checkIDRouterPriv(vector<Router> &r,int control, int cantdeRouters)
 }
 
 void Router::setReceptores(){
-    // for(int i = 0; i < size(receptores); i++){
-    //     // receptores.push_back(crearNuevoReceptor()); 
-    // }
+    for(int i = 0; i < cantidadDeReceptores; i++){
+        receptores.push_back(crearNuevoReceptor()); 
+    }
 
-    for(int i = 0; i < size(receptores); i++){ 
+    for(int i = 0; i < cantidadDeReceptores; i++){ 
         receptores[i].setDeterminante(1); 
     }
-    receptores[0].checkIDTerminal(size(receptores));
+    receptores[0].checkIDTerminal(receptores);
 }
 
-Terminal* Router::getReceptor(){ return &receptores[0]; }
+vector<Terminal> Router::getReceptor(){ return receptores; }
 
 Router crearRouter(){ Router *r = new Router(); return *r;}
 
 int main(int argc, char const *argv[])
 {
+
+    // Router r;
+    // vector<Terminal> aux = r.getReceptor();
+    // for(int i = 0; i < aux.size(); i++){
+    //     cout<<aux.at(i).getIDTerminal()<<" ";
+    //     if((i+1)%10 == 0) cout<<endl;
+    // }
+    // aux.at(0).checkIDTerminal(aux);
+
+    // int contador;
+    // for(int i = 0; i < aux.size(); i++){
+    //     for(int j = 0; j < aux.size(); j++){
+    //         if(aux.at(i).getIDTerminal() == aux.at(j).getIDTerminal()){
+    //             contador++;
+    //         }
+    //     }
+    // }
+    
+    // cout<<"\nRepetidos: "<<contador<<endl;
+
+
+
+
     int numeroDeRouter = 135,repetidos = 0;
     // Cola<int> c[1000];
 

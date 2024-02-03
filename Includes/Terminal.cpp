@@ -58,33 +58,30 @@ int Terminal::getIDTerminal(){ return id_TERMINAL; }
 
 void Terminal::setMaximaCantDeTerminales(int d){ MaximaCantDeTerminales = d; }
 
-void Terminal::checkIDTerminal(int n){ checkIDTerminalPriv(this,this,0,n); }
+void Terminal::checkIDTerminal(vector<Terminal> &t){ checkIDTerminalPriv( t,0,t.size()); }
 
-void Terminal::checkIDTerminalPriv(Terminal *a, Terminal *b,int control,int cantTerminales){
+void Terminal::checkIDTerminalPriv(vector<Terminal> &t,int control,int cantTerminales){
     if(control == 10){ return (void)0; }
 
-        burbuja_Terminal(a,b,cantTerminales);
+        burbuja_Terminal(&t.at(0),&t.at(0),cantTerminales);
+        // qsort(&t.at(0),t.size(),sizeof(Terminal),compare);
         
-        b++; int veces = 0,contador_a = 0,contador_b = 1;
+        int veces = 0,contador_a = 0,contador_b = 1;
 
-        for(int i = 0; i < cantTerminales-1; i++){// 0 -> n-1
-                       
-            for(int j = 1; j < cantTerminales; j++){//    1 -> n
-
-                if( contador_b < cantTerminales && b->getIDTerminal() >= 0){
-
-                    if( a->getIDTerminal() == b->getIDTerminal()){ 
-                        b->setMaximaCantDeTerminales(cantTerminales);
-                        veces++;
-                        b->setIDTerminal(b->getIDTerminal()+veces);
+        for(int i = 0; i < t.size()-1; i++){
+            for(int j = 1+i; j < t.size(); j++){
+                // if(cantdeRouters != 0){b->getIDRouter();}
+                if(t.at(i).getIDTerminal() == t.at(j).getIDTerminal()){
+                    veces++;
+                    t.at(j).setMaximaCantDeTerminales(t.size());
+                    t.at(j).setIDTerminal(t.at(j).getIDTerminal()+veces);
                     }
-                    b++;contador_b++;
                 }
-            }
-
-            a++; b = a; b++; veces = 0; contador_a++;contador_b = 1;
+            
+            veces =0;
         }
-        return checkIDTerminalPriv(this,this,control+1,cantTerminales);
+        //cout<<"\nReingresa Check";
+        return checkIDTerminalPriv(t,control+1,cantTerminales);
         
 }
 
