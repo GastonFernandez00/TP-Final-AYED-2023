@@ -7,9 +7,7 @@
         >Posiblemente eliminar funcion "Envio" de "Terminal", "cambiarEstado" y su atributo "estado" de "Cola", ya no tiene sentido. 
 
         >Se Tiene que enviar Paquete por paquete
-        
-        >Como acceder a los objetos dentro de cada buffer
-                
+                        
         >Cambiar la posicion por una forma matricial 100x100
 
         >Crear un mapa y asociar una posicion a un router ó su ID// Esto no tiene sentido, tiene que ser por ancho de banda
@@ -24,10 +22,11 @@
 /*
     Known Problems:
 
-        >>¡A veces! la creacion de routers ó de routers+terminales genera problemas, aparentemente de memoria
+        >>¡A veces! la creacion de routers ó de routers+terminales genera problemas, aparentemente de memoria. 
+        Ver checkID clase terminal y tal vez la de pagina
         
-        >La funcion checkID de "Terminal", "Pagina" ó "Router" crea algun problema con los punteros a veces. Si hay tiempo, checkear, 
-        no es inminente
+        >La funcion checkID de "Terminal" ó "Pagina" crea algun problema con los punteros a veces. Si hay tiempo, checkear, 
+        no es crucial
 
 
 
