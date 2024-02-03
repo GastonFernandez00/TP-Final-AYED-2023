@@ -76,7 +76,7 @@ void Router::checkIDRouterPriv(vector<Router> &r,int control, int cantdeRouters)
         // b++;b++;b++;
         // cout<<"\nNuevo ID B: "<<b->getIDRouter();
 
-        cout<<"\nReingresa Check";
+        //cout<<"\nReingresa Check";
         return checkIDRouterPriv(r,control+1,cantdeRouters);
 }
 
@@ -88,15 +88,37 @@ void Router::setReceptores(){
     for(int i = 0; i < cantidadDeReceptores; i++){ 
         receptores[i].setDeterminante(1); 
     }
-    receptores[0].checkIDTerminal(receptores);
+    receptores.at(0).checkIDTerminal(receptores);
 }
 
 vector<Terminal> Router::getReceptor(){ return receptores; }
 
 Router crearRouter(){ Router *r = new Router(); return *r;}
 
-int main(int argc, char const *argv[])
-{
+
+//Prueba de Funciones
+// int main(int argc, char const *argv[]){
+//     int cantdePaginas = (time(nullptr)*rand())%1000;
+//     Pagina p[cantdePaginas];
+    
+//     vector<Terminal> emisores; int cantdeEmisores = (time(nullptr)*rand())%256;
+//     for(int i = 0; i < cantdeEmisores; i++) { Terminal terminal_aux; emisores.push_back(terminal_aux); }
+//     emisores.at(0).checkIDTerminal(emisores);
+
+//     vector<Router> routers; int cantdeRouters = (time(nullptr)*rand())%256;
+//     for(int i = 0; i < cantdeRouters; i++) { Router router_aux; routers.push_back(router_aux); }
+//     routers.at(0).checkIDRouter(routers);
+
+//     cout<<"\nCantidad de Paginas: "<<cantdePaginas;
+//     cout<<"\nCantidad de Emisores: "<<emisores.size();
+//     cout<<"\nCantidad de Routers: "<<routers.size();
+//     int cantdeReceptores = 0;
+//     for(int i = 0; i < routers.size(); i++){
+//         vector<Terminal> terminal_aux = routers.at(i).getReceptor();
+//         cantdeReceptores += terminal_aux.size();
+        
+//     }
+//     cout<<"\nCantidad de Receptores: "<<cantdeReceptores<<endl;
 
     // Router r;
     // vector<Terminal> aux = r.getReceptor();
@@ -120,31 +142,31 @@ int main(int argc, char const *argv[])
 
 
 
-    int numeroDeRouter = 135,repetidos = 0;
-    // Cola<int> c[1000];
+    // int numeroDeRouter = (rand()*time(nullptr))%256, repetidos = 0;
+    // // Cola<int> c[1000];
 
-    vector<Router> r;
-    r.reserve(numeroDeRouter);
-    for(int i = 0; i < numeroDeRouter; i++){ r.push_back(crearRouter()); }
+    // vector<Router> r;
+    // r.reserve(numeroDeRouter);
+    // for(int i = 0; i < numeroDeRouter; i++){ r.push_back(crearRouter()); }
     
-    cout<<"\nEntraCheck\n";
-    r.at(0).checkIDRouter(r);
-    cout<<"\nSaleCheck\n";
+    // cout<<"\nEntraCheck\n";
+    // r.at(0).checkIDRouter(r);
+    // cout<<"\nSaleCheck\n";
 
-    for(int i = 0; i < numeroDeRouter-1; i++){
-        for(int j = 1+i; j < numeroDeRouter;j++){
-            if(r.at(i).getIDRouter() == r.at(j).getIDRouter()){
-                repetidos++; cout<<r.at(j).getIDRouter()<<" ";
-            }
-        }
-    }
-  
-    cout<<"\nRepetidos: "<<repetidos<<endl;
+    // for(int i = 0; i < numeroDeRouter-1; i++){
+    //     for(int j = 1+i; j < numeroDeRouter;j++){
+    //         if(r.at(i).getIDRouter() == r.at(j).getIDRouter()){
+    //             repetidos++; cout<<r.at(j).getIDRouter()<<" ";
+    //         }
+    //     }
+    // }
+    // cout<<"\nCant de Routers: "<<r.size()<<endl;
+    // cout<<"\nRepetidos: "<<repetidos<<endl;
 
-    for(int i = 0; i < numeroDeRouter; i++){
-        cout<<r.at(i).getIDRouter()<<" ";
-        if((i+1)%10 == 0) cout<<endl;
-    }
+    // for(int i = 0; i < numeroDeRouter; i++){
+    //     cout<<r.at(i).getIDRouter()<<" ";
+    //     if((i+1)%10 == 0) cout<<endl;
+    // }
 
-    return 0;
-}
+    // return 0;
+// }

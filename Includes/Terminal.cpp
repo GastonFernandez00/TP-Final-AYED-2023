@@ -61,6 +61,7 @@ void Terminal::setMaximaCantDeTerminales(int d){ MaximaCantDeTerminales = d; }
 void Terminal::checkIDTerminal(vector<Terminal> &t){ checkIDTerminalPriv( t,0,t.size()); }
 
 void Terminal::checkIDTerminalPriv(vector<Terminal> &t,int control,int cantTerminales){
+    if(t.size() < 2){ return (void)0; }
     if(control == 10){ return (void)0; }
 
         burbuja_Terminal(&t.at(0),&t.at(0),cantTerminales);

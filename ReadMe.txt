@@ -20,14 +20,6 @@
 */
 
 /*
-    Known Problems:
-
-        >>¡A veces! la creacion de routers ó de routers+terminales genera problemas, aparentemente de memoria. 
-        Ver checkID clase terminal y tal vez la de pagina
-        
-        >La funcion checkID de "Terminal" ó "Pagina" crea algun problema con los punteros a veces. Si hay tiempo, checkear, 
-        no es crucial
-
-
+    Known Problems: < Por ahora ninguno nuevo >
 
 */
