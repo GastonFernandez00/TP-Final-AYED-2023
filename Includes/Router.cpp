@@ -97,7 +97,12 @@ Router crearRouter(){ Router *r = new Router(); return *r;}
 
 Cola<Paquete> Router::getBufferRouter(){ return buffer; }
 
+int Router::getSizeBuffer(){ return buffer.sizeCola(); }
+
 Cola<Paquete> Router::getBufferRedireccionRouter(){ return buffer_Redireccion; }
+
+int Router::getSizeBufferRedireccionamiento(){ return buffer_Redireccion.sizeCola(); }
+
 
 
 //Prueba de Funciones

@@ -77,16 +77,6 @@ int main(int argc, char const *argv[])
     for(int i = 0; i < r.size(); i++) m.incluirEnMapa(r.at(i));
    
     
-    // vector<vector<Router>> aux = m.getMapa();
-    // cout<<"\nCapacidad Cuadrada: "<<aux.capacity()<<endl;
-
-    // for(int i = 0; i < aux.capacity(); i++){
-    //     for(int j = 0; j < aux.capacity(); j++){
-    //         cout<<aux.at(i).at(j).getIDRouter()<<"   ";
-    //         if((1+i)%(aux.capacity()+1) == 0) cout<<endl;
-    //     }
-    // }
-    //m.imprimirMapa();
     m.imprimirMapa();
     cout<<endl;
     system("pause");

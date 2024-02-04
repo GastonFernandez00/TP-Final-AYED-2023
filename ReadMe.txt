@@ -11,10 +11,7 @@
 
         >Se Tiene que enviar Paquete por paquete
                         
-        >Crear un mapa y asociar una posicion a un router ó su ID// Esto no tiene sentido, tiene que ser por ancho de banda
-        ó sea, el "peso"  (tamanio de la cola buffer redestino) de cada router
-
-        >La cola donde se acumulan los paquetes, deberian estar en el la terminal, no en el main
+        >La cola donde se acumulan los paquetes una vez enviados desde el router, deberian estar en cada terminal, no en el main
 
         >Ver de asociar una Bandwidth, que podría ser la cantidad de datos que puede descolarse a la vez. Tal vez funcion
         tipo Cola<Paquete> Reenviar(){

@@ -98,7 +98,10 @@ public:
 
     Cola<Paquete> getBufferRouter();
 
+    int getSizeBuffer();
+
     Cola<Paquete> getBufferRedireccionRouter();   
 
+    int getSizeBufferRedireccionamiento();
 };
 #endif
