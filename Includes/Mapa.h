@@ -5,15 +5,17 @@
 #include "Router.h"
 class Mapa{
 private:
-    int tamanioCuadradoMapa = 10;
+    int tamanioCuadradoMapa = 50;
     vector<vector<Router>> map;
 
     Router crearRouter();
+    void setTamanioCuadradoMapa(int);
     
 public:
     Mapa();
+    Mapa(int);
     void incluirEnMapa(Router);
-    //void imprimirMapa();
+    void imprimirMapa();
     vector<vector<Router>> getMapa();
 
 
