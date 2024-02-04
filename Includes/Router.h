@@ -16,6 +16,9 @@ private:
 
     Cola<Paquete> buffer;
     Cola<Paquete> buffer_Redireccion;
+    
+    /*  Establece las terminales receptoras asociadas a este router */
+    void setReceptores();
     void checkIDRouterPriv(vector<Router> &, int, int);
     Terminal crearNuevoReceptor();
 public:
@@ -86,8 +89,7 @@ public:
     */
     void checkIDRouter(vector<Router> &);
 
-    /*  Establece las terminales receptoras asociadas a este router */
-    void setReceptores();
+    
 
     /*  Devuelve un vector de los receptores del Router asociado*/
     vector<Terminal> getReceptor();

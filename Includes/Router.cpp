@@ -4,7 +4,7 @@
 using namespace std;
 
 Router::Router(){ this->setIDRouter(); this->setRouterPosicion(); this->setReceptores(); }
-Router::Router(int i){ this->setIDRouter(i); this->setRouterPosicion();this->setReceptores();}
+Router::Router(int i){ this->setIDRouter(i); }
 Router::Router(int i, int x, int y){ this->setIDRouter(i); this->setRouterPosicion(x,y); this->setReceptores();}
 
 Router::~Router(){ }
