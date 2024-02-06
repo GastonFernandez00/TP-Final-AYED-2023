@@ -1,6 +1,14 @@
 /*
     Ver:
-      
+
+        >La Bandwidth debería ser la cantidad de paquetes que puede enviar un router
+
+        >En clase mapa: hace falta una funcion que al poner un router, me devuelva los que tiene cerca, cual
+        es el que tiene la Bandwidth mas libre, y a que calcule cual es el mas cercano al router de destino
+            ->Necesito poder calcular la distancia hasta los más cercanos
+            ->La distancia física podría calcularse como sqrt(x^2+y^2)
+
+
         >En la clase Terminal, probablemente haga falta un Cola<Pagina> ó mejor un vector<Pagina>, y una funcion
         que rearme las paginas a partir de los paquetes. Tal vez el rearmado se haga en el router
 
@@ -28,7 +36,9 @@
 */
 
 /*
-    Known Problems: < Por ahora ninguno nuevo >
+    Known Problems: <>
+        >Cuando un router se intenta poner en la posicion de otro, los empieza a colocar desde (0,0), haciendo que
+        que la parte superior izquierda normalmente esté más cargada
 
 */
 

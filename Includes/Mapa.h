@@ -14,7 +14,7 @@ private:
 public:
     Mapa();
     Mapa(int);
-    void incluirEnMapa(Router);
+    void incluirEnMapa(Router&);
     void imprimirMapa();
     vector<vector<Router>> getMapa();
 

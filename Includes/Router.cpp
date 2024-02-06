@@ -3,9 +3,8 @@
 #include <time.h>
 using namespace std;
 
-Router::Router(){ this->setIDRouter(); this->setRouterPosicion(); this->setReceptores(); }
+Router::Router(){ this->setIDRouter(); this->setReceptores(); }
 Router::Router(int i){ this->setIDRouter(i); }
-Router::Router(int i, int x, int y){ this->setIDRouter(i); this->setRouterPosicion(x,y); this->setReceptores();}
 
 Router::~Router(){ }
 
@@ -13,15 +12,25 @@ Terminal Router::crearNuevoReceptor(){ Terminal t; return t;}
 
 void Router::setIDRouter(){ id_Router = rand()%MaximaCantDeRouters; }
 
-void Router::setRouterPosicion(){ posicion[rand()%tamanio_Posicion][rand()%tamanio_Posicion] = 1; }
+void Router::setRouterPosicion(){}
 
 void Router::setIDRouter(int i){ id_Router = i%MaximaCantDeRouters; }
 
-void Router::setRouterPosicion(int x, int y){ posicion[y%tamanio_Posicion][x%tamanio_Posicion] = 1; }
+void Router::setRouterPosicion(int x, int y){ setRouter_x(x); setRouter_y(y); }
+
+void Router::setRouter_x(int x){ posicion_x = x; }
+
+void Router::setRouter_y(int y){ posicion_y = y; }
+
+int Router::getRouter_x(){ return posicion_x;}
+
+int Router::getRouter_y(){ return posicion_y;}
 
 int Router::getIDRouter(){ return id_Router; }
 
-int Router::getPosicionRouter(){ return posicion[0][0]; } //CAMBIAR ESTO
+void  Router::printPosicionRouter(){ //CAMBIAR ESTO
+    cout<<"\nPosicion X: "<<getRouter_x()<<endl<<"Posicion Y: "<<getRouter_y()<<endl;
+}
 
 void Router::Recepcion(Cola<Paquete> c){
     

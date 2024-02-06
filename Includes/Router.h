@@ -6,7 +6,7 @@
 class Router{
 private:
     int id_Router = -1;
-    int posicion[tamanio_Posicion][tamanio_Posicion];
+    int posicion_x = -1 , posicion_y = -1;
 
     int MaximaCantDeRouters = 256;
     //Terminal receptores[256];
@@ -30,11 +30,6 @@ public:
         @param int
     */
     Router(int);
-
-    /*  Constructor de Clase, asocia una posicion e ID por parametro
-        @param int, int, int
-    */
-    Router(int,int,int);
 
     /*Destructor de Clase*/
     ~Router();
@@ -67,7 +62,7 @@ public:
     /*  Devuelve la posicion pseudo-fisica del router actual
         @returns int
     */
-    int getPosicionRouter();
+    void printPosicionRouter();
 
     /*  Prepara para recibir en el router el archivo que se esta enviando desde
         el terminal Emisor.
@@ -89,8 +84,6 @@ public:
     */
     void checkIDRouter(vector<Router> &);
 
-    
-
     /*  Devuelve un vector de los receptores del Router asociado*/
     vector<Terminal> getReceptor();
 
@@ -103,5 +96,13 @@ public:
     Cola<Paquete> getBufferRedireccionRouter();   
 
     int getSizeBufferRedireccionamiento();
+
+    void setRouter_x(int);
+
+    void setRouter_y(int);
+
+    int getRouter_x();
+
+    int getRouter_y();
 };
 #endif

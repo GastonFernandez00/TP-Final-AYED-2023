@@ -28,18 +28,19 @@ void Mapa::setTamanioCuadradoMapa(int n){ tamanioCuadradoMapa = n; }
 
 Router Mapa::crearRouter(){ Router r(-1); return r;} // Router No inicializado, posicion vacia y sin receptores
 
-void Mapa::incluirEnMapa(Router r){
+void Mapa::incluirEnMapa(Router &r){
 
     int x,y; this_thread::sleep_for(chrono::milliseconds(10));
 
     x = (time(nullptr)*rand())%tamanioCuadradoMapa;
     y = (time(nullptr)*rand())%tamanioCuadradoMapa;
-    if(map.at(y).at(x).getIDRouter() == -1){ map.at(y).at(x) = r; }
+    if(map.at(y).at(x).getIDRouter() == -1){ map.at(y).at(x) = r; r.setRouterPosicion(x,y);}
     else{
         x = y = 0;
         while( y < tamanioCuadradoMapa){
             if(map.at(y).at(x).getIDRouter() == -1){
                  map.at(y).at(x) = r;
+                 r.setRouterPosicion(x,y);
                  return (void)0;
             }
             x++;
@@ -69,7 +70,7 @@ int main(int argc, char const *argv[])
 {
     Mapa m;
     vector<Router> r;
-    for(int i = 0; i < 100; i++){ Router nuevo; r.push_back(nuevo); }
+    for(int i = 0; i < 256; i++){ Router nuevo; r.push_back(nuevo); }
     r.at(0).checkIDRouter(r);
     cout<<"\nFinCheck\n";
 
@@ -78,6 +79,9 @@ int main(int argc, char const *argv[])
    
     
     m.imprimirMapa();
+
+    r.at(137).printPosicionRouter();
+    
     cout<<endl;
     system("pause");
     return 0;
