@@ -112,7 +112,14 @@ Cola<Paquete> Router::getBufferRedireccionRouter(){ return buffer_Redireccion; }
 
 int Router::getSizeBufferRedireccionamiento(){ return buffer_Redireccion.sizeCola(); }
 
+void Router::incluirCercanos(Router *r){ 
+    if( cercanos.size() < 4) cercanos.push_back(r);
+    else{ cout<<"\nCapacidad llena. Se necesita rearmar Ruta\n"; }
+}
 
+void Router::borrarCercanos(){ cercanos.clear(); }
+
+vector<Router*> Router::getCercanos(){ return cercanos; }
 
 //Prueba de Funciones
 // int main(int argc, char const *argv[]){

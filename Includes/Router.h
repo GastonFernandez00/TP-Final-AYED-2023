@@ -7,6 +7,7 @@ class Router{
 private:
     int id_Router = -1;
     int posicion_x = -1 , posicion_y = -1;
+    vector<Router*> cercanos;
 
     int MaximaCantDeRouters = 256;
     //Terminal receptores[256];
@@ -104,5 +105,11 @@ public:
     int getRouter_x();
 
     int getRouter_y();
+
+    void incluirCercanos(Router*);
+
+    void borrarCercanos();
+
+    vector<Router*> getCercanos();
 };
 #endif

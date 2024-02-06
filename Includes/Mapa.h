@@ -10,6 +10,7 @@ private:
 
     Router crearRouter();
     void setTamanioCuadradoMapa(int);
+    int calcularDistancia(Router *,Router *);
     
 public:
     Mapa();
@@ -17,6 +18,7 @@ public:
     void incluirEnMapa(Router&);
     void imprimirMapa();
     vector<vector<Router>> getMapa();
+    void setCercanos(vector<Router>&);
 
 
 

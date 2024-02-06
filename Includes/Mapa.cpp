@@ -66,22 +66,84 @@ void Mapa::imprimirMapa(){
     cout<<endl;
 }
 
+int Mapa::calcularDistancia(Router *a,Router *b){
+    int x_a = a->getRouter_x(), y_a = a->getRouter_y();
+    int x_b = b->getRouter_x(), y_b = b->getRouter_y();
+    int distancia = sqrt(pow((x_a-x_b),2)+pow((y_a-y_b),2));
+    return distancia;
+}
+
+void Mapa::setCercanos(vector<Router> &r){// REVISAR, PROBLABEMENTE NO SIRVA.
+
+    for(int i = 0; i < r.size(); i++){
+        int x = 0,y = 0;
+        for(int j = 0; j < 3; j++){
+        while(y != tamanioCuadradoMapa){
+            if(map.at(y).at(x).getIDRouter() != -1 && map.at(y).at(x).getIDRouter() != r.at(i).getIDRouter()){
+                int dist = calcularDistancia(&r.at(i),&map.at(y).at(x));
+                if(r.at(i).getCercanos().size() >= 4){
+                    if(calcularDistancia(r.at(i).getCercanos().at(0),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(0) = &map.at(y).at(x);}
+                    else if(calcularDistancia(r.at(i).getCercanos().at(1),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(1) = &map.at(y).at(x);}
+                    else if(calcularDistancia(r.at(i).getCercanos().at(2),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(2) = &map.at(y).at(x);}
+                    else if(calcularDistancia(r.at(i).getCercanos().at(3),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(3) = &map.at(y).at(x);}
+                }
+                else{
+                    r.at(i).incluirCercanos(&map.at(y).at(x));
+                }
+            }
+            
+            x++;
+            if(x == tamanioCuadradoMapa){ x = 0; y++;}
+        }
+    }}
+
+
+}
+
 int main(int argc, char const *argv[])
 {
-    Mapa m;
+
+    int cantRouter = 1+(time(nullptr)*rand())%256;
+    cantRouter = 256;
+    Mapa m(20);
     vector<Router> r;
-    for(int i = 0; i < 256; i++){ Router nuevo; r.push_back(nuevo); }
+    for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo); }
     r.at(0).checkIDRouter(r);
-    cout<<"\nFinCheck\n";
+    cout<<"\nFinCheck\nCantidad de Routers: "<<r.size()<<endl;
 
 
     for(int i = 0; i < r.size(); i++) m.incluirEnMapa(r.at(i));
    
     
     m.imprimirMapa();
+    m.setCercanos(r);   
 
-    r.at(137).printPosicionRouter();
+
+    // int y,x; y = x = 0;
+    // while( m.getMapa().at(y).at(x).getIDRouter() == -1){
+    //     x++;
+    //     if(x == m.getMapa().size()){ x = 0; y++;}
+    // }
     
+    int a,b;
+    a = r.at(0).getIDRouter();
+    b = r.at(10).getIDRouter();
+    cout<<a<<endl;
+    cout<<b<<endl;
+
+
+    r.at(0).printPosicionRouter();
+    r.at(10).printPosicionRouter();
+
+    int distance = sqrt(pow(r.at(0).getRouter_x()-r.at(10).getRouter_x(),2)+pow(r.at(0).getRouter_y()-r.at(10).getRouter_y(),2));
+    printf("\nDistancia entre %d y %d: %d\n",a,b,distance);
+
+    for(int i = 0; i < r.at(0).getCercanos().size(); i++)
+    cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
+
+
+
+
     cout<<endl;
     system("pause");
     return 0;

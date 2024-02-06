@@ -3,6 +3,9 @@
 
         >La Bandwidth debería ser la cantidad de paquetes que puede enviar un router
 
+        >Tal vez necesito que en la clase router, cada uno busque desde él mismo, los cercanos y luego el final. 
+        Y necesito guardar esa rutua de alguna forma
+
         >En clase mapa: hace falta una funcion que al poner un router, me devuelva los que tiene cerca, cual
         es el que tiene la Bandwidth mas libre, y a que calcule cual es el mas cercano al router de destino
             ->Necesito poder calcular la distancia hasta los más cercanos
