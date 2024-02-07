@@ -1,6 +1,11 @@
 /*
     Ver:
 
+        >El mapa puede tener alguna funcion tipo rutas(id_inicio,id_final,Router *actual). Necesita 
+        una funcion extra que indexe las rutas
+        
+        >Ver que en el empaquetado, no se estén empaquetando siempre las mismas paginas
+
         >La Bandwidth debería ser la cantidad de paquetes que puede enviar un router
 
         >Tal vez necesito que en la clase router, cada uno busque desde él mismo, los cercanos y luego el final. 
