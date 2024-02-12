@@ -47,7 +47,10 @@
     Known Problems: <>
         >Cuando un router se intenta poner en la posicion de otro, los empieza a colocar desde (0,0), haciendo que
         que la parte superior izquierda normalmente esté más cargada
-
+        
+        >En el mapa, estoy creando copias de los routers existentes en vez de usar
+        punteros a los mismos. Por lo que una vez creados y almacenados en el mapa,
+        se deben alterar esos, y no los originales
 */
 
 /*  Notas:

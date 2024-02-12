@@ -14,6 +14,8 @@ private:
     int cantidadDeReceptores = 256;
     vector<Terminal> receptores;
 
+    int bandWidth = 1+(time(nullptr)*rand())%50;
+
 
     Cola<Paquete> buffer;
     Cola<Paquete> buffer_Redireccion;
@@ -110,6 +112,10 @@ public:
 
     void borrarCercanos();
 
-    vector<Router*> getCercanos();
+    vector<Router*>& getCercanos();
+
+    void setBandWidth(int);
+
+    int getBandWidth();
 };
 #endif

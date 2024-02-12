@@ -18,7 +18,7 @@ public:
     void incluirEnMapa(Router&);
     void imprimirMapa();
     vector<vector<Router>> getMapa();
-    void setCercanos(vector<Router>&);
+    void setCercanos();
 
 
 

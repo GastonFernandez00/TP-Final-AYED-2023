@@ -34,13 +34,13 @@ void Mapa::incluirEnMapa(Router &r){
 
     x = (time(nullptr)*rand())%tamanioCuadradoMapa;
     y = (time(nullptr)*rand())%tamanioCuadradoMapa;
-    if(map.at(y).at(x).getIDRouter() == -1){ map.at(y).at(x) = r; r.setRouterPosicion(x,y);}
+    if(map.at(y).at(x).getIDRouter() == -1){  r.setRouterPosicion(x,y); map.at(y).at(x) = r;}
     else{
         x = y = 0;
         while( y < tamanioCuadradoMapa){
             if(map.at(y).at(x).getIDRouter() == -1){
-                 map.at(y).at(x) = r;
                  r.setRouterPosicion(x,y);
+                 map.at(y).at(x) = r;
                  return (void)0;
             }
             x++;
@@ -73,29 +73,64 @@ int Mapa::calcularDistancia(Router *a,Router *b){
     return distancia;
 }
 
-void Mapa::setCercanos(vector<Router> &r){// REVISAR, PROBLABEMENTE NO SIRVA.
+void Mapa::setCercanos(){// REVISAR, PROBLABEMENTE NO SIRVA.
+    
+    //for(int repeticion = 0; repeticion < 2; repeticion++){
 
-    for(int i = 0; i < r.size(); i++){
-        int x = 0,y = 0;
-        for(int j = 0; j < 3; j++){
-        while(y != tamanioCuadradoMapa){
-            if(map.at(y).at(x).getIDRouter() != -1 && map.at(y).at(x).getIDRouter() != r.at(i).getIDRouter()){
-                int dist = calcularDistancia(&r.at(i),&map.at(y).at(x));
-                if(r.at(i).getCercanos().size() >= 4){
-                    if(calcularDistancia(r.at(i).getCercanos().at(0),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(0) = &map.at(y).at(x);}
-                    else if(calcularDistancia(r.at(i).getCercanos().at(1),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(1) = &map.at(y).at(x);}
-                    else if(calcularDistancia(r.at(i).getCercanos().at(2),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(2) = &map.at(y).at(x);}
-                    else if(calcularDistancia(r.at(i).getCercanos().at(3),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(3) = &map.at(y).at(x);}
-                }
-                else{
-                    r.at(i).incluirCercanos(&map.at(y).at(x));
+    for(int i = 0; i < tamanioCuadradoMapa; i++){
+        for(int j = 0; j < tamanioCuadradoMapa; j++){
+            if(map.at(i).at(j).getIDRouter() != -1){
+                int x = 0, y = 0;
+
+                while(y != tamanioCuadradoMapa){
+                    if(map.at(y).at(x).getIDRouter() != -1 && map.at(y).at(x).getIDRouter() != map.at(i).at(j).getIDRouter()){
+                        if(map.at(i).at(j).getCercanos().size() < 8) map.at(i).at(j).incluirCercanos(&map.at(y).at(x));
+                        else{
+                            int dist = calcularDistancia(&map.at(i).at(j),&map.at(y).at(x));
+                            int distCercanos[8];
+                            for(int calc = 0; calc < 8; calc++){
+                                distCercanos[calc] = calcularDistancia(map.at(i).at(j).getCercanos().at(calc),&map.at(i).at(j));
+                            }
+                            if(dist < distCercanos[0]){ map.at(i).at(j).getCercanos().at(0) = &map.at(y).at(x); }
+                            else if(dist < distCercanos[1]){ map.at(i).at(j).getCercanos().at(1) = &map.at(y).at(x); }
+                            else if(dist < distCercanos[2]){ map.at(i).at(j).getCercanos().at(2) = &map.at(y).at(x); }
+                            else if(dist < distCercanos[3]){ map.at(i).at(j).getCercanos().at(3) = &map.at(y).at(x); }
+                            else if(dist < distCercanos[4]){ map.at(i).at(j).getCercanos().at(4) = &map.at(y).at(x); }
+                            else if(dist < distCercanos[5]){ map.at(i).at(j).getCercanos().at(5) = &map.at(y).at(x); }
+                            else if(dist < distCercanos[6]){ map.at(i).at(j).getCercanos().at(6) = &map.at(y).at(x); }
+                            else if(dist < distCercanos[7]){ map.at(i).at(j).getCercanos().at(7) = &map.at(y).at(x); }
+                                                   
+                        }
+                    }
+     
+                    x++;
+                    if(x == tamanioCuadradoMapa){ x = 0; y++; }
                 }
             }
-            
-            x++;
-            if(x == tamanioCuadradoMapa){ x = 0; y++;}
         }
-    }}
+    }//}
+
+    // for(int i = 0; i < r.size(); i++){
+    //     int x = 0,y = 0;
+    //     while(y != tamanioCuadradoMapa){
+    //         if(map.at(y).at(x).getIDRouter() != -1 && map.at(y).at(x).getIDRouter() != r.at(i).getIDRouter()){
+        
+    //             int dist = calcularDistancia(&r.at(i),&map.at(y).at(x));
+    //             if(r.at(i).getCercanos().size() >= 4){
+    //                 if(calcularDistancia(r.at(i).getCercanos().at(0),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(0) = &map.at(y).at(x);}
+    //                 else if(calcularDistancia(r.at(i).getCercanos().at(1),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(1) = &map.at(y).at(x);}
+    //                 else if(calcularDistancia(r.at(i).getCercanos().at(2),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(2) = &map.at(y).at(x);}
+    //                 else if(calcularDistancia(r.at(i).getCercanos().at(3),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(3) = &map.at(y).at(x);}
+    //             }
+    //             else{
+    //                 r.at(i).incluirCercanos(&map.at(y).at(x));
+    //             }
+    //         }
+            
+    //         x++;
+    //         if(x == tamanioCuadradoMapa){ x = 0; y++;}
+    //     }
+    // }
 
 
 }
@@ -104,7 +139,7 @@ int main(int argc, char const *argv[])
 {
 
     int cantRouter = 1+(time(nullptr)*rand())%256;
-    cantRouter = 256;
+    //cantRouter = 256;
     Mapa m(20);
     vector<Router> r;
     for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo); }
@@ -115,8 +150,20 @@ int main(int argc, char const *argv[])
     for(int i = 0; i < r.size(); i++) m.incluirEnMapa(r.at(i));
    
     
+    //m.imprimirMapa();
+    m.setCercanos();   
     m.imprimirMapa();
-    m.setCercanos(r);   
+    cout<<"Router: "<<r.at(0).getIDRouter()<<endl;
+    cout<<"Posicion: X -> "<<r.at(0).getRouter_x()<<endl
+    <<"Posicion: Y -> "<<r.at(0).getRouter_y()<<endl;
+    cout<<"Cercanos:\n";
+    for(int i = 0; i < 8; i++)
+    cout<<m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).getCercanos().at(i)->getIDRouter()
+    <<endl;
+    // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
+
+    
+
 
 
     // int y,x; y = x = 0;
@@ -125,21 +172,21 @@ int main(int argc, char const *argv[])
     //     if(x == m.getMapa().size()){ x = 0; y++;}
     // }
     
-    int a,b;
-    a = r.at(0).getIDRouter();
-    b = r.at(10).getIDRouter();
-    cout<<a<<endl;
-    cout<<b<<endl;
+    // int a,b;
+    // a = r.at(0).getIDRouter();
+    // b = r.at(10).getIDRouter();
+    // cout<<a<<endl;
+    // cout<<b<<endl;
 
 
-    r.at(0).printPosicionRouter();
-    r.at(10).printPosicionRouter();
+    // r.at(0).printPosicionRouter();
+    // r.at(10).printPosicionRouter();
 
-    int distance = sqrt(pow(r.at(0).getRouter_x()-r.at(10).getRouter_x(),2)+pow(r.at(0).getRouter_y()-r.at(10).getRouter_y(),2));
-    printf("\nDistancia entre %d y %d: %d\n",a,b,distance);
+    // int distance = sqrt(pow(r.at(0).getRouter_x()-r.at(10).getRouter_x(),2)+pow(r.at(0).getRouter_y()-r.at(10).getRouter_y(),2));
+    // printf("\nDistancia entre %d y %d: %d\n",a,b,distance);
 
-    for(int i = 0; i < r.at(0).getCercanos().size(); i++)
-    cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
+    // for(int i = 0; i < r.at(0).getCercanos().size(); i++)
+    // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
 
 
 
