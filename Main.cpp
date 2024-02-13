@@ -1,7 +1,70 @@
 #include <iostream>
 #include <time.h>
-#include "./Includes/Router.h"
+#include "./Includes/Mapa.h"
 using namespace std;
+
+// void encontrarRouter(Mapa &m, int cual){
+//     for(int i = 0; i < m.getMapa().size(); i++)
+//                 for(int j = 0; j < m.getMapa().size(); j++)
+//                     if(m.getMapa().at(i).at(j).getIDRouter() == cual){
+//                         cout<<"\nEncontrado\n"; 
+//                         m.getMapa().at(i).at(j).printPosicionRouter();
+//                         return (void)0;
+//                     }
+//             cout<<"\nNo se encuentra ningun router con ese ID\n"; 
+// }
+
+// int main(int argc, char const *argv[])
+// {   
+//     int cantRouter = 1+time(nullptr)%256;
+//     Mapa m(15);
+//     vector<Router> r;
+//     for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo);}
+//     r.at(0).checkIDRouter(r);
+//     for(int i = 0; i < r.size(); i++){m.incluirEnMapa(r.at(i));}
+//     m.setCercanos();
+
+
+//     int opcion = 0;
+//     do{
+//         cout<<" Opciones: \n"
+//         <<"1) Imprimir mapa\n"
+//         <<"2) Aniadir Router al Mapa\n"
+//         <<"3) Ubicacion de un Router especifico\n"
+//         <<"4) Mostrar Routers Existentes\n"
+//         <<"5) Salir\n";
+
+//         cin>>opcion;
+//         if( opcion == 1){ m.imprimirMapa();}
+//         if( opcion == 2){
+//             Router nuevo; m.incluirEnMapa(nuevo); m.setCercanos();
+//             for(int i = 0; i < m.getMapa().size(); i++){
+//                 m.getMapa().at(i).at(0).checkIDRouter(m.getMapa().at(i));
+//             }
+//         }
+//         if( opcion == 3){
+//             int cual = 0;
+//             cout<<"\nIngresar ID de Router a ubicar: "; cin>>cual;
+//             encontrarRouter(m,cual);
+            
+//         }
+//         if( opcion == 4){
+//             int cuenta = 0;
+//             for(int i = 0; i < m.getMapa().size(); i++)
+//                 for(int j = 0; j < m.getMapa().size(); j++)
+//                     if(m.getMapa().at(i).at(j).getIDRouter() != -1){
+//                         cuenta++;
+//                         cout<<"Router Nº"<<cuenta<<" -> "<<m.getMapa().at(i).at(j).getIDRouter()<<endl;
+//                     }
+//         }       
+//     } while (opcion != 5);
+    
+
+
+
+
+//     return 0;
+// }
 
 
 // int main(int argc, char const *argv[]){

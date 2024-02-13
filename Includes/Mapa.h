@@ -10,7 +10,7 @@ private:
 
     Router crearRouter();
     void setTamanioCuadradoMapa(int);
-    int calcularDistancia(Router *,Router *);
+    float calcularDistancia(Router *,Router *);
     
 public:
     Mapa();

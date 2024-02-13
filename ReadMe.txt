@@ -1,6 +1,8 @@
 /*
     Ver:
 
+        >En Mapa, la funcion setCercanos debería comprobar un par de veces los cercanos
+
         >El mapa puede tener alguna funcion tipo rutas(id_inicio,id_final,Router *actual). Necesita 
         una funcion extra que indexe las rutas
         
@@ -51,6 +53,9 @@
         >En el mapa, estoy creando copias de los routers existentes en vez de usar
         punteros a los mismos. Por lo que una vez creados y almacenados en el mapa,
         se deben alterar esos, y no los originales
+
+        >Si intento aniadir nuevos routers, fuera del vector<Router> inicial, no puedo checkear los IDs. Habría
+        que modificar la funcion checkIDRouter para que tome en cuenta vector<vector<Router>>
 */
 
 /*  Notas:
