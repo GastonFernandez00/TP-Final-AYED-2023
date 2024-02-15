@@ -107,89 +107,65 @@ void Mapa::setCercanos(){
                 }
             }
         }
-    }//}
-
-    // for(int i = 0; i < r.size(); i++){
-    //     int x = 0,y = 0;
-    //     while(y != tamanioCuadradoMapa){
-    //         if(map.at(y).at(x).getIDRouter() != -1 && map.at(y).at(x).getIDRouter() != r.at(i).getIDRouter()){
-        
-    //             int dist = calcularDistancia(&r.at(i),&map.at(y).at(x));
-    //             if(r.at(i).getCercanos().size() >= 4){
-    //                 if(calcularDistancia(r.at(i).getCercanos().at(0),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(0) = &map.at(y).at(x);}
-    //                 else if(calcularDistancia(r.at(i).getCercanos().at(1),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(1) = &map.at(y).at(x);}
-    //                 else if(calcularDistancia(r.at(i).getCercanos().at(2),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(2) = &map.at(y).at(x);}
-    //                 else if(calcularDistancia(r.at(i).getCercanos().at(3),&map.at(y).at(x)) > dist){r.at(i).getCercanos().at(3) = &map.at(y).at(x);}
-    //             }
-    //             else{
-    //                 r.at(i).incluirCercanos(&map.at(y).at(x));
-    //             }
-    //         }
-            
-    //         x++;
-    //         if(x == tamanioCuadradoMapa){ x = 0; y++;}
-    //     }
-    // }
-
-
+    }
 }
 
-// int main(int argc, char const *argv[])
-// {
+int main(int argc, char const *argv[])
+{
 
-//     int cantRouter = 1+(time(nullptr)*rand())%256;
-//     //cantRouter = 256;
-//     Mapa m(20);
-//     vector<Router> r;
-//     for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo); }
-//     r.at(0).checkIDRouter(r);
-//     cout<<"\nFinCheck\nCantidad de Routers: "<<r.size()<<endl;
+    int cantRouter = 1+(time(nullptr)*rand())%256;
+    //cantRouter = 256;
+    Mapa m(20);
+    vector<Router> r;
+    for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo); }
+    r.at(0).checkIDRouter(r);
+    cout<<"\nFinCheck\nCantidad de Routers: "<<r.size()<<endl;
 
 
-//     for(int i = 0; i < r.size(); i++) m.incluirEnMapa(r.at(i));
+    for(int i = 0; i < r.size(); i++) m.incluirEnMapa(r.at(i));
    
     
-//     //m.imprimirMapa();
-//     m.setCercanos();   
-//     m.imprimirMapa();
-//     cout<<"Router: "<<r.at(0).getIDRouter()<<endl;
-//     m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).printPosicionRouter();
-//     cout<<"Cercanos:\n";
-//     for(int i = 0; i < 8; i++)
-//     cout<<m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).getCercanos().at(i)->getIDRouter()
-//     <<endl;
-//     // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
+    //m.imprimirMapa();
+    m.setCercanos();   
+    m.imprimirMapa();
+    cout<<"Router: "<<r.at(0).getIDRouter()<<endl;
+    m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).printPosicionRouter();
+    cout<<"Cercanos:\n";
+    for(int i = 0; i < 8; i++)
+    cout<<m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).getCercanos().at(i)->getIDRouter()
+    <<endl;
+    // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
 
     
 
 
 
-//     // int y,x; y = x = 0;
-//     // while( m.getMapa().at(y).at(x).getIDRouter() == -1){
-//     //     x++;
-//     //     if(x == m.getMapa().size()){ x = 0; y++;}
-//     // }
+    // int y,x; y = x = 0;
+    // while( m.getMapa().at(y).at(x).getIDRouter() == -1){
+    //     x++;
+    //     if(x == m.getMapa().size()){ x = 0; y++;}
+    // }
     
-//     // int a,b;
-//     // a = r.at(0).getIDRouter();
-//     // b = r.at(10).getIDRouter();
-//     // cout<<a<<endl;
-//     // cout<<b<<endl;
+    // int a,b;
+    // a = r.at(0).getIDRouter();
+    // b = r.at(10).getIDRouter();
+    // cout<<a<<endl;
+    // cout<<b<<endl;
 
 
-//     // r.at(0).printPosicionRouter();
-//     // r.at(10).printPosicionRouter();
+    // r.at(0).printPosicionRouter();
+    // r.at(10).printPosicionRouter();
 
-//     // int distance = sqrt(pow(r.at(0).getRouter_x()-r.at(10).getRouter_x(),2)+pow(r.at(0).getRouter_y()-r.at(10).getRouter_y(),2));
-//     // printf("\nDistancia entre %d y %d: %d\n",a,b,distance);
+    // int distance = sqrt(pow(r.at(0).getRouter_x()-r.at(10).getRouter_x(),2)+pow(r.at(0).getRouter_y()-r.at(10).getRouter_y(),2));
+    // printf("\nDistancia entre %d y %d: %d\n",a,b,distance);
 
-//     // for(int i = 0; i < r.at(0).getCercanos().size(); i++)
-//     // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
-
-
+    // for(int i = 0; i < r.at(0).getCercanos().size(); i++)
+    // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
 
 
-//     cout<<endl;
-//     system("pause");
-//     return 0;
-// }
+
+
+    cout<<endl;
+    system("pause");
+    return 0;
+}

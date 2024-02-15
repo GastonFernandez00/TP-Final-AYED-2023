@@ -1,8 +1,8 @@
 /*
     Ver:
 
-        >En Mapa, la funcion setCercanos debería comprobar un par de veces los cercanos
-
+        >En Mapa, la funcion setCercanos DEBE comprobar un par de veces los cercanos, y que no haya repetidos
+        
         >El mapa puede tener alguna funcion tipo rutas(id_inicio,id_final,Router *actual). Necesita 
         una funcion extra que indexe las rutas
         

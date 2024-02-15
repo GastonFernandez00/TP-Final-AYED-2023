@@ -16,6 +16,7 @@ using namespace std;
 
 // int main(int argc, char const *argv[])
 // {   
+// MapaNuevo:
 //     int cantRouter = 1+time(nullptr)%256;
 //     Mapa m(15);
 //     vector<Router> r;
@@ -32,23 +33,26 @@ using namespace std;
 //         <<"2) Aniadir Router al Mapa\n"
 //         <<"3) Ubicacion de un Router especifico\n"
 //         <<"4) Mostrar Routers Existentes\n"
-//         <<"5) Salir\n";
+//         <<"5) Mostrar Routers Cercanos a uno dado\n"
+//         <<"6) Mapa Nuevo\n"
+//         <<"7) Salir\n";
 
 //         cin>>opcion;
-//         if( opcion == 1){ m.imprimirMapa();}
-//         if( opcion == 2){
+//         switch(opcion){
+//         case 1:
+//             m.imprimirMapa();
+//             break;
+//         case 2:{
 //             Router nuevo; m.incluirEnMapa(nuevo); m.setCercanos();
-//             for(int i = 0; i < m.getMapa().size(); i++){
-//                 m.getMapa().at(i).at(0).checkIDRouter(m.getMapa().at(i));
 //             }
-//         }
-//         if( opcion == 3){
+//             break;        
+//         case 3:{
 //             int cual = 0;
 //             cout<<"\nIngresar ID de Router a ubicar: "; cin>>cual;
 //             encontrarRouter(m,cual);
-            
-//         }
-//         if( opcion == 4){
+//             }
+//             break;        
+//         case 4:{
 //             int cuenta = 0;
 //             for(int i = 0; i < m.getMapa().size(); i++)
 //                 for(int j = 0; j < m.getMapa().size(); j++)
@@ -56,8 +60,43 @@ using namespace std;
 //                         cuenta++;
 //                         cout<<"Router Nº"<<cuenta<<" -> "<<m.getMapa().at(i).at(j).getIDRouter()<<endl;
 //                     }
-//         }       
-//     } while (opcion != 5);
+//             }
+//             break;        
+//         case 5:{
+//             int cual = 0;
+//             cout<<"\nMostrar los 'Cercanos' del Router: ";cin>>cual;
+//             for(int i = 0; i < m.getMapa().size(); i++)
+//                 for(int j = 0; j < m.getMapa().size(); j++)
+//                     if(m.getMapa().at(i).at(j).getIDRouter() == cual){
+//                         cout<<"El router esta en: \n";m.getMapa().at(i).at(j).printPosicionRouter();
+//                         for(int k = 0; k < 8; k++)
+//                             cout<<"Cercano N"<<k+1<<" -> "<<m.getMapa().at(i).at(j).getCercanos().at(k)->getIDRouter()<<endl;
+//                     }
+//         }
+//             break;        
+//         case 6:{
+//             cout<<"\nSeguro de crear un nuevo mapa?\nY|N\n";
+//             char respuesta = 'N'; cin>>respuesta;
+//             if( respuesta == 'Y' || respuesta == 'y'){
+//                 int a,b,resultado;
+//                 a = 1+rand()%100; b = 1+time(nullptr)%100;
+//                 cout<<"\nPara Continuar responda, cuanto es "<<a<<"+"<<b<<endl;
+//                 cin>>resultado;
+//                 if(resultado == a+b || resultado == -1){
+//                     cout<<"\nReiniciando\n";
+//                     goto MapaNuevo;
+//                 }
+//                 else cout<<"\nError, no se reiniciara, intente nuevamente\n";
+//             }
+//         }
+
+//             break;        
+//         default:
+//             break;
+//         }
+   
+        
+//     } while (opcion != 7);
     
 
 
