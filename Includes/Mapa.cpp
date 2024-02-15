@@ -79,31 +79,39 @@ void Mapa::setCercanos(){
     for(int i = 0; i < tamanioCuadradoMapa; i++){
         for(int j = 0; j < tamanioCuadradoMapa; j++){
             if(map.at(i).at(j).getIDRouter() != -1){
-                int x = 0, y = 0;
+                for(int repe = 0; repe < 8; repe++){
+                    int x = 0, y = 0;
 
-                while(y != tamanioCuadradoMapa){
-                    if(map.at(y).at(x).getIDRouter() != -1 && map.at(y).at(x).getIDRouter() != map.at(i).at(j).getIDRouter()){
-                        if(map.at(i).at(j).getCercanos().size() < 8) map.at(i).at(j).incluirCercanos(&map.at(y).at(x));
-                        else{
-                            float dist = calcularDistancia(&map.at(i).at(j),&map.at(y).at(x));
-                            float distCercanos[8];
-                            for(int calc = 0; calc < 8; calc++){
-                                distCercanos[calc] = calcularDistancia(map.at(i).at(j).getCercanos().at(calc),&map.at(i).at(j));
+                    while(y != tamanioCuadradoMapa){
+                        if(map.at(y).at(x).getIDRouter() != -1 && map.at(y).at(x).getIDRouter() != map.at(i).at(j).getIDRouter()){
+                            if(map.at(i).at(j).getCercanos().size() < 8) map.at(i).at(j).incluirCercanos(&map.at(y).at(x));
+                            else{
+                                float dist = calcularDistancia(&map.at(i).at(j),&map.at(y).at(x));
+                                float distCercanos[8];
+                                for(int calc = 0; calc < 8; calc++){
+                                    distCercanos[calc] = calcularDistancia(map.at(i).at(j).getCercanos().at(calc),&map.at(i).at(j));
+                                }
+                                
+                                for(int calc = 0; calc < 8; calc++){
+                                    bool yaEsta = false;
+                                    if((dist < distCercanos[calc]) && (yaEsta == false)){
+                                        for(int rep = 0; rep < 8; rep++){
+                                            if(map.at(i).at(j).getCercanos().at(rep)->getIDRouter() == map.at(y).at(x).getIDRouter()){
+                                                yaEsta = true;
+                                            }
+                                        }    
+                                        if( yaEsta == false){
+                                            map.at(i).at(j).getCercanos().at(calc) = &map.at(y).at(x);
+                                        }
+                                    }
+                                }
+                                                    
                             }
-                            if(dist < distCercanos[0]){ map.at(i).at(j).getCercanos().at(0) = &map.at(y).at(x); }
-                            else if(dist < distCercanos[1]){ map.at(i).at(j).getCercanos().at(1) = &map.at(y).at(x); }
-                            else if(dist < distCercanos[2]){ map.at(i).at(j).getCercanos().at(2) = &map.at(y).at(x); }
-                            else if(dist < distCercanos[3]){ map.at(i).at(j).getCercanos().at(3) = &map.at(y).at(x); }
-                            else if(dist < distCercanos[4]){ map.at(i).at(j).getCercanos().at(4) = &map.at(y).at(x); }
-                            else if(dist < distCercanos[5]){ map.at(i).at(j).getCercanos().at(5) = &map.at(y).at(x); }
-                            else if(dist < distCercanos[6]){ map.at(i).at(j).getCercanos().at(6) = &map.at(y).at(x); }
-                            else if(dist < distCercanos[7]){ map.at(i).at(j).getCercanos().at(7) = &map.at(y).at(x); }
-                                                   
                         }
+        
+                        x++;
+                        if(x == tamanioCuadradoMapa){ x = 0; y++; }
                     }
-     
-                    x++;
-                    if(x == tamanioCuadradoMapa){ x = 0; y++; }
                 }
             }
         }
@@ -113,8 +121,8 @@ void Mapa::setCercanos(){
 int main(int argc, char const *argv[])
 {
 
-    int cantRouter = 1+(time(nullptr)*rand())%256;
-    //cantRouter = 256;
+    //int cantRouter = 1+(time(nullptr)*rand())%256;
+    int cantRouter = 256;
     Mapa m(20);
     vector<Router> r;
     for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo); }
