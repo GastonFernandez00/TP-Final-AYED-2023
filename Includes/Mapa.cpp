@@ -53,6 +53,16 @@ void Mapa::incluirEnMapa(Router &r){
 
 vector<vector<Router>> Mapa::getMapa(){ return map; }
 
+int Mapa::cantidadDeRoutersEnMapa(){
+    int suma = 0;
+    for(int i = 0; i < map.at(0).size(); i++)
+        for(int j = 0; j < map.at(0).size(); j++)
+            if(map.at(i).at(j).getIDRouter() != -1){
+                suma += 1;
+            }
+    return suma;
+}
+
 void Mapa::imprimirMapa(){
     if(map.size() <= 0) return (void)0;
     cout<<endl;
@@ -73,8 +83,7 @@ float Mapa::calcularDistancia(Router *a,Router *b){
     return distancia;
 }
 
-void Mapa::setCercanos(){
-    
+void Mapa::setCercanos(){    
 
     for(int i = 0; i < tamanioCuadradoMapa; i++){
         for(int j = 0; j < tamanioCuadradoMapa; j++){
@@ -121,8 +130,8 @@ void Mapa::setCercanos(){
 int main(int argc, char const *argv[])
 {
 
-    //int cantRouter = 1+(time(nullptr)*rand())%256;
-    int cantRouter = 256;
+    int cantRouter = 1+(time(nullptr)*rand())%256;
+    // int cantRouter = 256;
     Mapa m(20);
     vector<Router> r;
     for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo); }
@@ -139,12 +148,12 @@ int main(int argc, char const *argv[])
     cout<<"Router: "<<r.at(0).getIDRouter()<<endl;
     m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).printPosicionRouter();
     cout<<"Cercanos:\n";
-    for(int i = 0; i < 8; i++)
+    for(int i = 0; i < m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).getCercanos().size(); i++)
     cout<<m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).getCercanos().at(i)->getIDRouter()
     <<endl;
     // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
 
-    
+    cout<<"\n\nCantidad de Routers Activos: "<<m.cantidadDeRoutersEnMapa()<<endl;
 
 
 

@@ -19,7 +19,7 @@ public:
     void imprimirMapa();
     vector<vector<Router>> getMapa();
     void setCercanos();
-
+    int cantidadDeRoutersEnMapa();
 
 
 };

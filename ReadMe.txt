@@ -45,15 +45,20 @@
 
 /*
     Known Problems: <>
-        >Cuando un router se intenta poner en la posicion de otro, los empieza a colocar desde (0,0), haciendo que
-        que la parte superior izquierda normalmente esté más cargada
-        
+        ::::IMPORTANTES::::
         >En el mapa, estoy creando copias de los routers existentes en vez de usar
         punteros a los mismos. Por lo que una vez creados y almacenados en el mapa,
         se deben alterar esos, y no los originales
 
         >Si intento aniadir nuevos routers, fuera del vector<Router> inicial, no puedo checkear los IDs. Habría
         que modificar la funcion checkIDRouter para que tome en cuenta vector<vector<Router>>
+        
+        ::::INSIGNIFICANTES::::
+        >Si la cantidad de routers < 8, los routers en la lista de cercanos se repiten.
+
+        >Cuando un router se intenta poner en la posicion de otro, los empieza a colocar desde (0,0), haciendo que
+        que la parte superior izquierda normalmente esté más cargada
+        
 */
 
 /*  Notas:
