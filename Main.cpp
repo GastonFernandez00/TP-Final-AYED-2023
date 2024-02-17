@@ -3,6 +3,143 @@
 #include "./Includes/Mapa.h"
 using namespace std;
 
+int getRandID(vector<Router> r){
+    return r.at((int)(time(nullptr)*rand())%r.size()).getIDRouter();
+}
+
+
+void getCoords(int buscar,Mapa m){
+    for(int i = 0; i < m.getMapa().size(); i++)
+        for(int j = 0; j < m.getMapa().size(); j++)
+            if(m.getMapa().at(i).at(j).getIDRouter() == buscar){
+                m.getMapa().at(i).at(j).printPosicionRouter();
+                return (void)0;
+            }
+            cout<<"\nEl Router "<<buscar<<" No existe."<<endl;
+}
+
+void getCercanoss(int buscar, Mapa m){
+    for(int i = 0; i < m.getMapa().size(); i++)
+        for(int j = 0; j < m.getMapa().size(); j++)
+            if(m.getMapa().at(i).at(j).getIDRouter() == buscar){
+                for(int k = 0; k < 8; k++)
+                cout<<endl<<m.getMapa().at(i).at(j).getCercanos().at(k)->getIDRouter();
+                cout<<endl;
+                return (void)0;
+            }
+            cout<<"\nEl Router "<<buscar<<" No existe."<<endl;
+}
+
+void getPackRedir(int b, Mapa m){
+     for(int i = 0; i < m.getMapa().size(); i++)
+        for(int j = 0; j < m.getMapa().size(); j++)
+            if(m.getMapa().at(i).at(j).getIDRouter() == b){
+                cout<<"\nEl total de paquetes a redireccionar son: "<<m.getMapa().at(i).at(j).getSizeBufferRedireccionamiento();
+                return (void)0;
+            }
+            cout<<"\nEl Router "<<b<<" No existe."<<endl;
+}
+
+void getPackNORedir(int b, Mapa m){
+    for(int i = 0; i < m.getMapa().size(); i++)
+        for(int j = 0; j < m.getMapa().size(); j++)
+            if(m.getMapa().at(i).at(j).getIDRouter() == b){
+                cout<<"\nEl total de paquetes a son: "<<m.getMapa().at(i).at(j).getSizeBuffer();
+                return (void)0;
+            }
+            cout<<"\nEl Router "<<b<<" No existe."<<endl;
+}
+
+int main(int argc, char const *argv[])
+{
+NuevoMapa:
+    Pagina p[1000];
+    p->checkIDPaginas(size(p));
+    int cantRouters, cantEmisores;
+    cantRouters = cantEmisores = 1+(time(nullptr)*rand())%256;
+    vector<Router> r; vector<Terminal> t;
+    for(int i = 0; i < cantRouters; i++){ 
+        Router nuevo_r; r.push_back(nuevo_r);
+        Terminal nuevo_t; t.push_back(nuevo_t);
+    }
+    r.at(0).checkIDRouter(r);
+    t.at(0).checkIDTerminal(t);
+
+    for(int i = 0; i < size(p); i++){
+        p[i].setIDDestino(getRandID(r));
+    }
+
+    //EMPAQUETA LAS PAGINAS
+    for(int j = 0; j < t.size(); j++)
+        for(int i = 0+(size(p)/t.size())*j; i < (1+j)*(size(p)/t.size()); i++){
+            t.at(j).empaquetado(&p[i]);
+        }
+
+    //ENVIA LAS PAGINAS A ROUTERS
+    for(int j = 0; j < t.size(); j++){
+        r.at(j).Recepcion(t.at(j).getPaquetes());
+    }
+
+
+    Mapa m(20);
+    for(int i = 0; i < cantRouters; i++) m.incluirEnMapa(r.at(i));
+    m.setCercanos();
+
+    int opcion = 0;
+    do{
+        cout<<"\nOpciones: "
+        <<"\n1) Imprimir mapa"
+        <<"\n2) Routers activos"
+        <<"\n3) Routers cercanos a uno especifico"
+        <<"\n4) Coordenadas de un Router especifico"
+        <<"\n5) Paquetes a redireccionar de un Router especifico"
+        <<"\n6) Paquetes que no deben ser redireccionados de un Router especifico"
+        <<"\n7) Mapa Nuevo"
+        <<"\n8) Salir"
+        <<"\n\nIngresar Opcion: ";cin>>opcion;
+
+        while(opcion > 8 || opcion < 1){
+            cout<<"\nERROR: Reingresar Opcion: "; cin>>opcion;
+        }
+        switch(opcion){
+            case 1:
+                m.imprimirMapa(); break;
+            case 2:
+                cout<<"\nCantidad de Routers Activos: "<<m.cantidadDeRoutersEnMapa()<<endl; break;
+            case 3:{
+                int buscar = -1;
+                cout<<"\nIngresar Router a buscar Cercanos: ";cin>>buscar;
+                getCercanoss(buscar, m);                
+                break;}
+            case 4:{
+                int buscar = -1;
+                cout<<"\nIngresar Router a Buscar: ";cin>>buscar;
+                getCoords(buscar,m);
+                break;}
+            case 5:{
+                int buscar = -1;
+                cout<<"\nIngresar Router a buscar Paquetes de Redireccion: ";cin>>buscar;
+                getPackRedir(buscar,m);                
+                break;}
+            case 6:{
+                int buscar = -1;
+                cout<<"\nIngresar Router a buscar Paquetes :";cin>>buscar;
+                getPackNORedir(buscar,m);    
+                break;}
+            
+            case 7:
+                goto NuevoMapa;
+                break;
+        }
+        // <<"\n"
+        // <<"\n"<<endl;
+        
+        
+    }while(opcion != 8);
+    return 0;
+}
+
+
 // void encontrarRouter(Mapa &m, int cual){
 //     for(int i = 0; i < m.getMapa().size(); i++)
 //                 for(int j = 0; j < m.getMapa().size(); j++)

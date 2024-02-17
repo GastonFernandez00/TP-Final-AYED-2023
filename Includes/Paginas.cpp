@@ -4,8 +4,8 @@
 //#include <stdio.h>
 using namespace std;
 
-Pagina::Pagina(){ setTamanio(rand()); setID(rand()); setIDDestino(); setidDestinoTerminal();}
-Pagina::Pagina(int n){ setTamanio(n); setID(rand()); setIDDestino(); setidDestinoTerminal();}
+Pagina::Pagina(){ srand(time(nullptr)); setTamanio(rand()); setID(rand()); setIDDestino(); setidDestinoTerminal();}
+Pagina::Pagina(int n){ srand(time(nullptr)); setTamanio(n); setID(rand()); setIDDestino(); setidDestinoTerminal();}
 
 Pagina::~Pagina(){ }
 
@@ -19,9 +19,9 @@ void Pagina::setIDDestino(int d){ id_Destino = d%256; }
 
 void Pagina::setidDestinoTerminal(int d){ id_Destino_Terminal = d%256; }
 
-void Pagina::setIDDestino(){ id_Destino = rand()%256; }
+void Pagina::setIDDestino(){ srand(time(nullptr)); id_Destino = rand()%256; }
 
-void Pagina::setidDestinoTerminal(){ id_Destino_Terminal = rand()%256; }
+void Pagina::setidDestinoTerminal(){srand(time(nullptr)); id_Destino_Terminal = rand()%256; }
 
 int Pagina::getIDDestino(){ return id_Destino; }
 

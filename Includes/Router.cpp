@@ -35,14 +35,15 @@ void  Router::printPosicionRouter(){ //CAMBIAR ESTO
 void Router::Recepcion(Cola<Paquete> c){
     
     if(c.colaEmpty()){ return (void)0; }
-
-    if(c.getPrimero().getIDDestino() == this->getIDRouter()){
-        buffer.encolar(c.getPrimero());
-        c.desencolar();
-    }
-    else{
-        buffer_Redireccion.encolar(c.getPrimero());
-        c.desencolar();
+    while(!(c.colaEmpty())){
+        if(c.getPrimero().getIDDestino() == this->getIDRouter()){
+            buffer.encolar(c.getPrimero());
+            c.desencolar();
+        }
+        else{
+            buffer_Redireccion.encolar(c.getPrimero());
+            c.desencolar();
+        }
     }
 }
 

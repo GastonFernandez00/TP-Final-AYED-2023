@@ -4,6 +4,8 @@
 
         >>>>>Calcula 1 vez los pesos
 
+        >>Las Paginas DEBEN saber qué Routers Existen (Los IDs)
+
         >El mapa puede tener alguna funcion tipo rutas(id_inicio,id_final,Router *actual). Necesita 
         una funcion extra que indexe las rutas <---> Tal vez sea una funcion externa, a la que acceda el mapa
         
