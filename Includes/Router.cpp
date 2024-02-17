@@ -125,6 +125,8 @@ void Router::setBandWidth(int n){ bandWidth = n; }
 
 int Router::getBandWidth(){ return bandWidth; }
 
+void Router::setSiguienteInmediato(Router *r){ siguienteInmediato = r; }
+
 //Prueba de Funciones
 // int main(int argc, char const *argv[]){
 //     int cantdePaginas = (time(nullptr)*rand())%1000;

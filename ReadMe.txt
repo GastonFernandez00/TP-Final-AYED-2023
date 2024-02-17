@@ -1,29 +1,18 @@
 /*
     Ver:
+        >>>>>GRAFO PONDERADO Ó CON PESO
+
+        >>>>>Calcula 1 vez los pesos
 
         >El mapa puede tener alguna funcion tipo rutas(id_inicio,id_final,Router *actual). Necesita 
-        una funcion extra que indexe las rutas
+        una funcion extra que indexe las rutas <---> Tal vez sea una funcion externa, a la que acceda el mapa
         
         >Ver que en el empaquetado, no se estén empaquetando siempre las mismas paginas
 
         >La Bandwidth debería ser la cantidad de paquetes que puede enviar un router
 
-        >Tal vez necesito que en la clase router, cada uno busque desde él mismo, los cercanos y luego el final. 
-        Y necesito guardar esa rutua de alguna forma
-
-        >En clase mapa: hace falta una funcion que al poner un router, me devuelva los que tiene cerca, cual
-        es el que tiene la Bandwidth mas libre, y a que calcule cual es el mas cercano al router de destino
-            ->Necesito poder calcular la distancia hasta los más cercanos
-            ->La distancia física podría calcularse como sqrt(x^2+y^2)
-
-
         >En la clase Terminal, probablemente haga falta un Cola<Pagina> ó mejor un vector<Pagina>, y una funcion
         que rearme las paginas a partir de los paquetes. Tal vez el rearmado se haga en el router
-
-        >Posiblemente eliminar las funciones:
-            -> Router: atributo y funciones de posicion
-            -> Terminal: "Envio" 
-            -> Cola: "cambiarEstado" y su atributo "estado"
 
         >Se Tiene que enviar Paquete por paquete
                         
@@ -38,6 +27,11 @@
                 } 
                 return pkgReenviados;
             }
+
+        >Posiblemente eliminar las funciones:
+            -> Router: atributo y funciones de posicion
+            -> Terminal: "Envio" 
+            -> Cola: "cambiarEstado" y su atributo "estado"
 
         --->>> Al terminar, limpiar clases, y comentar funciones apropiadamente
 

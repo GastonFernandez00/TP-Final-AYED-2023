@@ -130,8 +130,8 @@ void Mapa::setCercanos(){
 int main(int argc, char const *argv[])
 {
 
-    int cantRouter = 1+(time(nullptr)*rand())%256;
-    // int cantRouter = 256;
+    // int cantRouter = 1+(time(nullptr)*rand())%256;
+    int cantRouter = 25;
     Mapa m(20);
     vector<Router> r;
     for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo); }

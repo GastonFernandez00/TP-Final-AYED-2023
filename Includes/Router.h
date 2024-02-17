@@ -9,6 +9,8 @@ private:
     int posicion_x = -1 , posicion_y = -1;
     vector<Router*> cercanos;
 
+    Router* siguienteInmediato = NULL;
+
     int MaximaCantDeRouters = 256;
     //Terminal receptores[256];
     int cantidadDeReceptores = 256;
@@ -117,5 +119,7 @@ public:
     void setBandWidth(int);
 
     int getBandWidth();
+
+    void setSiguienteInmediato(Router*);
 };
 #endif
