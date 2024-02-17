@@ -1,6 +1,6 @@
 #include "Mapa.h"
-#include <thread>
-#include <chrono>
+//#include <thread>
+//#include <chrono>
 
 Mapa::Mapa(){
     for(int i = 0; i < tamanioCuadradoMapa; i++){
@@ -30,10 +30,12 @@ Router Mapa::crearRouter(){ Router r(-1); return r;} // Router No inicializado, 
 
 void Mapa::incluirEnMapa(Router &r){
 
-    int x,y; this_thread::sleep_for(chrono::milliseconds(10));
+    random_device rd;
+    uniform_int_distribution<int> dist(0,tamanioCuadradoMapa-1);
+    int x,y;
 
-    x = (time(nullptr)*rand())%tamanioCuadradoMapa;
-    y = (time(nullptr)*rand())%tamanioCuadradoMapa;
+    x = dist(rd);
+    y = dist(rd);
     if(map.at(y).at(x).getIDRouter() == -1){  r.setRouterPosicion(x,y); map.at(y).at(x) = r;}
     else{
         x = y = 0;

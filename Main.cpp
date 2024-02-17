@@ -4,7 +4,10 @@
 using namespace std;
 
 int getRandID(vector<Router> r){
-    return r.at((int)(time(nullptr)*rand())%r.size()).getIDRouter();
+    random_device rd;
+    uniform_int_distribution<int> dist(0,r.size()-1);
+
+    return r.at(dist(rd)).getIDRouter();
 }
 
 
@@ -55,8 +58,12 @@ int main(int argc, char const *argv[])
 NuevoMapa:
     Pagina p[1000];
     p->checkIDPaginas(size(p));
+
     int cantRouters, cantEmisores;
-    cantRouters = cantEmisores = 1+(time(nullptr)*rand())%256;
+    random_device rd;
+    uniform_int_distribution<int> dist(0,255);
+    cantRouters = cantEmisores = dist(rd);
+
     vector<Router> r; vector<Terminal> t;
     for(int i = 0; i < cantRouters; i++){ 
         Router nuevo_r; r.push_back(nuevo_r);
@@ -65,6 +72,7 @@ NuevoMapa:
     r.at(0).checkIDRouter(r);
     t.at(0).checkIDTerminal(t);
 
+    //Asigna Los IDs teniendo en cuenta los que ya existen
     for(int i = 0; i < size(p); i++){
         p[i].setIDDestino(getRandID(r));
     }
@@ -128,6 +136,7 @@ NuevoMapa:
                 break;}
             
             case 7:
+                cout<<"\nReiniciando.\n";
                 goto NuevoMapa;
                 break;
         }
