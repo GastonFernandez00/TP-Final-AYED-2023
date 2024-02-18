@@ -21,6 +21,8 @@ public:
     void setCercanos();
     int cantidadDeRoutersEnMapa();
 
+    Router& getRouterEspecifico(int);
+
 
 };
 #endif

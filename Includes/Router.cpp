@@ -47,6 +47,16 @@ void Router::Recepcion(Cola<Paquete> c){
     }
 }
 
+void Router::Recepcion(Paquete p){
+    if(p.getDato() <= 0) return (void)0;
+    else if(p.getIDDestino() == this->getIDRouter()){
+        buffer.encolar(p);
+    }
+    else{
+        buffer_Redireccion.encolar(p);
+    }
+}
+
 bool Router::routerEmpty(){ return buffer.colaEmpty(); }
 
 bool Router::routerRedireccionEmpty(){ return buffer_Redireccion.colaEmpty(); }
@@ -105,11 +115,11 @@ vector<Terminal> Router::getReceptor(){ return receptores; }
 
 Router crearRouter(){ Router *r = new Router(); return *r;}
 
-Cola<Paquete> Router::getBufferRouter(){ return buffer; }
+Cola<Paquete>& Router::getBufferRouter(){ return buffer; }
 
 int Router::getSizeBuffer(){ return buffer.sizeCola(); }
 
-Cola<Paquete> Router::getBufferRedireccionRouter(){ return buffer_Redireccion; }
+Cola<Paquete>& Router::getBufferRedireccionRouter(){ return buffer_Redireccion; }
 
 int Router::getSizeBufferRedireccionamiento(){ return buffer_Redireccion.sizeCola(); }
 

@@ -40,6 +40,7 @@ int main(int argc, char const *argv[])
     for(int i = 0; i < r.size();i++) m.incluirEnMapa(r.at(i));
 
     m.imprimirMapa();
+    m.setCercanos();
 
     for(int i = 0; i < m.getMapa().size(); i ++)
         for(int j = 0; j < m.getMapa().size(); j ++)
@@ -55,10 +56,34 @@ int main(int argc, char const *argv[])
         cout<<aux.getPrimero().getDato()<<endl;
         aux.desencolar();
     }
-    
+
+
     for(int k = 0; k < 2; k ++){
     cout<<"\n\n\nPaquetes en el Router: "<<r.at(k).getIDRouter()<<endl;
-     for(int i = 0; i < m.getMapa().size(); i ++)
+    for(int i = 0; i < m.getMapa().size(); i ++)
+        for(int j = 0; j < m.getMapa().size(); j ++)
+            if(m.getMapa().at(i).at(j).getIDRouter() == r.at(k).getIDRouter()){
+                cout<<"\nCant de Paquetes almacenados: ";
+                cout<<m.getMapa().at(i).at(j).getBufferRouter().sizeCola();
+                cout<<"\nCant de Paquetes almacenados a REDIRECCIONAR: ";
+                cout<<m.getMapa().at(i).at(j).getBufferRedireccionRouter().sizeCola();
+
+            }}
+
+    for(int i = 0; i < m.getMapa().size(); i ++)
+        for(int j = 0; j < m.getMapa().size(); j ++)
+            if(m.getMapa().at(i).at(j).getIDRouter() != -1){
+                m.getMapa().at(i).at(j).getCercanos().at(0)->
+                Recepcion( m.getMapa().at(i).at(j).getBufferRedireccionRouter().getPrimero());
+                m.getMapa().at(i).at(j).getBufferRedireccionRouter().desencolar();
+
+            }
+
+
+
+    for(int k = 0; k < 2; k ++){
+    cout<<"\n\n\nPaquetes en el Router: "<<r.at(k).getIDRouter()<<endl;
+    for(int i = 0; i < m.getMapa().size(); i ++)
         for(int j = 0; j < m.getMapa().size(); j ++)
             if(m.getMapa().at(i).at(j).getIDRouter() == r.at(k).getIDRouter()){
                 cout<<"ENCONTRE EL ROUTER";
@@ -68,6 +93,7 @@ int main(int argc, char const *argv[])
                 cout<<m.getMapa().at(i).at(j).getBufferRedireccionRouter().sizeCola();
 
             }}
+    
             //     if(m.getMapa().at(i).at(j).getSizeBuffer() > 0 ){
             //         aux = m.getMapa().at(i).at(j).getBufferRouter();
             //         while(aux.sizeCola() > 0){

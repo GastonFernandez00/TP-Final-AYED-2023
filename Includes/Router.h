@@ -77,7 +77,9 @@ public:
         router vecino.        
         @param Cola<int>*
     */
-    void Recepcion(Cola<Paquete> );
+    void Recepcion(Cola<Paquete>);
+
+    void Recepcion(Paquete);
 
     /*  Pregunta si la cola del router tiene algun elemento*/
     bool routerEmpty();
@@ -94,11 +96,11 @@ public:
 
     void setMaximaCantDeRouters(int);
 
-    Cola<Paquete> getBufferRouter();
+    Cola<Paquete>& getBufferRouter();
 
     int getSizeBuffer();
 
-    Cola<Paquete> getBufferRedireccionRouter();   
+    Cola<Paquete>& getBufferRedireccionRouter();   
 
     int getSizeBufferRedireccionamiento();
 

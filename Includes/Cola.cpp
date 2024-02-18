@@ -19,7 +19,7 @@ template <class T>
 void Cola<T>::encolar(T e){ c.push(e); }
 
 template <class T>
-void Cola<T>::desencolar(){ c.pop(); }
+void Cola<T>::desencolar(){if(c.size() <= 0) return (void)0; c.pop(); }
 
 template <class T>
 void Cola<T>::vaciarCola(){

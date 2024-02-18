@@ -129,6 +129,14 @@ void Mapa::setCercanos(){
     }
 }
 
+Router& Mapa::getRouterEspecifico(int R){
+    for(int i = 0; i < tamanioCuadradoMapa; i ++)
+        for(int j = 0; j < tamanioCuadradoMapa; j ++)
+            if(map.at(i).at(j).getIDRouter() == R) return map.at(i).at(j);
+
+    cout<<"\nEl router no se encuentra en el mapa.";
+}
+
 // int main(int argc, char const *argv[])
 // {
 
