@@ -17,7 +17,7 @@ public:
     Mapa(int);
     void incluirEnMapa(Router&);
     void imprimirMapa();
-    vector<vector<Router>> getMapa();
+    vector<vector<Router>>& getMapa();
     void setCercanos();
     int cantidadDeRoutersEnMapa();
 

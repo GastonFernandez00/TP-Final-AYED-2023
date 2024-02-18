@@ -53,7 +53,7 @@ void Mapa::incluirEnMapa(Router &r){
     } 
 }
 
-vector<vector<Router>> Mapa::getMapa(){ return map; }
+vector<vector<Router>>& Mapa::getMapa(){ return map; }
 
 int Mapa::cantidadDeRoutersEnMapa(){
     int suma = 0;

@@ -1,10 +1,8 @@
 /*  Notas:
-
-        >Para simular la aleatoriedad puedo usar la libreria de time, en concreto la funcion 
-        time(NULL), que devuelve los segundos desde EPOCH
-
         >Las Paginas DEBEN saber qué Routers Existen (Los IDs)
-    
+
+        >Para aleatoriedad (Desde ahora) usar random_device y alguna distribucion probabilistica,
+        como la uniforme    
 */
 
 /*
