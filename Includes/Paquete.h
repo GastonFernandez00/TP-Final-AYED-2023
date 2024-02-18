@@ -6,7 +6,8 @@ using namespace std;
 class Paquete{
 private:
     int TAMANIO_MAX = 50;
-
+    int Divisiones_Totales = -1;
+    
     int idPertenencia = -1;
     int id_Destino = -1;
     int id_Destino_Terminal = -1;
@@ -24,6 +25,8 @@ public:
     /*  Establece el numero de paquete. Indica que posicion deberia tener al rearmar
         @param int    */
     void setPackNumero(int);
+
+    void setCantidadTotal(int);
 
     /*  Establece a que pagina pertenece
         @param Pagina   */
@@ -51,6 +54,8 @@ public:
     /*  Devuelve la posicion que deberia tener el paquete
         @returns int    */
     int getPackNumero();
+
+    int getDivisionesTotales();
 
     /*  Devuelde el dato que contiene el paquete
         @returns int    */

@@ -15,10 +15,22 @@ void Terminal::empaquetado(Pagina *p){
             return (void)0;
         }
         
+        int pAux = p->getTamanio();
+        int cantidadDeDivisiones = 0;
+        while( pAux >= 50){
+            cantidadDeDivisiones++;
+            pAux -= 50;
+        }
+        if(pAux > 0){
+            cantidadDeDivisiones++;
+            pAux = 0;
+        }
+
         while(p->getTamanio() >= 50){
             numero_de_paquete++;
             Paquete aux;
             aux.setDato(50);aux.setIds(p); aux.setPackNumero(numero_de_paquete);
+            aux.setCantidadTotal(cantidadDeDivisiones);
             p->setTamanio(p->getTamanio()-50);
             pkg.encolar(aux);
         }
@@ -26,7 +38,7 @@ void Terminal::empaquetado(Pagina *p){
             numero_de_paquete++;
             Paquete aux;
             aux.setIds(p); aux.setPackNumero(numero_de_paquete);
-            aux.setDato(p->getTamanio());
+            aux.setDato(p->getTamanio()); aux.setCantidadTotal(cantidadDeDivisiones);
             p->setTamanio(0);
             pkg.encolar(aux);
         }
