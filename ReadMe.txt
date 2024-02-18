@@ -1,23 +1,29 @@
+/*  Notas:
+
+        >Para simular la aleatoriedad puedo usar la libreria de time, en concreto la funcion 
+        time(NULL), que devuelve los segundos desde EPOCH
+
+        >Las Paginas DEBEN saber qué Routers Existen (Los IDs)
+    
+*/
+
 /*
     Ver:
         >>>>>GRAFO PONDERADO Ó CON PESO
 
         >>>>>Calcula 1 vez los pesos
 
-        >>Las Paginas DEBEN saber qué Routers Existen (Los IDs)
+        >Controlar:
+             Ahora mismo cada terminal envía la TOTALIDAD de los paquetes que tiene almacenado, al o mejor debería hacer
+            sólo envía 1 (un) paquete por vez
 
-        >El mapa puede tener alguna funcion tipo rutas(id_inicio,id_final,Router *actual). Necesita 
-        una funcion extra que indexe las rutas <---> Tal vez sea una funcion externa, a la que acceda el mapa
-        
-        >Ver que en el empaquetado, no se estén empaquetando siempre las mismas paginas
+        >La funcion de envío entre Routers, probablemente deba hacerse en el Mapa
 
         >La Bandwidth debería ser la cantidad de paquetes que puede enviar un router
 
         >En la clase Terminal, probablemente haga falta un Cola<Pagina> ó mejor un vector<Pagina>, y una funcion
         que rearme las paginas a partir de los paquetes. Tal vez el rearmado se haga en el router
 
-        >Se Tiene que enviar Paquete por paquete
-                        
         >La cola donde se acumulan los paquetes una vez enviados desde el router, deberian estar en cada terminal, no en el main
 
         >Ver de asociar una Bandwidth, que podría ser la cantidad de datos que puede descolarse a la vez. Tal vez funcion
@@ -57,9 +63,3 @@
         
 */
 
-/*  Notas:
-
-        >Para simular la aleatoriedad puedo usar la libreria de time, en concreto la funcion 
-        time(NULL), que devuelve los segundos desde EPOCH
-    
-*/
