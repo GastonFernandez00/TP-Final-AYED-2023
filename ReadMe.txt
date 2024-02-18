@@ -11,6 +11,8 @@
 
         >>>>>Calcula 1 vez los pesos
 
+        >El envio a uno de los cercanos DEBE ser a uno cercano al destino. SI O SI
+
         >Controlar:
              Ahora mismo cada terminal envía la TOTALIDAD de los paquetes que tiene almacenado, al o mejor debería hacer
             sólo envía 1 (un) paquete por vez

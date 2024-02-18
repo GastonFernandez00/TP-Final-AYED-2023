@@ -137,6 +137,38 @@ Router& Mapa::getRouterEspecifico(int R){
     cout<<"\nEl router no se encuentra en el mapa.";
 }
 
+void Mapa::envio(){
+    for(int i = 0; i < tamanioCuadradoMapa; i++)
+        for(int j = 0; j < tamanioCuadradoMapa; j++)
+            if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getSizeBufferRedireccionamiento() > 0){
+                bool enviado = false;
+                for(int k = 0; k < 8; k++){
+                    if(map.at(i).at(j).getBufferRedireccionRouter().getPrimero().getIDDestino()
+                    == map.at(i).at(j).getCercanos().at(k)->getIDRouter() && enviado == false){
+                    //END IF
+                        map.at(i).at(j).getCercanos().at(k)->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
+                        map.at(i).at(j).getBufferRedireccionRouter().desencolar();
+                        enviado = true;
+                    }
+                }
+                if(enviado == false){
+                        Router *menor = NULL;
+                        menor = map.at(i).at(j).getCercanos().at(0);
+                    for(int k = 1; k < 8 ; k++){
+                        if(menor->getSizeBufferRedireccionamiento() 
+                        > map.at(i).at(j).getCercanos().at(k)->getSizeBufferRedireccionamiento()){
+                            menor = map.at(i).at(j).getCercanos().at(k);
+                        }
+                    }
+                    menor->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
+                    map.at(i).at(j).getBufferRedireccionRouter().desencolar();
+                    enviado = true;
+                }
+
+            }
+            
+}
+
 // int main(int argc, char const *argv[])
 // {
 

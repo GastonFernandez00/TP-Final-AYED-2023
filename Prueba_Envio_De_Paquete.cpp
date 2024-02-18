@@ -3,124 +3,102 @@
 using namespace std;
 
 random_device rd;
-uniform_int_distribution<int> dist(0,1);
+uniform_int_distribution<int> dist(1,255);
+
+
+void printBufferRedir(Mapa m){
+    for(int i = 0; i < m.getMapa().size(); i ++){
+        for(int j = 0 ; j < m.getMapa().size(); j++){
+            if(m.getMapa().at(i).at(j).getIDRouter() == -1){
+                cout<<-1<<" ";
+            }
+            else{
+                cout<<m.getMapa().at(i).at(j).getSizeBufferRedireccionamiento()<<" ";
+            }
+        }
+        cout<<endl;
+    }
+}
+
+void printBuffer(Mapa m){
+    for(int i = 0; i < m.getMapa().size(); i ++){
+        for(int j = 0 ; j < m.getMapa().size(); j++){
+            if(m.getMapa().at(i).at(j).getIDRouter() == -1){
+                cout<<-1<<" ";
+            }
+            else{
+                cout<<m.getMapa().at(i).at(j).getSizeBuffer()<<" ";
+            }
+        }
+        cout<<endl;
+    }
+}
 
 int main(int argc, char const *argv[])
 {
-    Pagina p[1];
-    vector<Terminal> t;  
+    Pagina p[1000];
+    p->checkIDPaginas(size(p));
+    int cantRouters = dist(rd);
+    vector<Terminal> t;
     vector<Router> r;
-    for(int i = 0; i < 2; i ++){
+    for(int i = 0; i < cantRouters; i++){
         Terminal Nuevo_t; t.push_back(Nuevo_t);
         Router Nuevo_r; r.push_back(Nuevo_r);
     }
     t.at(0).checkIDTerminal(t);
     r.at(0).checkIDRouter(r);
-    p->setIDDestino(r.at(dist(rd)).getIDRouter());
-    
-    cout<<"Informacion de la Pagina\n"
-    <<"\nID Destino: "<<p->getIDDestino()
-    <<"\nID Destino Terminal: "<<p->getIDDestinoTerminal()
-    <<"\nID de la Pagina: "<<p->getID()
-    <<"\nTamanio de la Pagina: "<<p->getTamanio()<<endl;
-    
-    cout<<"\nRouters Existentes: ";for(int i = 0; i < 2; i++) cout<<r.at(i).getIDRouter()<<" ";
-      
-    t.at(0).empaquetado(p);
-    
-    cout<<"\n\nPaquetes dentro de la Terminal: \n";
-    Cola<Paquete> aux = t.at(0).getPaquetes();
-    while(aux.sizeCola() > 0){
-        cout<<aux.getPrimero().getDato()<<endl;
-        aux.desencolar();
+    for(int i = 0; i < size(p); i++) p[i].setIDDestino(r.at(dist(rd)%cantRouters).getIDRouter());
+
+    for(int i = 0; i < cantRouters; i++)
+        for(int j = i*(size(p)/t.size()); j < (1+i)*(size(p)/t.size());j++){
+            t.at(i).empaquetado(&p[j]);
     }
 
-    Mapa m(5);
-
-    for(int i = 0; i < r.size();i++) m.incluirEnMapa(r.at(i));
-
-    m.imprimirMapa();
+    for(int i = 0; i < cantRouters; i++){
+        r.at(i).Recepcion(t.at(i).getPaquetes());
+    }
+    
+    Mapa m(20);
+    for(int i = 0; i < cantRouters;i++) m.incluirEnMapa(r.at(i));
     m.setCercanos();
 
-    for(int i = 0; i < m.getMapa().size(); i ++)
-        for(int j = 0; j < m.getMapa().size(); j ++)
-            if(m.getMapa().at(i).at(j).getIDRouter() == r.at(0).getIDRouter()){
-                cout<<"Router donde se esta haciendo la recepcion: "<<m.getMapa().at(i).at(j).getIDRouter()
-                <<endl;
-                m.getMapa().at(i).at(j).Recepcion(t.at(0).getPaquetes());
-            }
 
-    cout<<"\n\nPaquetes dentro de la Terminal TRAS recepcion: \n";
-   aux = t.at(0).getPaquetes();
-    while(aux.sizeCola() > 0){
-        cout<<aux.getPrimero().getDato()<<endl;
-        aux.desencolar();
-    }
+    int contador = 0;
+    int opcion = 0;
+    do{
+        // cout<<"\nOpciones: "
+        // <<"\n1) Imprimir IDs: "
+        // <<"\n2) Imprimir Buffer: "
+        // <<"\n3) Imprimir BufferRedireccion: "
+        // <<"\n4) Envio"
+        // <<"\n10) Salir"
+        // <<"\nIngresar Opcion: ";cin>>opcion;
 
+        // switch(opcion){
+        //     case 1:
+        //         m.imprimirMapa(); break;
+        //     case 2:
+        //         printBuffer(m); break;
+        //     case 3:
+        //         printBufferRedir(m); break;
+        //     case 4:
+        //         m.envio(); break;
+        // }
 
-    for(int k = 0; k < 2; k ++){
-    cout<<"\n\n\nPaquetes en el Router: "<<r.at(k).getIDRouter()<<endl;
-    for(int i = 0; i < m.getMapa().size(); i ++)
-        for(int j = 0; j < m.getMapa().size(); j ++)
-            if(m.getMapa().at(i).at(j).getIDRouter() == r.at(k).getIDRouter()){
-                cout<<"\nCant de Paquetes almacenados: ";
-                cout<<m.getMapa().at(i).at(j).getBufferRouter().sizeCola();
-                cout<<"\nCant de Paquetes almacenados a REDIRECCIONAR: ";
-                cout<<m.getMapa().at(i).at(j).getBufferRedireccionRouter().sizeCola();
+        
+        m.envio();
+        // int tempo = 12500;
+        // for(int i = 0; i < tempo; i++)for(int j = 0; j < tempo; j++);
+        contador++;
+        if(contador == 1000){
+            printBuffer(m);cout<<endl;
+        printBufferRedir(m);cout<<endl;
+            contador = 0;
+            cout<<"Presione 1 para continuar";
+            cin>>opcion;
+        }
 
-            }}
-
-    for(int i = 0; i < m.getMapa().size(); i ++)
-        for(int j = 0; j < m.getMapa().size(); j ++)
-            if(m.getMapa().at(i).at(j).getIDRouter() != -1){
-                m.getMapa().at(i).at(j).getCercanos().at(0)->
-                Recepcion( m.getMapa().at(i).at(j).getBufferRedireccionRouter().getPrimero());
-                m.getMapa().at(i).at(j).getBufferRedireccionRouter().desencolar();
-
-            }
-
-
-
-    for(int k = 0; k < 2; k ++){
-    cout<<"\n\n\nPaquetes en el Router: "<<r.at(k).getIDRouter()<<endl;
-    for(int i = 0; i < m.getMapa().size(); i ++)
-        for(int j = 0; j < m.getMapa().size(); j ++)
-            if(m.getMapa().at(i).at(j).getIDRouter() == r.at(k).getIDRouter()){
-                cout<<"\nCant de Paquetes almacenados: ";
-                cout<<m.getMapa().at(i).at(j).getBufferRouter().sizeCola();
-                cout<<"\nCant de Paquetes almacenados a REDIRECCIONAR: ";
-                cout<<m.getMapa().at(i).at(j).getBufferRedireccionRouter().sizeCola();
-
-            }}
-            
-    for(int i = 0; i < m.getMapa().size(); i ++)
-        for(int j = 0; j < m.getMapa().size(); j ++)
-            if(m.getMapa().at(i).at(j).getIDRouter() != -1){
-                m.getMapa().at(i).at(j).getBufferRouter().desencolar();
-                cout<<"\nDivisiones Totales: "
-                <<m.getMapa().at(i).at(j).getBufferRouter().getPrimero().getDivisionesTotales();
-            }
-
-    
-    
-            //     if(m.getMapa().at(i).at(j).getSizeBuffer() > 0 ){
-            //         aux = m.getMapa().at(i).at(j).getBufferRouter();
-            //         while(aux.sizeCola() > 0){
-            //             cout<<aux.getPrimero().getDato()<<endl;
-            //             aux.desencolar();
-            //         }
-            //     }
-            //     else{
-            //         aux = m.getMapa().at(i).at(j).getBufferRedireccionRouter();
-            //         while(aux.sizeCola() > 0){
-            //             cout<<aux.getPrimero().getDato()<<endl;
-            //             aux.desencolar();
-            //         }
-            //     }
-            // }
-
-
-
+    }while(opcion != 10);
 
     return 0;
 }
