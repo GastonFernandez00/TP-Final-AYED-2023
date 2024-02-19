@@ -100,6 +100,10 @@ void Terminal::checkIDTerminalPriv(vector<Terminal> &t,int control,int cantTermi
 
 Cola<Paquete> Terminal::getPaquetes(){ return pkg; }
 
+void Terminal::recibePaquetes(Cola<Paquete> c){ recibidos.push_back(c); }
+
+vector<Cola<Paquete>>& Terminal::getPaquetesRecibidos(){ return recibidos; }
+
 //Terminal crearTerminal(){ Terminal t; return t;} SOLO PARA TESTING
 
 /*int main(int argc, char const *argv[]){

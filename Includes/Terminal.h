@@ -7,7 +7,10 @@ class Terminal{
 private:
 
     Cola<Paquete> pkg;
+    vector<Cola<Paquete>> recibidos;
     int id_TERMINAL = -1;
+
+
 
     /*  Si: Determinante == 0 -> Emisor
         Si: Determinante == 1 -> Receptor
@@ -73,6 +76,10 @@ public:
 
     /*  Devuelve los paquetes almacenados en la terminal*/
     Cola<Paquete> getPaquetes();
+
+    void recibePaquetes(Cola<Paquete>);
+
+    vector<Cola<Paquete>>& getPaquetesRecibidos();
 
 
 };

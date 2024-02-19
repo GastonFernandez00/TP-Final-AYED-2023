@@ -111,7 +111,7 @@ void Router::setReceptores(){
     receptores.at(0).checkIDTerminal(receptores);
 }
 
-vector<Terminal> Router::getReceptor(){ return receptores; }
+vector<Terminal>& Router::getReceptor(){ return receptores; }
 
 Router crearRouter(){ Router *r = new Router(); return *r;}
 
@@ -139,6 +139,14 @@ int Router::getBandWidth(){ return bandWidth; }
 void Router::setSiguienteInmediato(Router *r){ siguienteInmediato = r; }
 
 vector<Cola<Paquete>>& Router::getPaquetesPreparados(){ return Preparado;}
+
+Terminal& Router::getTerminalEspecifico(int n){
+    for(int i = 0; i < this->getReceptor().size(); i++){
+        if(this->getReceptor().at(i).getIDTerminal() == n)
+            return this->getReceptor().at(i);
+    }
+    cout<<"\nEl terminal no se encuentra en el mapa."<<endl;
+}
 
 //Prueba de Funciones
 // int main(int argc, char const *argv[]){

@@ -50,9 +50,10 @@ void printPaquetesListos(Mapa m){
 
 int main(int argc, char const *argv[])
 {
-    Pagina p[1000];
+    Pagina p[2];
+    p->setTamanio(150);
     p->checkIDPaginas(size(p));
-    int cantRouters = dist(rd);
+    int cantRouters = 2;//dist(rd);
     vector<Terminal> t;
     vector<Router> r;
     for(int i = 0; i < cantRouters; i++){
@@ -72,7 +73,7 @@ int main(int argc, char const *argv[])
         r.at(i).Recepcion(t.at(i).getPaquetes());
     }
     
-    Mapa m(20);
+    Mapa m(5);
     for(int i = 0; i < cantRouters;i++) m.incluirEnMapa(r.at(i));
     m.setCercanos();
 
@@ -87,6 +88,9 @@ int main(int argc, char const *argv[])
         <<"\n4) Paquetes Preparados"
         <<"\n5) Envio"        
         <<"\n6) Envios Multiples"
+        <<"\n7) Acceder a un Terminal de destino"
+        <<"\n8) Info de la Pagina"
+        <<"\n9) Envio a Terminales desde Router"
         <<"\n10) Salir"
         <<"\nIngresar Opcion: ";cin>>opcion;
 
@@ -107,8 +111,23 @@ int main(int argc, char const *argv[])
                 for(i = 0; i < valor; i++) m.envioEntreRouters();
                 break;
                 }
-            
-        }
+            case 7:{
+                int rout,ter;
+                cout<<"\nIngresar Router a acceder: ";cin>>rout;
+                cout<<"\nIngresar Terminal a acceder dentro del router: ";cin>>ter;
+                cout<<"\nCantidad de Paginas que se pueden armar en el terminal: "
+                <<m.getRouterEspecifico(rout).getTerminalEspecifico(ter).getPaquetesRecibidos().size();
+
+            break;}
+            case 8:
+                cout<<"\nId de Pagina: "<<p->getID()
+                <<"\nId de destino de Router: "<<p->getIDDestino()
+                <<"\nId de destino de Terminal: "<<p->getIDDestinoTerminal()<<endl;
+                break;
+            case 9:
+                m.envioATerminales();
+                break;
+            }
 
         
         // m.envio();

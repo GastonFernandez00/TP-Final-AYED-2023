@@ -25,6 +25,8 @@ public:
     Router& getRouterEspecifico(int);
 
     void envioEntreRouters();
+
+    void envioATerminales();
     
 
 

@@ -94,7 +94,7 @@ public:
     void checkIDRouter(vector<Router> &);
 
     /*  Devuelve un vector de los receptores del Router asociado*/
-    vector<Terminal> getReceptor();
+    vector<Terminal>& getReceptor();
 
     void setMaximaCantDeRouters(int);
 
@@ -127,5 +127,7 @@ public:
     void setSiguienteInmediato(Router*);
 
     vector<Cola<Paquete>>& getPaquetesPreparados();
+
+    Terminal& getTerminalEspecifico(int);
 };
 #endif
