@@ -138,6 +138,8 @@ int Router::getBandWidth(){ return bandWidth; }
 
 void Router::setSiguienteInmediato(Router *r){ siguienteInmediato = r; }
 
+vector<Cola<Paquete>>& Router::getPaquetesPreparados(){ return Preparado;}
+
 //Prueba de Funciones
 // int main(int argc, char const *argv[]){
 //     int cantdePaginas = (time(nullptr)*rand())%1000;

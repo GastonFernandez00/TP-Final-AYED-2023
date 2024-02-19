@@ -3,7 +3,7 @@
 using namespace std;
 
 random_device rd;
-uniform_int_distribution<int> dist(1,255);
+uniform_int_distribution<int> dist(1,2);
 
 
 void printBufferRedir(Mapa m){
@@ -28,6 +28,20 @@ void printBuffer(Mapa m){
             }
             else{
                 cout<<m.getMapa().at(i).at(j).getSizeBuffer()<<" ";
+            }
+        }
+        cout<<endl;
+    }
+}
+
+void printPaquetesListos(Mapa m){
+    for(int i = 0; i < m.getMapa().size(); i ++){
+        for(int j = 0 ; j < m.getMapa().size(); j++){
+            if(m.getMapa().at(i).at(j).getIDRouter() == -1){
+                cout<<-1<<" ";
+            }
+            else{
+                cout<<m.getMapa().at(i).at(j).getPaquetesPreparados().size()<<" ";
             }
         }
         cout<<endl;
@@ -66,37 +80,48 @@ int main(int argc, char const *argv[])
     int contador = 0;
     int opcion = 0;
     do{
-        // cout<<"\nOpciones: "
-        // <<"\n1) Imprimir IDs: "
-        // <<"\n2) Imprimir Buffer: "
-        // <<"\n3) Imprimir BufferRedireccion: "
-        // <<"\n4) Envio"
-        // <<"\n10) Salir"
-        // <<"\nIngresar Opcion: ";cin>>opcion;
+        cout<<"\nOpciones: "
+        <<"\n1) Imprimir IDs: "
+        <<"\n2) Imprimir Buffer: "
+        <<"\n3) Imprimir BufferRedireccion: "
+        <<"\n4) Paquetes Preparados"
+        <<"\n5) Envio"        
+        <<"\n6) Envios Multiples"
+        <<"\n10) Salir"
+        <<"\nIngresar Opcion: ";cin>>opcion;
 
-        // switch(opcion){
-        //     case 1:
-        //         m.imprimirMapa(); break;
-        //     case 2:
-        //         printBuffer(m); break;
-        //     case 3:
-        //         printBufferRedir(m); break;
-        //     case 4:
-        //         m.envio(); break;
-        // }
+        switch(opcion){
+            case 1:
+                m.imprimirMapa(); break;
+            case 2:
+                printBuffer(m); break;
+            case 3:
+                printBufferRedir(m); break;
+            case 4:
+                printPaquetesListos(m); break;
+            case 5:
+                m.envioEntreRouters(); break;
+            case 6:{
+                int i = 0, valor = 1;
+                cout<<"\nIngresar la cantidad de envios: ";cin>>valor;
+                for(i = 0; i < valor; i++) m.envioEntreRouters();
+                break;
+                }
+            
+        }
 
         
-        m.envio();
-        // int tempo = 12500;
-        // for(int i = 0; i < tempo; i++)for(int j = 0; j < tempo; j++);
-        contador++;
-        if(contador == 1000){
-            printBuffer(m);cout<<endl;
-        printBufferRedir(m);cout<<endl;
-            contador = 0;
-            cout<<"Presione 1 para continuar";
-            cin>>opcion;
-        }
+        // m.envio();
+        // // int tempo = 12500;
+        // // for(int i = 0; i < tempo; i++)for(int j = 0; j < tempo; j++);
+        // contador++;
+        // if(contador == 1000){
+        //     printBuffer(m);cout<<endl;
+        // printBufferRedir(m);cout<<endl;
+        //     contador = 0;
+        //     cout<<"Presione 1 para continuar";
+        //     cin>>opcion;
+        // }
 
     }while(opcion != 10);
 

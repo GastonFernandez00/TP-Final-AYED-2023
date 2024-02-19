@@ -137,7 +137,7 @@ Router& Mapa::getRouterEspecifico(int R){
     cout<<"\nEl router no se encuentra en el mapa.";
 }
 
-void Mapa::envio(){
+void Mapa::envioEntreRouters(){
     for(int i = 0; i < tamanioCuadradoMapa; i++)
         for(int j = 0; j < tamanioCuadradoMapa; j++)
             if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getSizeBufferRedireccionamiento() > 0){
@@ -166,7 +166,33 @@ void Mapa::envio(){
                 }
 
             }
-            
+    this->RearmadoDePaquetes();
+}
+
+void Mapa::RearmadoDePaquetes(){
+    for(int i = 0; i < tamanioCuadradoMapa; i++)
+        for(int j = 0; j < tamanioCuadradoMapa; j++)
+            if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getSizeBuffer() > 0){
+                while(map.at(i).at(j).getSizeBuffer() > 0){
+                    //if(map.at(i).at(j).getSizeBuffer() > 0){
+                        bool encontrado = false, index; 
+                        for(int iter = 0; iter < map.at(i).at(j).getPaquetesPreparados().size(); iter++){
+                            if(map.at(i).at(j).getPaquetesPreparados().at(iter).getPrimero().getIdPertenencia()
+                            == map.at(i).at(j).getBufferRouter().getPrimero().getIdPertenencia()
+                            && encontrado == false){encontrado = true;index = iter;}
+                        }
+                            if(encontrado == false){
+                                Cola<Paquete> aux; aux.encolar( map.at(i).at(j).getBufferRouter().getPrimero());
+                                map.at(i).at(j).getPaquetesPreparados().push_back(aux);
+                                map.at(i).at(j).getBufferRouter().desencolar();
+                            }
+                            else{
+                                map.at(i).at(j).getPaquetesPreparados().at(index).encolar(map.at(i).at(j).getBufferRouter().getPrimero());
+                                map.at(i).at(j).getBufferRouter().desencolar();
+                            }
+                        }
+                }
+ //           }
 }
 
 // int main(int argc, char const *argv[])

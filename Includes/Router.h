@@ -16,6 +16,8 @@ private:
     int cantidadDeReceptores = 256;
     vector<Terminal> receptores;
 
+    vector<Cola<Paquete>> Preparado; //Preparado de paquetes para enviar a los terminales
+
     int bandWidth = 1+(time(nullptr)*rand())%50;
 
 
@@ -123,5 +125,7 @@ public:
     int getBandWidth();
 
     void setSiguienteInmediato(Router*);
+
+    vector<Cola<Paquete>>& getPaquetesPreparados();
 };
 #endif
