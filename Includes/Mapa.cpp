@@ -181,7 +181,7 @@ void Mapa::envioEntreRouters(){
 
                         Router* conveniente = aux.at(0).first;
                         for(int n = 1; n < 3; n++){
-                            if(conveniente->getSizeBufferRedireccionamiento() > aux.at(n).first->getSizeBufferRedireccionamiento())
+                            if((conveniente->getSizeBufferRedireccionamiento()/conveniente->getBandWidth()) > (aux.at(n).first->getSizeBufferRedireccionamiento()/aux.at(n).first->getBandWidth()))
                             conveniente = aux.at(n).first;
                         }
                         conveniente->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
