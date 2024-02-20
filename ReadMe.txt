@@ -7,28 +7,15 @@
 
 /*
     Ver:
-        >La funcion de envío tal vez deba tener en cuenta el Bandwidth
+        >Si los routers que se establecen como cercano, no pueden ir arriba ó abajo, para acercarse al router 
+        de destino final, empiezan a pasarse el pkg entre ellos y se queda trabado
 
         >Controlar:
              Ahora mismo cada terminal envía la TOTALIDAD de los paquetes que tiene almacenado, al o mejor debería hacer
             sólo envía 1 (un) paquete por vez
 
-        >La Bandwidth debería ser la cantidad de paquetes que puede enviar un router
-
         >En la clase Terminal, probablemente haga falta un Cola<Pagina> ó mejor un vector<Pagina>, y una funcion
-        que rearme las paginas a partir de los paquetes. Tal vez el rearmado se haga en el router
-
-        >La cola donde se acumulan los paquetes una vez enviados desde el router, deberian estar en cada terminal, no en el main
-
-        >Ver de asociar una Bandwidth, que podría ser la cantidad de datos que puede descolarse a la vez. Tal vez funcion
-        tipo Cola<Paquete> Reenviar(){
-                Cola<Paquete> pkgReenviados;
-                for(){
-                    pkgReenviados.encolar(buffer.getPrimero());  
-                    buffer.descolar();
-                } 
-                return pkgReenviados;
-            }
+        que rearme las paginas a partir de los paquetes. Tal vez el rearmado se haga en el mapa
 
         >Posiblemente eliminar las funciones:
             -> Router: atributo y funciones de posicion
