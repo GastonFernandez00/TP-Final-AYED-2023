@@ -3,7 +3,7 @@
 using namespace std;
 
 random_device rd;
-uniform_int_distribution<int> dist(1,2);
+uniform_int_distribution<int> dist(0,256);
 
 
 void printBufferRedir(Mapa m){
@@ -48,12 +48,24 @@ void printPaquetesListos(Mapa m){
     }
 }
 
+void redirvacio(Mapa m){
+    bool vacio = true;
+    for(int i = 0; i < m.getMapa().size(); i ++){
+        for(int j = 0 ; j < m.getMapa().size(); j++){
+            if(m.getMapa().at(i).at(j).getIDRouter() == -1 &&
+            m.getMapa().at(i).at(j).getSizeBufferRedireccionamiento() > 0){
+                vacio = false;
+                m.getMapa().at(i).at(j).printPosicionRouter();
+            }}}
+           
+}
+
 int main(int argc, char const *argv[])
 {
-    Pagina p[2];
+    Pagina p[1000];
     p->setTamanio(150);
     p->checkIDPaginas(size(p));
-    int cantRouters = 2;//dist(rd);
+    int cantRouters = 250; //dist(rd);
     vector<Terminal> t;
     vector<Router> r;
     for(int i = 0; i < cantRouters; i++){
@@ -73,7 +85,7 @@ int main(int argc, char const *argv[])
         r.at(i).Recepcion(t.at(i).getPaquetes());
     }
     
-    Mapa m(5);
+    Mapa m(20);
     for(int i = 0; i < cantRouters;i++) m.incluirEnMapa(r.at(i));
     m.setCercanos();
 
@@ -91,7 +103,9 @@ int main(int argc, char const *argv[])
         <<"\n7) Acceder a un Terminal de destino"
         <<"\n8) Info de la Pagina"
         <<"\n9) Envio a Terminales desde Router"
-        <<"\n10) Salir"
+        <<"\n10) Tamanio de redireccion de un router"
+        <<"\n11) GetCercanos a un router especifico"
+        <<"\n20) Salir"
         <<"\nIngresar Opcion: ";cin>>opcion;
 
         switch(opcion){
@@ -127,6 +141,18 @@ int main(int argc, char const *argv[])
             case 9:
                 m.envioATerminales();
                 break;
+            case 10:{
+                int rout,ter;
+                cout<<"\nIngresar Router a acceder: ";cin>>rout;
+                cout<<m.getRouterEspecifico(rout).getSizeBufferRedireccionamiento()<<endl;
+                break;}
+            case 11:{
+                int rout,ter;
+                cout<<"\nIngresar Router a acceder: ";cin>>rout;
+                for(int i = 0; i < 8; i++)cout
+                <<m.getRouterEspecifico(rout).getCercanos().at(i)->getIDRouter()<<endl;
+                break;
+            }
             }
 
         
@@ -142,7 +168,7 @@ int main(int argc, char const *argv[])
         //     cin>>opcion;
         // }
 
-    }while(opcion != 10);
+    }while(opcion != 20);
 
     return 0;
 }

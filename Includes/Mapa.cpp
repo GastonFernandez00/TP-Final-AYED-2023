@@ -146,6 +146,8 @@ void Mapa::envioEntreRouters(){
     for(int i = 0; i < tamanioCuadradoMapa; i++)
         for(int j = 0; j < tamanioCuadradoMapa; j++)
             if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getSizeBufferRedireccionamiento() > 0){
+                for(int bw = 0; bw < map.at(i).at(j).getBandWidth(); bw++)
+                if(map.at(i).at(j).getSizeBufferRedireccionamiento() > 0){
                 bool enviado = false;
                 for(int k = 0; k < 8; k++){
                     if(map.at(i).at(j).getBufferRedireccionRouter().getPrimero().getIDDestino()
@@ -158,7 +160,7 @@ void Mapa::envioEntreRouters(){
                 }
                 if(enviado == false){
                     vector<pair<Router*,int>> aux;
-                    for (int n = 0; n < 8; n++) aux.push_back(pair<Router*,int>(
+                    for (int n = 0; n < 8; n++) aux.push_back(pair<Router*,float>(
                         map.at(i).at(j).getCercanos().at(n),calcularDistancia(map.at(i).at(j).getCercanos().at(n),
                         &getRouterEspecifico(map.at(i).at(j).getBufferRedireccionRouter().getPrimero().getIDDestino()))));
                         sort(aux.begin(), aux.end(), comparador);
@@ -167,13 +169,14 @@ void Mapa::envioEntreRouters(){
                         for(int n = 1; n < 3; n++){
                             if(conveniente->getSizeBufferRedireccionamiento() > aux.at(n).first->getSizeBufferRedireccionamiento())
                             conveniente = aux.at(n).first;
+                            cout<<"INCORRECTO, REVISAR DESPUES DE CAMBIAR LOS CERCANOS";
                         }
                         conveniente->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
                         map.at(i).at(j).getBufferRedireccionRouter().desencolar();
                         enviado = true;
                 }
 
-            }
+            }}
     this->RearmadoDePaquetes();
 }
 

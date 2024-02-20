@@ -7,17 +7,11 @@
 
 /*
     Ver:
-        >>>>>GRAFO PONDERADO Ó CON PESO
-
-        >>>>>Calcula 1 vez los pesos
-
-        >El envio a uno de los cercanos DEBE ser a uno cercano al destino. SI O SI
+        >La funcion de envío tal vez deba tener en cuenta el Bandwidth
 
         >Controlar:
              Ahora mismo cada terminal envía la TOTALIDAD de los paquetes que tiene almacenado, al o mejor debería hacer
             sólo envía 1 (un) paquete por vez
-
-        >La funcion de envío entre Routers, probablemente deba hacerse en el Mapa
 
         >La Bandwidth debería ser la cantidad de paquetes que puede enviar un router
 
