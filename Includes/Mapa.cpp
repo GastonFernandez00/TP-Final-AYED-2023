@@ -1,6 +1,11 @@
 #include "Mapa.h"
+#include <algorithm>
 //#include <thread>
 //#include <chrono>
+
+auto comparador = [](const auto& a, const auto& b) {
+        return a.second < b.second;
+};
 
 Mapa::Mapa(){
     for(int i = 0; i < tamanioCuadradoMapa; i++){
@@ -152,17 +157,20 @@ void Mapa::envioEntreRouters(){
                     }
                 }
                 if(enviado == false){
-                        Router *menor = NULL;
-                        menor = map.at(i).at(j).getCercanos().at(0);
-                    for(int k = 1; k < 8 ; k++){
-                        if(menor->getSizeBufferRedireccionamiento() 
-                        > map.at(i).at(j).getCercanos().at(k)->getSizeBufferRedireccionamiento()){
-                            menor = map.at(i).at(j).getCercanos().at(k);
+                    vector<pair<Router*,int>> aux;
+                    for (int n = 0; n < 8; n++) aux.push_back(pair<Router*,int>(
+                        map.at(i).at(j).getCercanos().at(n),calcularDistancia(map.at(i).at(j).getCercanos().at(n),
+                        &getRouterEspecifico(map.at(i).at(j).getBufferRedireccionRouter().getPrimero().getIDDestino()))));
+                        sort(aux.begin(), aux.end(), comparador);
+
+                        Router* conveniente = aux.at(0).first;
+                        for(int n = 1; n < 3; n++){
+                            if(conveniente->getSizeBufferRedireccionamiento() > aux.at(n).first->getSizeBufferRedireccionamiento())
+                            conveniente = aux.at(n).first;
                         }
-                    }
-                    menor->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
-                    map.at(i).at(j).getBufferRedireccionRouter().desencolar();
-                    enviado = true;
+                        conveniente->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
+                        map.at(i).at(j).getBufferRedireccionRouter().desencolar();
+                        enviado = true;
                 }
 
             }
