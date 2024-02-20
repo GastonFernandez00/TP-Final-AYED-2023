@@ -7,6 +7,8 @@
 
 /*
     Ver:
+        >Terminar funcion de envio a terminales
+
         >Si los routers que se establecen como cercano, no pueden ir arriba ó abajo, para acercarse al router 
         de destino final, empiezan a pasarse el pkg entre ellos y se queda trabado
 
@@ -16,11 +18,6 @@
 
         >En la clase Terminal, probablemente haga falta un Cola<Pagina> ó mejor un vector<Pagina>, y una funcion
         que rearme las paginas a partir de los paquetes. Tal vez el rearmado se haga en el mapa
-
-        >Posiblemente eliminar las funciones:
-            -> Router: atributo y funciones de posicion
-            -> Terminal: "Envio" 
-            -> Cola: "cambiarEstado" y su atributo "estado"
 
         --->>> Al terminar, limpiar clases, y comentar funciones apropiadamente
 
@@ -37,10 +34,5 @@
         que modificar la funcion checkIDRouter para que tome en cuenta vector<vector<Router>>
         
         ::::INSIGNIFICANTES::::
-        >Si la cantidad de routers < 8, los routers en la lista de cercanos se repiten.
-
-        >Cuando un router se intenta poner en la posicion de otro, los empieza a colocar desde (0,0), haciendo que
-        que la parte superior izquierda normalmente esté más cargada
-        
 */
 
