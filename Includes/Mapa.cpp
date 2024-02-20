@@ -43,16 +43,30 @@ void Mapa::incluirEnMapa(Router &r){
     y = dist(rd);
     if(map.at(y).at(x).getIDRouter() == -1){  r.setRouterPosicion(x,y); map.at(y).at(x) = r;}
     else{
-        x = y = 0;
-        while( y < tamanioCuadradoMapa){
-            if(map.at(y).at(x).getIDRouter() == -1){
-                 r.setRouterPosicion(x,y);
-                 map.at(y).at(x) = r;
-                 return (void)0;
-            }
-            x++;
-            if(x == tamanioCuadradoMapa){ x = 0; y++; }
+        vector<pair<int,int>> cuenta; 
+        for(int i = 0; i < tamanioCuadradoMapa; i++){
+            int contador = 0;
+                for(int j = 0; j < tamanioCuadradoMapa; j++){
+                    if(map.at(i).at(j).getIDRouter() != -1){
+                        contador++;
+                    }
+                }
+            cuenta.push_back(pair<int,int>(i,contador));
         }
+        sort(cuenta.begin(),cuenta.end(),comparador);
+
+        if(cuenta.at(0).second < tamanioCuadradoMapa){
+            y = cuenta.at(0).first;
+            bool seleccionado = false;
+            while(seleccionado == false){
+                x = dist(rd);
+                if(map.at(y).at(x).getIDRouter() == -1){
+                    r.setRouterPosicion(x,y); map.at(y).at(x) = r;
+                    return (void)0;
+                }
+            }
+        }
+        
         cout<<"\nNo se pudo aniadir\n";
         return (void)0;
     } 
@@ -169,7 +183,6 @@ void Mapa::envioEntreRouters(){
                         for(int n = 1; n < 3; n++){
                             if(conveniente->getSizeBufferRedireccionamiento() > aux.at(n).first->getSizeBufferRedireccionamiento())
                             conveniente = aux.at(n).first;
-                            cout<<"INCORRECTO, REVISAR DESPUES DE CAMBIAR LOS CERCANOS";
                         }
                         conveniente->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
                         map.at(i).at(j).getBufferRedireccionRouter().desencolar();
