@@ -76,5 +76,7 @@ public:
     /*  Devuelve el estado de la cola, si esta listo para enviarse o no*/
     bool getEstado();
 
+    bool operator==(Cola<Paquete>);
+
 };
 #endif

@@ -206,7 +206,9 @@ void Mapa::RearmadoDePaquetes(){
                             && encontrado == false){encontrado = true;index = iter;}
                         }
                             if(encontrado == false){
-                                Cola<Paquete> aux; aux.encolar( map.at(i).at(j).getBufferRouter().getPrimero());
+                                Cola<Paquete> aux; 
+                                aux.setIDCola(map.at(i).at(j).getBufferRouter().getPrimero().getIdPertenencia());
+                                aux.encolar( map.at(i).at(j).getBufferRouter().getPrimero());
                                 map.at(i).at(j).getPaquetesPreparados().push_back(aux);
                                 map.at(i).at(j).getBufferRouter().desencolar();
                             }
@@ -224,21 +226,23 @@ void Mapa::envioATerminales(){
     for(int i = 0; i < tamanioCuadradoMapa; i ++){
         for(int j = 0; j < tamanioCuadradoMapa; j++){
             Router *r = &map.at(i).at(j);
+            vector<Cola<Paquete>> aEnviar;
             if(r->getIDRouter() != -1 && r->getPaquetesPreparados().size() > 0){
-                for(int k = 0; k < r->getPaquetesPreparados().size(); k++){
-                    if(r->getPaquetesPreparados().at(k).getPrimero().getDivisionesTotales() == r->getPaquetesPreparados().at(k).sizeCola()){
-                        for(int ter = 0; ter < 256; ter++){
-                            bool enviado = false;
-                            if(enviado == false && r->getPaquetesPreparados().at(k).getPrimero().getIDDestinoTerminal() == r->getReceptor().at(ter).getIDTerminal()){
-                                r->getReceptor().at(ter).recibePaquetes(r->getPaquetesPreparados().at(k));
-                                enviado = true;
-                                r->getPaquetesPreparados().erase(r->getPaquetesPreparados().begin()+k);
-                                k--;
-                            }
-                        }
+                for(int k = 0; k < r->getPaquetesPreparados().size();k++){
+                    if(r->getPaquetesPreparados().at(k).getPrimero().getDivisionesTotales()==
+                    r->getPaquetesPreparados().at(k).sizeCola()){
+                        //END IF 
+                        aEnviar.push_back(r->getPaquetesPreparados().at(k));
                     }
-                    (k <= 0)? k = 0:k;
                 }
+            }
+            for(int k = 0; k < aEnviar.size(); k++){
+                if(r->getReceptor().at(k).getIDTerminal() == aEnviar.back().getPrimero().getIDDestinoTerminal()){
+                    r->getReceptor().at(k).recibePaquetes(aEnviar.back());
+                    aEnviar.back().vaciarCola();
+                    aEnviar.pop_back();
+                }
+                
             }
 
         }

@@ -1,5 +1,10 @@
 #include "Cola.h"
 
+template<class T>
+bool Cola<T>::operator==( Cola<Paquete> p) {
+    return (p.getIDCola() == this->getIDCola());
+}
+
 template <class T>
 Cola<T>::Cola(){ setIDCola(); }
 
