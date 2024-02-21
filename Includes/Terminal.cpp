@@ -66,7 +66,11 @@ queue<Paquete> Terminal::envio(){
     // c->setidDestinoTerminal(id_destino_terminal);   
 }
 
-void Terminal::setIDTerminal(){ id_TERMINAL = rand()%MaximaCantDeTerminales; }
+void Terminal::setIDTerminal(){
+    random_device rd;
+    uniform_int_distribution<int> dist(0,MaximaCantDeTerminales-1);
+    id_TERMINAL = dist(rd); 
+    }
 
 void Terminal::setIDTerminal(int t){ id_TERMINAL = t%MaximaCantDeTerminales; }
 

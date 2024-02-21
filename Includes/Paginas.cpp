@@ -1,6 +1,7 @@
 #include "Paginas.h"
 #include "Extras.h"
 #include <iostream>
+#include <random>
 //#include <stdio.h>
 using namespace std;
 
@@ -21,7 +22,11 @@ void Pagina::setidDestinoTerminal(int d){ id_Destino_Terminal = d%256; }
 
 void Pagina::setIDDestino(){ srand(time(nullptr)); id_Destino = rand()%256; }
 
-void Pagina::setidDestinoTerminal(){srand(time(nullptr)); id_Destino_Terminal = rand()%256; }
+void Pagina::setidDestinoTerminal(){
+    random_device rd;
+    uniform_int_distribution<int> dist(0,255);
+    id_Destino_Terminal = dist(rd); 
+}
 
 int Pagina::getIDDestino(){ return id_Destino; }
 
