@@ -85,7 +85,8 @@ int main(int argc, char const *argv[])
         r.at(i).Recepcion(t.at(i).getPaquetes());
     }
     
-    Mapa m(20);
+    
+    Mapa m(sqrt(cantRouters)+1);
     for(int i = 0; i < cantRouters;i++) m.incluirEnMapa(r.at(i));
     m.setCercanos();
 
@@ -100,10 +101,10 @@ int main(int argc, char const *argv[])
         <<"\n4) Paquetes Preparados"
         <<"\n5) Envio"        
         <<"\n6) Envios Multiples"
-        <<"\n7) Acceder a un Terminal de destino"
+        <<"\n7) Rearmado de Paquetes por Pagina"
         <<"\n8) Info de la Pagina"
-        <<"\n9) Envio a Terminales desde Router"
-        <<"\n10) Tamanio de redireccion de un router"
+        <<"\n9) Acceder a un Terminal de destino"
+        <<"\n10) Envio a Terminales desde Router"
         <<"\n11) GetCercanos a un router especifico"
         <<"\n20) Salir"
         <<"\nIngresar Opcion: ";cin>>opcion;
@@ -125,7 +126,10 @@ int main(int argc, char const *argv[])
                 for(i = 0; i < valor; i++) m.envioEntreRouters();
                 break;
                 }
-            case 7:{
+            case 7:
+                m.RearmadoDePaquetes();
+                break;
+            case 9:{
                 int rout,ter;
                 cout<<"\nIngresar Router a acceder: ";cin>>rout;
                 cout<<"\nIngresar Terminal a acceder dentro del router: ";cin>>ter;
@@ -138,14 +142,9 @@ int main(int argc, char const *argv[])
                 <<"\nId de destino de Router: "<<p->getIDDestino()
                 <<"\nId de destino de Terminal: "<<p->getIDDestinoTerminal()<<endl;
                 break;
-            case 9:
+            case 10:
                 m.envioATerminales();
                 break;
-            case 10:{
-                int rout,ter;
-                cout<<"\nIngresar Router a acceder: ";cin>>rout;
-                cout<<m.getRouterEspecifico(rout).getSizeBufferRedireccionamiento()<<endl;
-                break;}
             case 11:{
                 int rout,ter;
                 cout<<"\nIngresar Router a acceder: ";cin>>rout;

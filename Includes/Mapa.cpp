@@ -190,7 +190,7 @@ void Mapa::envioEntreRouters(){
                 }
 
             }}
-    this->RearmadoDePaquetes();
+    
 }
 
 void Mapa::RearmadoDePaquetes(){
@@ -220,21 +220,27 @@ void Mapa::RearmadoDePaquetes(){
 }
 
 void Mapa::envioATerminales(){
-    for(int i = 0; i < tamanioCuadradoMapa; i++)
-        for(int j = 0; j < tamanioCuadradoMapa; j++)
-            if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getPaquetesPreparados().size() > 0){
-                for(int p = 0 ; p < map.at(i).at(j).getPaquetesPreparados().size(); p++)
-                    for(int k = 0 ; k < 256; k++){
-                    if(map.at(i).at(j).getReceptor().at(k).getIDTerminal() == 
-                    map.at(i).at(j).getPaquetesPreparados().at(p).getPrimero().getIDDestinoTerminal() &&
-                    map.at(i).at(j).getPaquetesPreparados().at(p).getPrimero().getDivisionesTotales() ==
-                    map.at(i).at(j).getPaquetesPreparados().at(p).sizeCola()){
-                        map.at(i).at(j).getReceptor().at(k).recibePaquetes(map.at(i).at(j).getPaquetesPreparados().at(p));
-                        cout<<"\nFUNCION ERRONEA, ARREGLAR\n";
-                        map.at(i).at(j).getPaquetesPreparados().erase(map.at(i).at(j).getPaquetesPreparados().begin()+p-1);
-                    }
-                }
-            }
+    // for(int i = 0; i < tamanioCuadradoMapa; i++)
+    //     for(int j = 0; j < tamanioCuadradoMapa; j++)
+    //         if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getPaquetesPreparados().size() > 0){
+    //             for(int p = 0 ; p < map.at(i).at(j).getPaquetesPreparados().size(); p++)
+    //                 for(int k = 0 ; k < 256; k++){
+    //                 if(map.at(i).at(j).getReceptor().at(k).getIDTerminal() == 
+    //                 map.at(i).at(j).getPaquetesPreparados().at(p).getPrimero().getIDDestinoTerminal() &&
+    //                 map.at(i).at(j).getPaquetesPreparados().at(p).getPrimero().getDivisionesTotales() ==
+    //                 map.at(i).at(j).getPaquetesPreparados().at(p).sizeCola()){
+    //                     map.at(i).at(j).getReceptor().at(k).recibePaquetes(map.at(i).at(j).getPaquetesPreparados().at(p));
+    //                     cout<<"\nFUNCION ERRONEA, ARREGLAR\n";
+    //                     map.at(i).at(j).getPaquetesPreparados().erase(map.at(i).at(j).getPaquetesPreparados().begin()+p);
+    //                     (p <= 0)? p=0:p--;
+    //                 }
+    //             }
+    //         }
+    // this->armadoDePaginas();
+}
+
+void Mapa::armadoDePaginas(){
+
 }
 
 // int main(int argc, char const *argv[])

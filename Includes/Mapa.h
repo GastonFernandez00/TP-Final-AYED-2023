@@ -11,7 +11,8 @@ private:
     Router crearRouter();
     void setTamanioCuadradoMapa(int);
     float calcularDistancia(Router *,Router *);
-    void RearmadoDePaquetes();
+    void armadoDePaginas();
+    
     
 public:
     Mapa();
@@ -21,6 +22,7 @@ public:
     vector<vector<Router>>& getMapa();
     void setCercanos();
     int cantidadDeRoutersEnMapa();
+    void RearmadoDePaquetes();
 
     Router& getRouterEspecifico(int);
 
