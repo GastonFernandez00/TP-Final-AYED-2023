@@ -131,7 +131,7 @@
 //                 cout<<"\nIngresar Terminal a acceder dentro del router: ";cin>>ter;
 //                 cout<<"\nCantidad de Paginas que se pueden armar en el terminal: "
 //                 <<m.getRouterEspecifico(rout).getTerminalEspecifico(ter).getPaquetesRecibidos().size();
-
+ 
 //             break;}
 //             case 8:
 //                 cout<<"\nId de Pagina: "<<p->getID()
