@@ -32,17 +32,17 @@ void  Router::printPosicionRouter(){ //CAMBIAR ESTO
     cout<<"\nPosicion X: "<<getRouter_x()<<endl<<"Posicion Y: "<<getRouter_y()<<endl;
 }
 
-void Router::Recepcion(Cola<Paquete> c){
+void Router::Recepcion(queue<Paquete> c){
     
-    if(c.colaEmpty()){ return (void)0; }
-    while(!(c.colaEmpty())){
-        if(c.getPrimero().getIDDestino() == this->getIDRouter()){
-            buffer.encolar(c.getPrimero());
-            c.desencolar();
+    if(c.empty()){ return (void)0; }
+    while(!(c.empty())){
+        if(c.front().getIDDestino() == this->getIDRouter()){
+            buffer.push(c.front());
+            c.pop();
         }
         else{
-            buffer_Redireccion.encolar(c.getPrimero());
-            c.desencolar();
+            buffer_Redireccion.push(c.front());
+            c.pop();
         }
     }
 }
@@ -50,16 +50,16 @@ void Router::Recepcion(Cola<Paquete> c){
 void Router::Recepcion(Paquete p){
     if(p.getDato() <= 0) return (void)0;
     else if(p.getIDDestino() == this->getIDRouter()){
-        buffer.encolar(p);
+        buffer.push(p);
     }
     else{
-        buffer_Redireccion.encolar(p);
+        buffer_Redireccion.push(p);
     }
 }
 
-bool Router::routerEmpty(){ return buffer.colaEmpty(); }
+bool Router::routerEmpty(){ return buffer.empty(); }
 
-bool Router::routerRedireccionEmpty(){ return buffer_Redireccion.colaEmpty(); }
+bool Router::routerRedireccionEmpty(){ return buffer_Redireccion.empty(); }
 
 void Router::setMaximaCantDeRouters(int n){ MaximaCantDeRouters = n; }
 
@@ -115,13 +115,13 @@ vector<Terminal>& Router::getReceptor(){ return receptores; }
 
 Router crearRouter(){ Router *r = new Router(); return *r;}
 
-Cola<Paquete>& Router::getBufferRouter(){ return buffer; }
+queue<Paquete>& Router::getBufferRouter(){ return buffer; }
 
-int Router::getSizeBuffer(){ return buffer.sizeCola(); }
+int Router::getSizeBuffer(){ return buffer.size(); }
 
-Cola<Paquete>& Router::getBufferRedireccionRouter(){ return buffer_Redireccion; }
+queue<Paquete>& Router::getBufferRedireccionRouter(){ return buffer_Redireccion; }
 
-int Router::getSizeBufferRedireccionamiento(){ return buffer_Redireccion.sizeCola(); }
+int Router::getSizeBufferRedireccionamiento(){ return buffer_Redireccion.size(); }
 
 void Router::incluirCercanos(Router *r){ 
     if( cercanos.size() < 8) cercanos.push_back(r);
@@ -138,7 +138,7 @@ int Router::getBandWidth(){ return bandWidth; }
 
 void Router::setSiguienteInmediato(Router *r){ siguienteInmediato = r; }
 
-vector<Cola<Paquete>>& Router::getPaquetesPreparados(){ return Preparado;}
+vector<queue<Paquete>>& Router::getPaquetesPreparados(){ return Preparado;}
 
 Terminal& Router::getTerminalEspecifico(int n){
     for(int i = 0; i < this->getReceptor().size(); i++){
