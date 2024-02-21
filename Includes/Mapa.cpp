@@ -221,39 +221,36 @@ void Mapa::RearmadoDePaquetes(){
 }
 
 void Mapa::envioATerminales(){
-    
-    for(int i = 0; i < tamanioCuadradoMapa; i ++){
-        for(int j = 0; j < tamanioCuadradoMapa; j++){
-            Router *r = &map.at(i).at(j);
-            vector<queue<Paquete>*> aEnviar;
-            if(r->getIDRouter() != -1 && r->getPaquetesPreparados().size() > 0){
-                for(int k = 0; k < r->getPaquetesPreparados().size();k++){
-                    if(r->getPaquetesPreparados().at(k).front().getDivisionesTotales()==
-                    r->getPaquetesPreparados().at(k).size()){
-                        //END IF 
-                        aEnviar.push_back(&r->getPaquetesPreparados().at(k));
+    for(int i = 0; i < tamanioCuadradoMapa; i++) for(int j = 0; j < tamanioCuadradoMapa; j++){
+        Router *r = &map.at(i).at(j);
+        if(r->getIDRouter() != -1){
+            for(int p = 0; p < r->getPaquetesPreparados().size(); p++){
+                if(r->getPaquetesPreparados().at(p).front().getDivisionesTotales() == r->getPaquetesPreparados().at(p).size()){
+                    for(int ter = 0; ter < 256; ter++){
+                        bool encontrado = false;
+                        if(r->getPaquetesPreparados().size() > 0)
+                        if(!encontrado && r->getPaquetesPreparados().at(p).front().getIDDestinoTerminal() == r->getReceptor().at(ter).getIDTerminal()){
+                            
+                            r->getReceptor().at(ter).recibePaquetes(r->getPaquetesPreparados().at(p));
+                            r->getPaquetesPreparados().erase(r->getPaquetesPreparados().begin()+p);
+                            if(p > 0) p--;
+                        }
                     }
                 }
-            }
-            for(int k = 0; k < aEnviar.size(); k++){
-                if(r->getReceptor().at(k).getIDTerminal() == aEnviar.back()->front().getIDDestinoTerminal()){
-                    r->getReceptor().at(k).recibePaquetes(*aEnviar.back());
 
-                    while(aEnviar.back()->size() > 0){
-                    aEnviar.back()->pop();
-                    }
-                    
-                    aEnviar.pop_back();
-                }
-            }
-            for(int k = 0 ; k < r->getPaquetesPreparados().size(); k++){
-                if(r->getPaquetesPreparados().at(k).empty()){
-                    r->getPaquetesPreparados().erase(r->getPaquetesPreparados().begin()+1);
-                }
             }
 
         }
-    }    
+
+
+
+
+
+    }
+    
+
+
+
     this->armadoDePaginas();
 }
 

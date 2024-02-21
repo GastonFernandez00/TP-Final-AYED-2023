@@ -63,9 +63,8 @@ void redirvacio(Mapa m){
 int main(int argc, char const *argv[])
 {
     Pagina p[1000];
-    p->setTamanio(150);
     p->checkIDPaginas(size(p));
-    int cantRouters = 250; //dist(rd);
+    int cantRouters = 100; //dist(rd);
     vector<Terminal> t;
     vector<Router> r;
     for(int i = 0; i < cantRouters; i++){
@@ -106,6 +105,7 @@ int main(int argc, char const *argv[])
         <<"\n9) Acceder a un Terminal de destino"
         <<"\n10) Envio a Terminales desde Router"
         <<"\n11) GetCercanos a un router especifico"
+        <<"\n12) Imprimir Paginas de Una Terminal"
         <<"\n20) Salir"
         <<"\nIngresar Opcion: ";cin>>opcion;
 
@@ -151,6 +151,17 @@ int main(int argc, char const *argv[])
                 for(int i = 0; i < 8; i++)cout
                 <<m.getRouterEspecifico(rout).getCercanos().at(i)->getIDRouter()<<endl;
                 break;
+            }
+            case 12:{
+                m.printFinalDePaginas();
+                break;}
+            case 13:{
+                int rout; cout<<"\nIngresar router a acceder: ";cin>>rout;
+                for(int i = 0; i < 256; i++){
+                    cout<<"Terminal: "<<i;
+                    m.getRouterEspecifico(rout).getReceptor().at(i).getPaginasDisponibles();
+                }
+                
             }
             }
 
