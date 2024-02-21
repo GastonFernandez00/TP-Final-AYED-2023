@@ -29,6 +29,8 @@ public:
     void envioEntreRouters();
 
     void envioATerminales();
+
+    void printFinalDePaginas();
     
 
 

@@ -122,7 +122,7 @@ void Terminal::rearmarPaginas(Cola<Paquete> &p){
 }
 
 void Terminal::getPaginasDisponibles(){
-    if(paginasDisponibles.size() <= 0) return (void)0;
+    if(paginasDisponibles.size() <= 0){ cout<<"\nNo hay paginas para mostrar en este terminal"; return (void)0;}
     cout<<"\nLa/s Pagina/s Disponible/s en este Terminal es/son: "<<endl;
     for(int i = 0; i < paginasDisponibles.size();i++){
         cout<<"Paginas "<<i+1<<": "<<paginasDisponibles.at(i).getTamanio()<<endl;

@@ -247,7 +247,27 @@ void Mapa::envioATerminales(){
 }
 
 void Mapa::armadoDePaginas(){
+    for(int i = 0; i < tamanioCuadradoMapa; i++){
+        for(int j = 0; j < tamanioCuadradoMapa; j++){
+            Router *r = &map.at(i).at(j);
+            if(r->getIDRouter() != -1){
+                for(int ter = 0; ter < 256; ter++){
+                    while(r->getReceptor().at(ter).getPaquetesRecibidos().size() > 0){
+                        r->getReceptor().at(ter).rearmarPaginas(r->getReceptor().at(ter).getPaquetesRecibidos().back());
+                        r->getReceptor().at(ter).getPaquetesRecibidos().pop_back();
+                    }                    
+                }
+            }
+        }
+    }
 
+}
+
+void Mapa::printFinalDePaginas(){
+    int x,y;
+    cout<<"\nIngresar Router a ver: ";cin>>y;
+    cout<<"\nIngresar Terminal a ver: ";cin>>x;
+    getRouterEspecifico(y).getTerminalEspecifico(x).getPaginasDisponibles();
 }
 
 // int main(int argc, char const *argv[])
