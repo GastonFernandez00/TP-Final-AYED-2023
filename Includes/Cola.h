@@ -54,7 +54,7 @@ public:
 
     //  Devuelve el dato mas antiguo de la cola, pero no lo elimina.
     //  @returns T
-    T getPrimero();
+    T& getPrimero();
 
     //  Devuelve el dato mas reciente de la cola, pero no lo elimina
     //  @returns T

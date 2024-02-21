@@ -1,6 +1,10 @@
 #include <time.h>
 #include "Terminal.h"
 #include "Extras.h"
+#include <algorithm>
+auto comparador_t = [](const auto& a, const auto& b) {
+        return a.second < b.second;
+};
 using namespace std;
 
 Terminal::Terminal(){  this->setIDTerminal(); }
@@ -103,6 +107,28 @@ Cola<Paquete> Terminal::getPaquetes(){ return pkg; }
 void Terminal::recibePaquetes(Cola<Paquete> c){ recibidos.push_back(c); }
 
 vector<Cola<Paquete>>& Terminal::getPaquetesRecibidos(){ return recibidos; }
+
+void Terminal::rearmarPaginas(Cola<Paquete> &p){
+    vector<pair<Paquete,int>> c;
+    for(int i = 0; i < p.sizeCola(); i++)
+    {c.push_back(pair<Paquete,int>(p.getPrimero(),p.getPrimero().getPackNumero()));}
+    sort(c.begin(),c.end(),comparador_t);
+    int tamanio = 0;
+    for(int i = 0; i < c.size(); i++){
+        tamanio += c.at(i).first.getDato();
+    }
+    Pagina nueva_p(tamanio);
+    paginasDisponibles.push_back(nueva_p);
+}
+
+void Terminal::getPaginasDisponibles(){
+    if(paginasDisponibles.size() <= 0) return (void)0;
+    cout<<"\nLa/s Pagina/s Disponible/s en este Terminal es/son: "<<endl;
+    for(int i = 0; i < paginasDisponibles.size();i++){
+        cout<<"Paginas "<<i+1<<": "<<paginasDisponibles.at(i).getTamanio()<<endl;
+    }
+
+}
 
 //Terminal crearTerminal(){ Terminal t; return t;} SOLO PARA TESTING
 

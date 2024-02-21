@@ -8,6 +8,7 @@ private:
 
     Cola<Paquete> pkg;
     vector<Cola<Paquete>> recibidos;
+    vector<Pagina> paginasDisponibles;
     int id_TERMINAL = -1;
 
 
@@ -81,6 +82,9 @@ public:
 
     vector<Cola<Paquete>>& getPaquetesRecibidos();
 
+    void rearmarPaginas(Cola<Paquete>&);
+
+    void getPaginasDisponibles();
 
 };
 #endif

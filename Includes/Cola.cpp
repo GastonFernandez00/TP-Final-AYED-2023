@@ -46,7 +46,7 @@ template <class T>
 queue<T> Cola<T>::getCola(){ return c; }
 
 template <class T>
-T Cola<T>::getPrimero(){ return c.front(); }
+T& Cola<T>::getPrimero(){ return c.front(); }
 
 template <class T>
 T Cola<T>::getUltimo(){ return c.back(); }
