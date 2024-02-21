@@ -220,23 +220,30 @@ void Mapa::RearmadoDePaquetes(){
 }
 
 void Mapa::envioATerminales(){
-    // for(int i = 0; i < tamanioCuadradoMapa; i++)
-    //     for(int j = 0; j < tamanioCuadradoMapa; j++)
-    //         if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getPaquetesPreparados().size() > 0){
-    //             for(int p = 0 ; p < map.at(i).at(j).getPaquetesPreparados().size(); p++)
-    //                 for(int k = 0 ; k < 256; k++){
-    //                 if(map.at(i).at(j).getReceptor().at(k).getIDTerminal() == 
-    //                 map.at(i).at(j).getPaquetesPreparados().at(p).getPrimero().getIDDestinoTerminal() &&
-    //                 map.at(i).at(j).getPaquetesPreparados().at(p).getPrimero().getDivisionesTotales() ==
-    //                 map.at(i).at(j).getPaquetesPreparados().at(p).sizeCola()){
-    //                     map.at(i).at(j).getReceptor().at(k).recibePaquetes(map.at(i).at(j).getPaquetesPreparados().at(p));
-    //                     cout<<"\nFUNCION ERRONEA, ARREGLAR\n";
-    //                     map.at(i).at(j).getPaquetesPreparados().erase(map.at(i).at(j).getPaquetesPreparados().begin()+p);
-    //                     (p <= 0)? p=0:p--;
-    //                 }
-    //             }
-    //         }
-    // this->armadoDePaginas();
+    
+    for(int i = 0; i < tamanioCuadradoMapa; i ++){
+        for(int j = 0; j < tamanioCuadradoMapa; j++){
+            Router *r = &map.at(i).at(j);
+            if(r->getIDRouter() != -1 && r->getPaquetesPreparados().size() > 0){
+                for(int k = 0; k < r->getPaquetesPreparados().size(); k++){
+                    if(r->getPaquetesPreparados().at(k).getPrimero().getDivisionesTotales() == r->getPaquetesPreparados().at(k).sizeCola()){
+                        for(int ter = 0; ter < 256; ter++){
+                            bool enviado = false;
+                            if(enviado == false && r->getPaquetesPreparados().at(k).getPrimero().getIDDestinoTerminal() == r->getReceptor().at(ter).getIDTerminal()){
+                                r->getReceptor().at(ter).recibePaquetes(r->getPaquetesPreparados().at(k));
+                                enviado = true;
+                                r->getPaquetesPreparados().erase(r->getPaquetesPreparados().begin()+k);
+                                k--;
+                            }
+                        }
+                    }
+                    (k <= 0)? k = 0:k;
+                }
+            }
+
+        }
+    }    
+    this->armadoDePaginas();
 }
 
 void Mapa::armadoDePaginas(){
