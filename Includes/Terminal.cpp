@@ -36,7 +36,7 @@ void Terminal::empaquetado(Pagina *p){
             aux.setDato(50);aux.setIds(p); aux.setPackNumero(numero_de_paquete);
             aux.setCantidadTotal(cantidadDeDivisiones);
             p->setTamanio(p->getTamanio()-50);
-            pkg.encolar(aux);
+            pkg.push(aux);
         }
         if(p->getTamanio() < 50 && p->getTamanio() > 0){
             numero_de_paquete++;
@@ -44,7 +44,7 @@ void Terminal::empaquetado(Pagina *p){
             aux.setIds(p); aux.setPackNumero(numero_de_paquete);
             aux.setDato(p->getTamanio()); aux.setCantidadTotal(cantidadDeDivisiones);
             p->setTamanio(0);
-            pkg.encolar(aux);
+            pkg.push(aux);
         }
 }
 
@@ -52,9 +52,9 @@ void Terminal::setDeterminante(bool D){ determinante = D; }
 
 bool Terminal::getDeterminante(){ return determinante; }
 
-Cola<Paquete> Terminal::envio(){
+queue<Paquete> Terminal::envio(){
     cout<<"No implementado, funcion vieja";
-    Cola<Paquete> p;
+    queue<Paquete> p;
     return p;
     // pkg.cambiarEstado();
     // return this->getPaquetes();
@@ -66,7 +66,11 @@ Cola<Paquete> Terminal::envio(){
     // c->setidDestinoTerminal(id_destino_terminal);   
 }
 
-void Terminal::setIDTerminal(){ id_TERMINAL = rand()%MaximaCantDeTerminales; }
+void Terminal::setIDTerminal(){
+    random_device rd;
+    uniform_int_distribution<int> dist(0,MaximaCantDeTerminales-1);
+    id_TERMINAL = dist(rd); 
+    }
 
 void Terminal::setIDTerminal(int t){ id_TERMINAL = t%MaximaCantDeTerminales; }
 
@@ -102,16 +106,16 @@ void Terminal::checkIDTerminalPriv(vector<Terminal> &t,int control,int cantTermi
         
 }
 
-Cola<Paquete> Terminal::getPaquetes(){ return pkg; }
+queue<Paquete> Terminal::getPaquetes(){ return pkg; }
 
-void Terminal::recibePaquetes(Cola<Paquete> c){ recibidos.push_back(c); }
+void Terminal::recibePaquetes(queue<Paquete> c){ recibidos.push_back(c); }
 
-vector<Cola<Paquete>>& Terminal::getPaquetesRecibidos(){ return recibidos; }
+vector<queue<Paquete>>& Terminal::getPaquetesRecibidos(){ return recibidos; }
 
-void Terminal::rearmarPaginas(Cola<Paquete> &p){
+void Terminal::rearmarPaginas(queue<Paquete> &p){
     vector<pair<Paquete,int>> c;
-    for(int i = 0; i < p.sizeCola(); i++)
-    {c.push_back(pair<Paquete,int>(p.getPrimero(),p.getPrimero().getPackNumero()));}
+    for(int i = 0; i < p.size(); i++)
+    {c.push_back(pair<Paquete,int>(p.front(),p.front().getPackNumero()));}
     sort(c.begin(),c.end(),comparador_t);
     int tamanio = 0;
     for(int i = 0; i < c.size(); i++){

@@ -16,13 +16,13 @@ private:
     int cantidadDeReceptores = 256;
     vector<Terminal> receptores;
 
-    vector<Cola<Paquete>> Preparado; //Preparado de paquetes para enviar a los terminales
+    vector<queue<Paquete>> Preparado; //Preparado de paquetes para enviar a los terminales
 
     int bandWidth = 1+(time(nullptr)*rand())%50;
 
 
-    Cola<Paquete> buffer;
-    Cola<Paquete> buffer_Redireccion;
+    queue<Paquete> buffer;
+    queue<Paquete> buffer_Redireccion;
     
     /*  Establece las terminales receptoras asociadas a este router */
     void setReceptores();
@@ -79,7 +79,7 @@ public:
         router vecino.        
         @param Cola<int>*
     */
-    void Recepcion(Cola<Paquete>);
+    void Recepcion(queue<Paquete>);
 
     void Recepcion(Paquete);
 
@@ -98,11 +98,11 @@ public:
 
     void setMaximaCantDeRouters(int);
 
-    Cola<Paquete>& getBufferRouter();
+    queue<Paquete>& getBufferRouter();
 
     int getSizeBuffer();
 
-    Cola<Paquete>& getBufferRedireccionRouter();   
+    queue<Paquete>& getBufferRedireccionRouter();   
 
     int getSizeBufferRedireccionamiento();
 
@@ -126,7 +126,7 @@ public:
 
     void setSiguienteInmediato(Router*);
 
-    vector<Cola<Paquete>>& getPaquetesPreparados();
+    vector<queue<Paquete>>& getPaquetesPreparados();
 
     Terminal& getTerminalEspecifico(int);
 };

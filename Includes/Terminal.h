@@ -1,13 +1,14 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
+#include <queue>
+#include <random>
 #include "Paginas.h"
-#include "Cola.h"
 #include "Paquete.h"
 class Terminal{
 private:
 
-    Cola<Paquete> pkg;
-    vector<Cola<Paquete>> recibidos;
+    queue<Paquete> pkg;
+    vector<queue<Paquete>> recibidos;
     vector<Pagina> paginasDisponibles;
     int id_TERMINAL = -1;
 
@@ -63,7 +64,7 @@ public:
         asocia un id de router y terminal a donde debe ser enviado
         @param Cola<int>*, int
     */
-    Cola<Paquete> envio();
+    queue<Paquete> envio();
 
     /*  Establece el ID del Terminal */
     void setIDTerminal();
@@ -76,13 +77,13 @@ public:
     void checkIDTerminal(vector<Terminal> &);
 
     /*  Devuelve los paquetes almacenados en la terminal*/
-    Cola<Paquete> getPaquetes();
+    queue<Paquete> getPaquetes();
 
-    void recibePaquetes(Cola<Paquete>);
+    void recibePaquetes(queue<Paquete>);
 
-    vector<Cola<Paquete>>& getPaquetesRecibidos();
+    vector<queue<Paquete>>& getPaquetesRecibidos();
 
-    void rearmarPaginas(Cola<Paquete>&);
+    void rearmarPaginas(queue<Paquete>&);
 
     void getPaginasDisponibles();
 

@@ -164,11 +164,11 @@ void Mapa::envioEntreRouters(){
                 if(map.at(i).at(j).getSizeBufferRedireccionamiento() > 0){
                 bool enviado = false;
                 for(int k = 0; k < 8; k++){
-                    if(map.at(i).at(j).getBufferRedireccionRouter().getPrimero().getIDDestino()
+                    if(map.at(i).at(j).getBufferRedireccionRouter().front().getIDDestino()
                     == map.at(i).at(j).getCercanos().at(k)->getIDRouter() && enviado == false){
                     //END IF
-                        map.at(i).at(j).getCercanos().at(k)->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
-                        map.at(i).at(j).getBufferRedireccionRouter().desencolar();
+                        map.at(i).at(j).getCercanos().at(k)->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().front());
+                        map.at(i).at(j).getBufferRedireccionRouter().pop();
                         enviado = true;
                     }
                 }
@@ -176,7 +176,7 @@ void Mapa::envioEntreRouters(){
                     vector<pair<Router*,int>> aux;
                     for (int n = 0; n < 8; n++) aux.push_back(pair<Router*,float>(
                         map.at(i).at(j).getCercanos().at(n),calcularDistancia(map.at(i).at(j).getCercanos().at(n),
-                        &getRouterEspecifico(map.at(i).at(j).getBufferRedireccionRouter().getPrimero().getIDDestino()))));
+                        &getRouterEspecifico(map.at(i).at(j).getBufferRedireccionRouter().front().getIDDestino()))));
                         sort(aux.begin(), aux.end(), comparador);
 
                         Router* conveniente = aux.at(0).first;
@@ -184,8 +184,8 @@ void Mapa::envioEntreRouters(){
                             if((conveniente->getSizeBufferRedireccionamiento()/conveniente->getBandWidth()) > (aux.at(n).first->getSizeBufferRedireccionamiento()/aux.at(n).first->getBandWidth()))
                             conveniente = aux.at(n).first;
                         }
-                        conveniente->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().getPrimero());
-                        map.at(i).at(j).getBufferRedireccionRouter().desencolar();
+                        conveniente->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().front());
+                        map.at(i).at(j).getBufferRedireccionRouter().pop();
                         enviado = true;
                 }
 
@@ -201,18 +201,19 @@ void Mapa::RearmadoDePaquetes(){
                     //if(map.at(i).at(j).getSizeBuffer() > 0){
                         bool encontrado = false, index; 
                         for(int iter = 0; iter < map.at(i).at(j).getPaquetesPreparados().size(); iter++){
-                            if(map.at(i).at(j).getPaquetesPreparados().at(iter).getPrimero().getIdPertenencia()
-                            == map.at(i).at(j).getBufferRouter().getPrimero().getIdPertenencia()
+                            if(map.at(i).at(j).getPaquetesPreparados().at(iter).front().getIdPertenencia()
+                            == map.at(i).at(j).getBufferRouter().front().getIdPertenencia()
                             && encontrado == false){encontrado = true;index = iter;}
                         }
                             if(encontrado == false){
-                                Cola<Paquete> aux; aux.encolar( map.at(i).at(j).getBufferRouter().getPrimero());
+                                queue<Paquete> aux; 
+                                aux.push( map.at(i).at(j).getBufferRouter().front());
                                 map.at(i).at(j).getPaquetesPreparados().push_back(aux);
-                                map.at(i).at(j).getBufferRouter().desencolar();
+                                map.at(i).at(j).getBufferRouter().pop();
                             }
                             else{
-                                map.at(i).at(j).getPaquetesPreparados().at(index).encolar(map.at(i).at(j).getBufferRouter().getPrimero());
-                                map.at(i).at(j).getBufferRouter().desencolar();
+                                map.at(i).at(j).getPaquetesPreparados().at(index).push(map.at(i).at(j).getBufferRouter().front());
+                                map.at(i).at(j).getBufferRouter().pop();
                             }
                         }
                 }
@@ -220,29 +221,36 @@ void Mapa::RearmadoDePaquetes(){
 }
 
 void Mapa::envioATerminales(){
-    
-    for(int i = 0; i < tamanioCuadradoMapa; i ++){
-        for(int j = 0; j < tamanioCuadradoMapa; j++){
-            Router *r = &map.at(i).at(j);
-            if(r->getIDRouter() != -1 && r->getPaquetesPreparados().size() > 0){
-                for(int k = 0; k < r->getPaquetesPreparados().size(); k++){
-                    if(r->getPaquetesPreparados().at(k).getPrimero().getDivisionesTotales() == r->getPaquetesPreparados().at(k).sizeCola()){
-                        for(int ter = 0; ter < 256; ter++){
-                            bool enviado = false;
-                            if(enviado == false && r->getPaquetesPreparados().at(k).getPrimero().getIDDestinoTerminal() == r->getReceptor().at(ter).getIDTerminal()){
-                                r->getReceptor().at(ter).recibePaquetes(r->getPaquetesPreparados().at(k));
-                                enviado = true;
-                                r->getPaquetesPreparados().erase(r->getPaquetesPreparados().begin()+k);
-                                k--;
-                            }
+    for(int i = 0; i < tamanioCuadradoMapa; i++) for(int j = 0; j < tamanioCuadradoMapa; j++){
+        Router *r = &map.at(i).at(j);
+        if(r->getIDRouter() != -1){
+            for(int p = 0; p < r->getPaquetesPreparados().size(); p++){
+                if(r->getPaquetesPreparados().at(p).front().getDivisionesTotales() == r->getPaquetesPreparados().at(p).size()){
+                    for(int ter = 0; ter < 256; ter++){
+                        bool encontrado = false;
+                        if(r->getPaquetesPreparados().size() > 0)
+                        if(!encontrado && r->getPaquetesPreparados().at(p).front().getIDDestinoTerminal() == r->getReceptor().at(ter).getIDTerminal()){
+                            
+                            r->getReceptor().at(ter).recibePaquetes(r->getPaquetesPreparados().at(p));
+                            r->getPaquetesPreparados().erase(r->getPaquetesPreparados().begin()+p);
+                            if(p > 0) p--;
                         }
                     }
-                    (k <= 0)? k = 0:k;
                 }
+
             }
 
         }
-    }    
+
+
+
+
+
+    }
+    
+
+
+
     this->armadoDePaginas();
 }
 
