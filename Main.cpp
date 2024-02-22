@@ -63,38 +63,51 @@ void redirvacio(Mapa m){
 
 int main(int argc, char const *argv[])
 {
+
+    //Le indico cuantas Paginas, y Routers/Terminales van a existir, de forma aleatoria
     int cantdePaginas = paginas(rd);
     int cantRouters = dist(rd); 
     while(cantdePaginas%cantRouters != 0){ cantdePaginas++; }
 
-    
+    //Establezco el ID de cada pagina luego de haberlas creado, para que no se repitan
     Pagina p[cantdePaginas];
-    for(int i = 0; i < cantdePaginas; i++) {p[i].setID(i);p[i].setidDestinoTerminal(255);}
+    for(int i = 0; i < cantdePaginas; i++) p[i].setID(i);
 
-    Pagina aux = p[0];
-
+    //Creo Los terminales y Routers
+    //Cada Router crea automaticamente 256 terminales, que son los que van a recibir las paginas
     vector<Terminal> t;
     vector<Router> r;
     for(int i = 0; i < cantRouters; i++){
         Terminal Nuevo_t; t.push_back(Nuevo_t);
         Router Nuevo_r; r.push_back(Nuevo_r);
     }
+    //Revisa que no los IDs de los terminales y routers no se repitan
     t.at(0).checkIDTerminal(t);
     r.at(0).checkIDRouter(r);
+    //Establece de forma aleatoria a que router va a ir cada pagina, independientemente desde donde inicie
     for(int i = 0; i < cantdePaginas; i++) p[i].setIDDestino(r.at(dist(rd)%cantRouters).getIDRouter());
 
+    //Vector auxiliar para poder acceder a cada pagina, ya que las originales pierden informacion
+    Pagina aux[cantdePaginas];
+    for(int i = 0; i < cantdePaginas; i++) aux[i] = p[i];
+
+    //Empaqueta las paginas:
+    //Esta hecho de forma que cada terminal empaquete la misma cantidad de paginas
     for(int i = 0; i < cantRouters; i++)
         for(int j = i*(cantdePaginas/t.size()); j < (1+i)*(cantdePaginas/t.size());j++){
             t.at(i).empaquetado(p[j]);
     }
 
+    //Cada Router recibe los paquetes la terminal que tiene conectada
     for(int i = 0; i < cantRouters; i++){
         r.at(i).Recepcion(t.at(i).getPaquetes());
     }
     
-    
+    //Se crea el mapa de routers y se le asocian los routers
     Mapa m(sqrt(cantRouters)+1);
     for(int i = 0; i < cantRouters;i++) m.incluirEnMapa(r.at(i));
+    //Se establecen para cada router qué otros routers tiene cerca
+    //para poder enviar los paquetes
     m.setCercanos();
 
 
@@ -112,9 +125,10 @@ int main(int argc, char const *argv[])
         <<"\n8) Info de la Pagina"
         <<"\n9) Acceder a un Terminal de destino"
         <<"\n10) Envio a Terminales desde Router"
-        <<"\n11) GetCercanos a un router especifico"
-        <<"\n12) Imprimir Paginas de Una Terminal"
-        <<"\n13) Imprimir las paginas de TODAS las terminales de un router"
+        <<"\n11) Envios Multiples a Termianes desde Router"
+        <<"\n12) GetCercanos a un router especifico"
+        <<"\n13) Imprimir Paginas de Una Terminal"
+        <<"\n14) Imprimir las paginas de TODAS las terminales de un router"
         <<"\n20) Salir"
         <<"\nIngresar Opcion: ";cin>>opcion;
 
@@ -146,29 +160,37 @@ int main(int argc, char const *argv[])
                 <<m.getRouterEspecifico(rout).getTerminalEspecifico(ter).getPaquetesRecibidos().size();
 
             break;}
-            case 8:
-                cout<<"\nId de Pagina: "<<p->getID()
-                <<"\nId de destino de Router: "<<p->getIDDestino()
-                <<"\nTemanio: "<<aux.getTamanio()
-                <<"\nId de destino de Terminal: "<<p->getIDDestinoTerminal()<<endl;
-                break;
+            case 8:{
+                int pag;
+                cout<<"\nIngresar Pagina a obtener informacion (Existen 0 - "<<cantdePaginas-1<<" de paginas): ";cin>>pag;
+                cout<<"\nId de Pagina: "<<aux[pag].getID()
+                <<"\nId de destino de Router: "<<aux[pag].getIDDestino()
+                <<"\nTemanio: "<<aux[pag].getTamanio()
+                <<"\nId de destino de Terminal: "<<aux[pag].getIDDestinoTerminal()<<endl;
+                break;}
             case 10:
                 m.envioATerminales();
                 break;
             case 11:{
+                int i = 0, valor = 1;
+                cout<<"\nIngresar la cantidad de envios a terminales: ";cin>>valor;
+                for(i = 0; i < valor; i++) m.envioEntreRouters();
+                break;
+                }
+            case 12:{
                 int rout,ter;
                 cout<<"\nIngresar Router a acceder: ";cin>>rout;
                 for(int i = 0; i < 8; i++)cout
                 <<m.getRouterEspecifico(rout).getCercanos().at(i)->getIDRouter()<<endl;
                 break;
             }
-            case 12:{
+            case 13:{
                 m.printFinalDePaginas();
                 break;}
-            case 13:{
+            case 14:{
                 int rout; cout<<"\nIngresar router a acceder: ";cin>>rout;
                 for(int i = 0; i < 256; i++){
-                    cout<<"\nTerminal: "<<i+1;
+                    cout<<"\nTerminal: "<<i;
                     m.getRouterEspecifico(rout).getReceptor().at(i).getPaginasDisponibles();
                 } 
                 
@@ -176,17 +198,6 @@ int main(int argc, char const *argv[])
             }
 
         
-        // m.envio();
-        // // int tempo = 12500;
-        // // for(int i = 0; i < tempo; i++)for(int j = 0; j < tempo; j++);
-        // contador++;
-        // if(contador == 1000){
-        //     printBuffer(m);cout<<endl;
-        // printBufferRedir(m);cout<<endl;
-        //     contador = 0;
-        //     cout<<"Presione 1 para continuar";
-        //     cin>>opcion;
-        // }
 
     }while(opcion != 20);
 

@@ -5,26 +5,15 @@
         como la uniforme    
 */
 
-/*
-    Ver:
-        >Terminar funcion de envio a terminales
-
-        >Si los routers que se establecen como cercano, no pueden ir arriba ó abajo, para acercarse al router 
-        de destino final, empiezan a pasarse el pkg entre ellos y se queda trabado
-
+/*  Ver:
         >Controlar:
              Ahora mismo cada terminal envía la TOTALIDAD de los paquetes que tiene almacenado, al o mejor debería hacer
             sólo envía 1 (un) paquete por vez
 
-        >En la clase Terminal, probablemente haga falta un Cola<Pagina> ó mejor un vector<Pagina>, y una funcion
-        que rearme las paginas a partir de los paquetes. Tal vez el rearmado se haga en el mapa
-
         --->>> Al terminar, limpiar clases, y comentar funciones apropiadamente
-
 */
 
-/*
-    Known Problems: <>
+/*  Known Problems: <>
         ::::IMPORTANTES::::
         >En el mapa, estoy creando copias de los routers existentes en vez de usar
         punteros a los mismos. Por lo que una vez creados y almacenados en el mapa,
@@ -32,6 +21,9 @@
 
         >Si intento aniadir nuevos routers, fuera del vector<Router> inicial, no puedo checkear los IDs. Habría
         que modificar la funcion checkIDRouter para que tome en cuenta vector<vector<Router>>
+        
+        >Si los routers que se establecen como cercano, no pueden ir arriba ó abajo, para acercarse al router 
+        de destino final, empiezan a pasarse el pkg entre ellos y se queda trabado
         
         ::::INSIGNIFICANTES::::
 */
