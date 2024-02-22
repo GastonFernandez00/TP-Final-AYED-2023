@@ -15,7 +15,7 @@ void Pagina::setTamanio(int n){
     uniform_int_distribution<int> dist(1,500);
     tamanio = dist(rd); 
 }
-int Pagina::getTamanio(){ return tamanio; }
+int& Pagina::getTamanio(){ return tamanio; }
 
 void Pagina::setID(int n){ id_pagina = n; }
 int Pagina::getID(){ return id_pagina; }

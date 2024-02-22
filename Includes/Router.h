@@ -79,9 +79,9 @@ public:
         router vecino.        
         @param Cola<int>*
     */
-    void Recepcion(queue<Paquete>);
+    void Recepcion(queue<Paquete>&);
 
-    void Recepcion(Paquete);
+    void Recepcion(Paquete&);
 
     /*  Pregunta si la cola del router tiene algun elemento*/
     bool routerEmpty();

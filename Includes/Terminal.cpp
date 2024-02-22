@@ -11,7 +11,9 @@ Terminal::Terminal(){  this->setIDTerminal(); }
 Terminal::Terminal(bool b){ determinante = b; if(determinante == 1) this->setIDTerminal();}
 Terminal::~Terminal(){}
 
-void Terminal::empaquetado(Pagina *p){
+void Terminal::empaquetado(Pagina &p){
+        cout<<"Entro\n";
+        int veces = 0;
         int numero_de_paquete = 0;
 
         if(this->getDeterminante() == 1){ 
@@ -19,7 +21,7 @@ void Terminal::empaquetado(Pagina *p){
             return (void)0;
         }
         
-        int pAux = p->getTamanio();
+        int pAux = p.getTamanio();
         int cantidadDeDivisiones = 0;
         while( pAux >= 50){
             cantidadDeDivisiones++;
@@ -30,22 +32,27 @@ void Terminal::empaquetado(Pagina *p){
             pAux = 0;
         }
 
-        while(p->getTamanio() >= 50){
+        while(p.getTamanio() >= 50){
+            veces++;
             numero_de_paquete++;
             Paquete aux;
-            aux.setDato(50);aux.setIds(p); aux.setPackNumero(numero_de_paquete);
+            aux.setDato(50);aux.setIds(&p); aux.setPackNumero(numero_de_paquete);
             aux.setCantidadTotal(cantidadDeDivisiones);
-            p->setTamanio(p->getTamanio()-50);
+            int nuevo_tamanio = p.getTamanio()-50;
+            p.setTamanio(nuevo_tamanio);
             pkg.push(aux);
         }
-        if(p->getTamanio() < 50 && p->getTamanio() > 0){
+        if(p.getTamanio() < 50 && p.getTamanio() > 0){
+            veces++;
             numero_de_paquete++;
             Paquete aux;
-            aux.setIds(p); aux.setPackNumero(numero_de_paquete);
-            aux.setDato(p->getTamanio()); aux.setCantidadTotal(cantidadDeDivisiones);
-            p->setTamanio(0);
+            aux.setIds(&p); aux.setPackNumero(numero_de_paquete);
+            aux.setDato(p.getTamanio()); aux.setCantidadTotal(cantidadDeDivisiones);
+            p.setTamanio(0);
             pkg.push(aux);
         }
+
+        cout<<"Veces que creo paquetes: "<<veces<<endl;
 }
 
 void Terminal::setDeterminante(bool D){ determinante = D; }
@@ -106,7 +113,7 @@ void Terminal::checkIDTerminalPriv(vector<Terminal> &t,int control,int cantTermi
         
 }
 
-queue<Paquete> Terminal::getPaquetes(){ return pkg; }
+queue<Paquete>& Terminal::getPaquetes(){ return pkg; }
 
 void Terminal::recibePaquetes(queue<Paquete> c){ recibidos.push_back(c); }
 

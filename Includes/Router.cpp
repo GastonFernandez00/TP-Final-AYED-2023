@@ -32,7 +32,7 @@ void  Router::printPosicionRouter(){ //CAMBIAR ESTO
     cout<<"\nPosicion X: "<<getRouter_x()<<endl<<"Posicion Y: "<<getRouter_y()<<endl;
 }
 
-void Router::Recepcion(queue<Paquete> c){
+void Router::Recepcion(queue<Paquete> &c){
     
     if(c.empty()){ return (void)0; }
     while(!(c.empty())){
@@ -47,7 +47,7 @@ void Router::Recepcion(queue<Paquete> c){
     }
 }
 
-void Router::Recepcion(Paquete p){
+void Router::Recepcion(Paquete &p){
     if(p.getDato() <= 0) return (void)0;
     else if(p.getIDDestino() == this->getIDRouter()){
         buffer.push(p);

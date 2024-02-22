@@ -31,7 +31,7 @@ public:
 
     /*  Devuelve del Tamanio de la Pagina
         @returns int    */
-    int getTamanio();
+    int& getTamanio();
 
     /*  Establece el Tamanio de la Pagina <= 500
         @param int    */

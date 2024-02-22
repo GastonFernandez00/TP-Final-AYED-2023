@@ -58,7 +58,7 @@ public:
         y separa la pagina en nodos de tamanio 50
         @param Pagina *, Cola<int>*
     */
-    void empaquetado(Pagina *);
+    void empaquetado(Pagina &);
 
     /*  Establece que X cola esta lista para ser enviada (levanta un flag) y 
         asocia un id de router y terminal a donde debe ser enviado
@@ -77,7 +77,7 @@ public:
     void checkIDTerminal(vector<Terminal> &);
 
     /*  Devuelve los paquetes almacenados en la terminal*/
-    queue<Paquete> getPaquetes();
+    queue<Paquete>& getPaquetes();
 
     void recibePaquetes(queue<Paquete>);
 
