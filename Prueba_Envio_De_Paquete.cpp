@@ -23,7 +23,7 @@
 // int main(int argc, char const *argv[])
 // {
 //     int cantidadDePaginas = 100;//paginas(rd);
-//     int cantidadRouterTerminales = 100;//dist(rd);
+//     int cantidadRouterTerminales = 10;//dist(rd);
 //     while(cantidadDePaginas%cantidadRouterTerminales != 0 || cantidadDePaginas == 0){cantidadDePaginas++;}
 //     Pagina p[cantidadDePaginas];
 //     for(int i = 0; i < cantidadDePaginas; i++) p[i].setID(i);
@@ -79,7 +79,7 @@
 //     m.setCercanos();
 //     for(int i = 0; i < 100; i++) m.envioEntreRouters();
 //     m.imprimirMapa();
-//     m.RearmadoDePaquetes();
+//     for(int i = 0; i < 20; i++) m.RearmadoDePaquetes();
 
 //     for(int i = 0; i < m.getMapa().size(); i++){
 //     for(int j = 0; j < m.getMapa().size(); j++){
@@ -98,4 +98,27 @@
 //         }}
         
 //     }}
+
+//     cout<<"\n\n";
+//     for(int i = 0; i < m.getMapa().size(); i++){ for(int j = 0; j < m.getMapa().size(); j++){
+//         if(m.getMapa().at(i).at(j).getIDRouter() != -1){
+//             cout<<m.getMapa().at(i).at(j).getPaquetesPreparados().size()<<" ";}
+//         else{ cout<<-1<<" ";}
+        
+//     }cout<<endl;}
+//     cout<<"\n\n";
+//     cout<<cantidadDePaginas<<endl;
+
+//     m.envioATerminales();
+
+//     for(int i = 0; i < m.getMapa().size(); i++){ for(int j = 0; j < m.getMapa().size(); j++){
+//         if(m.getMapa().at(i).at(j).getIDRouter() != -1){
+//             cout<<m.getMapa().at(i).at(j).getPaquetesPreparados().size()<<" ";}
+//         else{ cout<<-1<<" ";}
+        
+//     }cout<<endl;}
+
+
+
+    
 // }

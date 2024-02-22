@@ -241,7 +241,7 @@ void Mapa::envioATerminales(){
                             r->getPaquetesPreparados().erase(r->getPaquetesPreparados().begin()+p);
                             break;
                         }
-                    }
+                    }break;
                 }
 
             }
@@ -252,8 +252,7 @@ void Mapa::envioATerminales(){
 }
 
 void Mapa::armadoDePaginas(){
-    for(int i = 0; i < tamanioCuadradoMapa; i++){
-        for(int j = 0; j < tamanioCuadradoMapa; j++){
+    for(int i = 0; i < tamanioCuadradoMapa; i++){ for(int j = 0; j < tamanioCuadradoMapa; j++){
             Router *r = &map.at(i).at(j);
             if(r->getIDRouter() != -1){
                 for(int ter = 0; ter < 256; ter++){

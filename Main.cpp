@@ -69,7 +69,10 @@ int main(int argc, char const *argv[])
 
     
     Pagina p[cantdePaginas];
-    for(int i = 0; i < cantdePaginas; i++) {p[i].setID(i);p[i].setidDestinoTerminal(0);}
+    for(int i = 0; i < cantdePaginas; i++) {p[i].setID(i);p[i].setidDestinoTerminal(255);}
+
+    Pagina aux = p[0];
+
     vector<Terminal> t;
     vector<Router> r;
     for(int i = 0; i < cantRouters; i++){
@@ -146,6 +149,7 @@ int main(int argc, char const *argv[])
             case 8:
                 cout<<"\nId de Pagina: "<<p->getID()
                 <<"\nId de destino de Router: "<<p->getIDDestino()
+                <<"\nTemanio: "<<aux.getTamanio()
                 <<"\nId de destino de Terminal: "<<p->getIDDestinoTerminal()<<endl;
                 break;
             case 10:

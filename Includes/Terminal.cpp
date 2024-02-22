@@ -131,23 +131,35 @@ void Terminal::recibePaquetes(queue<Paquete> c){ recibidos.push_back(c); }
 vector<queue<Paquete>>& Terminal::getPaquetesRecibidos(){ return recibidos; }
 
 void Terminal::rearmarPaginas(queue<Paquete> &p){
-    vector<pair<Paquete,int>> c;
-    for(int i = 0; i < p.size(); i++)
-    {c.push_back(pair<Paquete,int>(p.front(),p.front().getPackNumero()));}
-    sort(c.begin(),c.end(),comparador_t);
+    Pagina nueva_p;
+    nueva_p.setID(p.front().getIdPertenencia());
+    nueva_p.setidDestinoTerminal(p.front().getIDDestinoTerminal());
+    nueva_p.setIDDestino(p.front().getIDDestino());
+
     int tamanio = 0;
-    for(int i = 0; i < c.size(); i++){
-        tamanio += c.at(i).first.getDato();
+    while(p.size() > 0){
+        tamanio += p.front().getDato();
+        p.pop();
     }
-    Pagina nueva_p(tamanio);
+    nueva_p.getTamanio() = tamanio;
     paginasDisponibles.push_back(nueva_p);
+    // vector<pair<Paquete,int>> c;
+    // for(int i = 0; i < p.size(); i++)
+    // {c.push_back(pair<Paquete,int>(p.front(),p.front().getPackNumero()));}
+    // sort(c.begin(),c.end(),comparador_t);
+    // int tamanio = 0;
+    // for(int i = 0; i < c.size(); i++){
+    //     tamanio += c.at(i).first.getDato();
+    // }
+    // Pagina nueva_p(tamanio);
+    // paginasDisponibles.push_back(nueva_p);
 }
 
 void Terminal::getPaginasDisponibles(){
     if(paginasDisponibles.size() <= 0){ cout<<"\nNo hay paginas para mostrar en este terminal"; return (void)0;}
     cout<<"\nLa/s Pagina/s Disponible/s en este Terminal es/son: "<<endl;
     for(int i = 0; i < paginasDisponibles.size();i++){
-        cout<<"Paginas "<<i+1<<": "<<paginasDisponibles.at(i).getTamanio()<<endl;
+        cout<<"Paginas "<<i+1<<": "<<paginasDisponibles.at(i).getTamanio()<<" ID-> "<<paginasDisponibles.at(i).getID()<<endl;
     }
 
 }
