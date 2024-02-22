@@ -159,9 +159,9 @@ Router& Mapa::getRouterEspecifico(int R){
 void Mapa::envioEntreRouters(){
     for(int i = 0; i < tamanioCuadradoMapa; i++)
         for(int j = 0; j < tamanioCuadradoMapa; j++)
-            if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getSizeBufferRedireccionamiento() > 0){
+            if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getBufferRedireccionRouter().size() > 0){
                 for(int bw = 0; bw < map.at(i).at(j).getBandWidth(); bw++)
-                if(map.at(i).at(j).getSizeBufferRedireccionamiento() > 0){
+                if(map.at(i).at(j).getBufferRedireccionRouter().size() > 0){
                 bool enviado = false;
                 for(int k = 0; k < 8; k++){
                     if(map.at(i).at(j).getBufferRedireccionRouter().front().getIDDestino()
@@ -170,6 +170,7 @@ void Mapa::envioEntreRouters(){
                         map.at(i).at(j).getCercanos().at(k)->Recepcion(map.at(i).at(j).getBufferRedireccionRouter().front());
                         map.at(i).at(j).getBufferRedireccionRouter().pop();
                         enviado = true;
+                        break;
                     }
                 }
                 if(enviado == false){

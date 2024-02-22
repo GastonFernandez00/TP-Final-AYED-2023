@@ -36,10 +36,11 @@ void Terminal::empaquetado(Pagina &p){
             // veces++;
             numero_de_paquete++;
             Paquete aux;
-            if(p.getTamanio() > 50) aux.setDato(50);
-            else aux.setDato(p.getTamanio());
-            aux.setIds(&p); aux.setPackNumero(numero_de_paquete);aux.setCantidadTotal(cantidadDeDivisiones);
-            p.setTamanio(p.getTamanio()-50);
+            if(p.getTamanio() > 50){ aux.setDato(50);}
+            else {aux.setDato(p.getTamanio());}
+            aux.setIds(&p); aux.setPackNumero(i+1);aux.setCantidadTotal(cantidadDeDivisiones);
+            if(p.getTamanio() > 50) p.getTamanio() -= 50;
+            else{p.getTamanio() = 0;}
             pkg.push(aux);
         }
         // while(p.getTamanio() >= 50){

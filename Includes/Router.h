@@ -18,7 +18,7 @@ private:
 
     vector<queue<Paquete>> Preparado; //Preparado de paquetes para enviar a los terminales
 
-    int bandWidth = 1+(time(nullptr)*rand())%50;
+    int bandWidth = 1;
 
 
     queue<Paquete> buffer;
@@ -120,7 +120,7 @@ public:
 
     vector<Router*>& getCercanos();
 
-    void setBandWidth(int);
+    void setBandWidth();
 
     int getBandWidth();
 

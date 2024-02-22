@@ -3,7 +3,7 @@
 #include <time.h>
 using namespace std;
 
-Router::Router(){ this->setIDRouter(); this->setReceptores(); }
+Router::Router(){ this->setIDRouter(); this->setReceptores(); this->setBandWidth(); }
 Router::Router(int i){ this->setIDRouter(i); }
 
 Router::~Router(){ }
@@ -132,7 +132,11 @@ void Router::borrarCercanos(){ cercanos.clear(); }
 
 vector<Router*>& Router::getCercanos(){ return cercanos; }
 
-void Router::setBandWidth(int n){ bandWidth = n; }
+void Router::setBandWidth(){
+    random_device rd;
+    uniform_int_distribution<int> dist(1,50);
+    bandWidth = dist(rd);
+}
 
 int Router::getBandWidth(){ return bandWidth; }
 
