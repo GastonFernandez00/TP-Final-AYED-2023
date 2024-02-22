@@ -26,10 +26,12 @@ public:
         @param int    */
     void setPackNumero(int);
 
+    /*  Establece en cuantos paquetes se dividio la pagina de la que proviene
+        @param int  */
     void setCantidadTotal(int);
 
-    /*  Establece a que pagina pertenece
-        @param Pagina   */
+    /*  Establece la informacion de cada paquete, segun la informacion de la pagina padre
+        @param Pagina *p    */
     void setIds(Pagina *);
 
     /*  Establece que dato contiene
@@ -41,7 +43,7 @@ public:
     int getIdPertenencia();
     
     /*  Devuelve el Id de del router a donde debe ir la cola
-            @returns int    */
+        @returns int    */
     int getIDDestino();
 
     /*  Establece el Id de la computadora de destino.
@@ -49,12 +51,13 @@ public:
         esta numerada de esa forma, independiente de las otras que esten conectadas
         a otros routers. Pero sin parametros.*/
     int getIDDestinoTerminal();
-
     
     /*  Devuelve la posicion que deberia tener el paquete
         @returns int    */
     int getPackNumero();
 
+    /*  Devuelve la cantidad de paquetes en las que se dividio la pagina
+        @returns int    */
     int getDivisionesTotales();
 
     /*  Devuelde el dato que contiene el paquete

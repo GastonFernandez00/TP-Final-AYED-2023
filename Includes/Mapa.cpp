@@ -1,7 +1,6 @@
 #include "Mapa.h"
 #include <algorithm>
-//#include <thread>
-//#include <chrono>
+
 
 auto comparador = [](const auto& a, const auto& b) {
         return a.second < b.second;
@@ -9,22 +8,22 @@ auto comparador = [](const auto& a, const auto& b) {
 
 Mapa::Mapa(){
     for(int i = 0; i < tamanioCuadradoMapa; i++){
-        vector<Router> aux;
+        vector<Router> aux; //Genera una fila
         map.push_back(aux);
         for(int j = 0; j < tamanioCuadradoMapa; j++){
-            map.at(i).push_back(crearRouter());
+            map.at(i).push_back(crearRouter()); //Aumenta la columna con un Router vacio
         }
     }
 
 }
 
 Mapa::Mapa(int n){
-    setTamanioCuadradoMapa(n);
+    setTamanioCuadradoMapa(n); //Establece cual va a ser el tamanio del mapa
     for(int i = 0; i < tamanioCuadradoMapa; i++){
-        vector<Router> aux;
+        vector<Router> aux; //Genera una fila
         map.push_back(aux);
         for(int j = 0; j < tamanioCuadradoMapa; j++){
-            map.at(i).push_back(crearRouter());
+            map.at(i).push_back(crearRouter()); //Aumenta la columna con un Router vacio
         }
     }
 }
@@ -46,27 +45,26 @@ void Mapa::incluirEnMapa(Router &r){
         vector<pair<int,int>> cuenta; 
         for(int i = 0; i < tamanioCuadradoMapa; i++){
             int contador = 0;
-                for(int j = 0; j < tamanioCuadradoMapa; j++){
+                for(int j = 0; j < tamanioCuadradoMapa; j++){ //Cuenta cuantos espacios ocupados hay en cada fila
                     if(map.at(i).at(j).getIDRouter() != -1){
                         contador++;
                     }
                 }
-            cuenta.push_back(pair<int,int>(i,contador));
+            cuenta.push_back(pair<int,int>(i,contador)); 
         }
-        sort(cuenta.begin(),cuenta.end(),comparador);
+        sort(cuenta.begin(),cuenta.end(),comparador);//reordena de menor a mayor, en base a las filas mas ocupadas
 
-        if(cuenta.at(0).second < tamanioCuadradoMapa){
-            y = cuenta.at(0).first;
+        if(cuenta.at(0).second < tamanioCuadradoMapa){//Si hay espacios libres en la fila se
+            y = cuenta.at(0).first;                    //define que fila es. Ya que se cambio en el sort
             bool seleccionado = false;
-            while(seleccionado == false){
+            while(seleccionado == false){               //Mientras no se haya incluido el router en alguna posicion, repite
                 x = dist(rd);
-                if(map.at(y).at(x).getIDRouter() == -1){
+                if(map.at(y).at(x).getIDRouter() == -1){//Tiene que ser una posicion vacia
                     r.setRouterPosicion(x,y); map.at(y).at(x) = r;
                     return (void)0;
                 }
             }
         }
-        
         cout<<"\nNo se pudo aniadir\n";
         return (void)0;
     } 
@@ -90,7 +88,6 @@ void Mapa::imprimirMapa(){
     for(int i = 0; i < tamanioCuadradoMapa; i++){
         for(int j = 0; j < tamanioCuadradoMapa; j++){
         cout<<map.at(i).at(j).getIDRouter()<<" ";
-        //if((1+j)%(tamanioCuadradoMapa+1) == 0) cout<<endl;
         }
         cout<<endl;
     }
@@ -273,63 +270,3 @@ void Mapa::printFinalDePaginas(){
     cout<<"\nIngresar Terminal a ver: ";cin>>x;
     getRouterEspecifico(y).getTerminalEspecifico(x).getPaginasDisponibles();
 }
-
-// int main(int argc, char const *argv[])
-// {
-
-//     // int cantRouter = 1+(time(nullptr)*rand())%256;
-//     int cantRouter = 25;
-//     Mapa m(20);
-//     vector<Router> r;
-//     for(int i = 0; i < cantRouter; i++){ Router nuevo; r.push_back(nuevo); }
-//     r.at(0).checkIDRouter(r);
-//     cout<<"\nFinCheck\nCantidad de Routers: "<<r.size()<<endl;
-
-
-//     for(int i = 0; i < r.size(); i++) m.incluirEnMapa(r.at(i));
-   
-    
-//     //m.imprimirMapa();
-//     m.setCercanos();   
-//     m.imprimirMapa();
-//     cout<<"Router: "<<r.at(0).getIDRouter()<<endl;
-//     m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).printPosicionRouter();
-//     cout<<"Cercanos:\n";
-//     for(int i = 0; i < m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).getCercanos().size(); i++)
-//     cout<<m.getMapa().at(r.at(0).getRouter_y()).at(r.at(0).getRouter_x()).getCercanos().at(i)->getIDRouter()
-//     <<endl;
-//     // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
-
-//     cout<<"\n\nCantidad de Routers Activos: "<<m.cantidadDeRoutersEnMapa()<<endl;
-
-
-
-//     // int y,x; y = x = 0;
-//     // while( m.getMapa().at(y).at(x).getIDRouter() == -1){
-//     //     x++;
-//     //     if(x == m.getMapa().size()){ x = 0; y++;}
-//     // }
-    
-//     // int a,b;
-//     // a = r.at(0).getIDRouter();
-//     // b = r.at(10).getIDRouter();
-//     // cout<<a<<endl;
-//     // cout<<b<<endl;
-
-
-//     // r.at(0).printPosicionRouter();
-//     // r.at(10).printPosicionRouter();
-
-//     // int distance = sqrt(pow(r.at(0).getRouter_x()-r.at(10).getRouter_x(),2)+pow(r.at(0).getRouter_y()-r.at(10).getRouter_y(),2));
-//     // printf("\nDistancia entre %d y %d: %d\n",a,b,distance);
-
-//     // for(int i = 0; i < r.at(0).getCercanos().size(); i++)
-//     // cout<<r.at(0).getCercanos().at(i)->getIDRouter()<<endl;
-
-
-
-
-//     cout<<endl;
-//     system("pause");
-//     return 0;
-// }

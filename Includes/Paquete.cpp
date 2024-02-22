@@ -28,15 +28,3 @@ int Paquete::getPackNumero(){ return packNumero; }
 int Paquete::getDivisionesTotales(){ return Divisiones_Totales; }
 
 int Paquete::getDato(){ return (DATO > 0)? DATO:-1; }
-
-// int main(int argc, char const *argv[])
-// {
-//     Pagina p[10];
-//     Paquete *P;
-//     vector<Paquete*> v;
-//     for(int i = 0; i < size(p); i++){ v.push_back(new Paquete);}
-    
-//     cout<<v.at(0)->getIdPertenencia();
-
-//     return 0;
-// }

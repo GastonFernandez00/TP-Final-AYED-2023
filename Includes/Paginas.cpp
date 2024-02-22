@@ -2,15 +2,14 @@
 #include "Extras.h"
 #include <iostream>
 #include <random>
-//#include <stdio.h>
 using namespace std;
 
-Pagina::Pagina(){ setTamanio(0); setID(rand()); setIDDestino(); setidDestinoTerminal();}
-Pagina::Pagina(int n){ srand(time(nullptr)); setTamanio(n); setID(rand()); setIDDestino(); setidDestinoTerminal();}
+Pagina::Pagina(){ setTamanio(); setIDDestino(); setidDestinoTerminal();}
+Pagina::Pagina(int n){ setTamanio(); setIDDestino(); setidDestinoTerminal();}
 
 Pagina::~Pagina(){ }
 
-void Pagina::setTamanio(int n){
+void Pagina::setTamanio(){
     random_device rd;
     uniform_int_distribution<int> dist(1,500);
     tamanio = dist(rd); 
@@ -35,57 +34,3 @@ void Pagina::setidDestinoTerminal(){
 int Pagina::getIDDestino(){ return id_Destino; }
 
 int Pagina::getIDDestinoTerminal(){ return id_Destino_Terminal;}
-
-void Pagina::setMaximaCantDePaginas(int d){ MaximaCantDePaginas = d; }
-
-void Pagina::checkIDPaginas(int cantpaginas){ checkIDPaginasPriv(this, this, 0,cantpaginas);}
-
-void Pagina::checkIDPaginasPriv(Pagina *a, Pagina *b, int control,int cantpaginas){
-        if(control == 10){ return (void)0; }
-
-    
-        burbuja_Pagina(a,b,cantpaginas);
-        
-        b++;int veces = 0;
-        for(int i = 0; i < cantpaginas; i++){
-            
-            if(a->getID() > cantpaginas || a->getID() < 0){ return checkIDPaginasPriv(this,this,control+1,cantpaginas); }
-
-            for(int j = 1; j < cantpaginas-1; j++){
-                if(b->getID() < cantpaginas && b->getID() >= 0){
-                    if(a->getID() == b->getID()){
-                        b->setMaximaCantDePaginas(cantpaginas);
-                        veces+=1;
-                        b->setID(b->getID()+veces);
-                    }    
-                    b++;
-                }
-
-            }
-
-            a++;b = a; b++; veces = 0;
-        }
-
-        return checkIDPaginasPriv(this,this,control+1,cantpaginas);
-
-}
-
-//  PRUEBA DE FUNCIONES
-// int main(int argc, char const *argv[]){   
-//     Pagina p;
-
-//     cout<<"TAMANIO: "<<p.getTamanio()<<endl
-//     <<"ID: "<<p.getID()<<endl<<"Iddestino: "<<p.getIDDestino()<<endl
-//     <<"IdDestinoTerminal: "<<p.getIDDestinoTerminal()<<endl;
-
-//     cout<<"\n-------------\n";
-//     cout<<"Restableciendo tamanio";p.setTamanio(350);
-//     cout<<"\nRestableciendo IDdestino";p.setIDDestino(350);
-//     cout<<"\nRestableciendo Iddestinoterminal";p.setidDestinoTerminal(350);
-
-//     cout<<"\n-------------\nNuevos Valores"<<endl;
-//     cout<<"TAMANIO: "<<p.getTamanio()<<endl
-//     <<"ID: "<<p.getID()<<endl<<"Iddestino: "<<p.getIDDestino()<<endl
-//     <<"IdDestinoTerminal: "<<p.getIDDestinoTerminal()<<endl;
-
-// }

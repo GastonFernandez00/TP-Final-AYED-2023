@@ -61,8 +61,8 @@ void redirvacio(Mapa m){
            
 }
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
+REINICIO:
 
     //Le indico cuantas Paginas, y Routers/Terminales van a existir, de forma aleatoria
     int cantdePaginas = paginas(rd);
@@ -123,12 +123,12 @@ int main(int argc, char const *argv[])
         <<"\n6) Envios Multiples"
         <<"\n7) Rearmado de Paquetes por Pagina"
         <<"\n8) Info de la Pagina"
-        <<"\n9) Acceder a un Terminal de destino"
-        <<"\n10) Envio a Terminales desde Router"
-        <<"\n11) Envios Multiples a Termianes desde Router"
-        <<"\n12) GetCercanos a un router especifico"
-        <<"\n13) Imprimir Paginas de Una Terminal"
-        <<"\n14) Imprimir las paginas de TODAS las terminales de un router"
+        <<"\n9) Envio a Terminales desde Router"
+        <<"\n10) Envios Multiples a Termianes desde Router"
+        <<"\n11) GetCercanos a un router especifico"
+        <<"\n12) Imprimir Paginas de Una Terminal"
+        <<"\n13) Imprimir las paginas de TODAS las terminales de un router"
+        <<"\n19) Nueva Simulacion"
         <<"\n20) Salir"
         <<"\nIngresar Opcion: ";cin>>opcion;
 
@@ -152,14 +152,6 @@ int main(int argc, char const *argv[])
             case 7:
                 m.RearmadoDePaquetes();
                 break;
-            case 9:{
-                int rout,ter;
-                cout<<"\nIngresar Router a acceder: ";cin>>rout;
-                cout<<"\nIngresar Terminal a acceder dentro del router: ";cin>>ter;
-                cout<<"\nCantidad de Paginas que se pueden armar en el terminal: "
-                <<m.getRouterEspecifico(rout).getTerminalEspecifico(ter).getPaquetesRecibidos().size();
-
-            break;}
             case 8:{
                 int pag;
                 cout<<"\nIngresar Pagina a obtener informacion (Existen 0 - "<<cantdePaginas-1<<" de paginas): ";cin>>pag;
@@ -168,33 +160,35 @@ int main(int argc, char const *argv[])
                 <<"\nTemanio: "<<aux[pag].getTamanio()
                 <<"\nId de destino de Terminal: "<<aux[pag].getIDDestinoTerminal()<<endl;
                 break;}
-            case 10:
+            case 9:
                 m.envioATerminales();
                 break;
-            case 11:{
+            case 10:{
                 int i = 0, valor = 1;
                 cout<<"\nIngresar la cantidad de envios a terminales: ";cin>>valor;
-                for(i = 0; i < valor; i++) m.envioEntreRouters();
+                for(i = 0; i < valor; i++)  m.envioATerminales();
                 break;
                 }
-            case 12:{
+            case 11:{
                 int rout,ter;
                 cout<<"\nIngresar Router a acceder: ";cin>>rout;
                 for(int i = 0; i < 8; i++)cout
                 <<m.getRouterEspecifico(rout).getCercanos().at(i)->getIDRouter()<<endl;
                 break;
             }
-            case 13:{
+            case 12:{
                 m.printFinalDePaginas();
                 break;}
-            case 14:{
+            case 13:{
                 int rout; cout<<"\nIngresar router a acceder: ";cin>>rout;
                 for(int i = 0; i < 256; i++){
                     cout<<"\nTerminal: "<<i;
                     m.getRouterEspecifico(rout).getReceptor().at(i).getPaginasDisponibles();
                 } 
-                
-            }
+                break;}
+            case 19:
+                cout<<"\nReiniciando\n";
+                goto REINICIO;
             }
 
         

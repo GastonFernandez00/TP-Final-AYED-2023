@@ -3,22 +3,18 @@
 
 class Pagina{
 private:
-    int id_pagina;
+    int id_pagina;  //Identificador de la pagina
     int tamanio;//MAX = 500 //Tambien es la informacion en si misma
     int id_Destino = -1; //Router de Destino
     int id_Destino_Terminal = -1; //Terminal de Destino
-    
 
-    int  MaximaCantDePaginas = 256;
-    void checkIDPaginasPriv(Pagina*, Pagina*,int,int);
-    void setMaximaCantDePaginas(int);
 public:
 
     /* Establece el id de la pagina
        @param int     */
     void setID(int);
 
-    /*  Constructor de Clase
+    /*  Constructor de Clase {Ya no define ID}
         Define ID Y  TAMANIO    */
     Pagina();
 
@@ -33,9 +29,8 @@ public:
         @returns int    */
     int& getTamanio();
 
-    /*  Establece el Tamanio de la Pagina <= 500
-        @param int    */
-    void setTamanio(int);  
+    /*  Establece el Tamanio de la Pagina <= 500 */
+    void setTamanio();  
     
     /*  Devuelve el ID de la pagina
         @returns int*/
@@ -68,8 +63,5 @@ public:
         esta numerada de esa forma, independiente de las otras que esten conectadas
         a otros routers. Pero sin parametros.*/
     int getIDDestinoTerminal();
-
-    void checkIDPaginas(int);
-
 };
 #endif
