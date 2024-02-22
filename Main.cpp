@@ -82,7 +82,7 @@
 
 //     for(int i = 0; i < cantRouters; i++)
 //         for(int j = i*(cantdePaginas/t.size()); j < (1+i)*(cantdePaginas/t.size());j++){
-//             t.at(i).empaquetado(&p[j]);
+//             t.at(i).empaquetado(p[j]);
 //     }
 
 //     for(int i = 0; i < cantRouters; i++){

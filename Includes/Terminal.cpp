@@ -12,8 +12,8 @@ Terminal::Terminal(bool b){ determinante = b; if(determinante == 1) this->setIDT
 Terminal::~Terminal(){}
 
 void Terminal::empaquetado(Pagina &p){
-        cout<<"Entro\n";
-        int veces = 0;
+        // cout<<"Entro\n";
+        // int veces = 0;
         int numero_de_paquete = 0;
 
         if(this->getDeterminante() == 1){ 
@@ -32,27 +32,37 @@ void Terminal::empaquetado(Pagina &p){
             pAux = 0;
         }
 
-        while(p.getTamanio() >= 50){
-            veces++;
+        for(int i = 0; i < cantidadDeDivisiones; i++){
+            // veces++;
             numero_de_paquete++;
             Paquete aux;
-            aux.setDato(50);aux.setIds(&p); aux.setPackNumero(numero_de_paquete);
-            aux.setCantidadTotal(cantidadDeDivisiones);
-            int nuevo_tamanio = p.getTamanio()-50;
-            p.setTamanio(nuevo_tamanio);
+            if(p.getTamanio() > 50) aux.setDato(50);
+            else aux.setDato(p.getTamanio());
+            aux.setIds(&p); aux.setPackNumero(numero_de_paquete);aux.setCantidadTotal(cantidadDeDivisiones);
+            p.setTamanio(p.getTamanio()-50);
             pkg.push(aux);
         }
-        if(p.getTamanio() < 50 && p.getTamanio() > 0){
-            veces++;
-            numero_de_paquete++;
-            Paquete aux;
-            aux.setIds(&p); aux.setPackNumero(numero_de_paquete);
-            aux.setDato(p.getTamanio()); aux.setCantidadTotal(cantidadDeDivisiones);
-            p.setTamanio(0);
-            pkg.push(aux);
-        }
+        // while(p.getTamanio() >= 50){
+        //     veces++;
+        //     numero_de_paquete++;
+        //     Paquete aux;
+        //     aux.setDato(50);aux.setIds(&p); aux.setPackNumero(numero_de_paquete);
+        //     aux.setCantidadTotal(cantidadDeDivisiones);
+        //     int nuevo_tamanio = p.getTamanio()-50;
+        //     p.setTamanio(nuevo_tamanio);
+        //     pkg.push(aux);
+        // }
+        // if(p.getTamanio() < 50 && p.getTamanio() > 0){
+        //     veces++;
+        //     numero_de_paquete++;
+        //     Paquete aux;
+        //     aux.setIds(&p); aux.setPackNumero(numero_de_paquete);
+        //     aux.setDato(p.getTamanio()); aux.setCantidadTotal(cantidadDeDivisiones);
+        //     p.setTamanio(0);
+        //     pkg.push(aux);
+        // }
 
-        cout<<"Veces que creo paquetes: "<<veces<<endl;
+        // cout<<"Veces que creo paquetes: "<<veces<<endl;
 }
 
 void Terminal::setDeterminante(bool D){ determinante = D; }
