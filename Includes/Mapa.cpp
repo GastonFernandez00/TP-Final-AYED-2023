@@ -225,15 +225,13 @@ void Mapa::envioATerminales(){
         Router *r = &map.at(i).at(j);
         if(r->getIDRouter() != -1){
             for(int p = 0; p < r->getPaquetesPreparados().size(); p++){
+                if(!r->getPaquetesPreparados().at(p).empty())
                 if(r->getPaquetesPreparados().at(p).front().getDivisionesTotales() == r->getPaquetesPreparados().at(p).size()){
                     for(int ter = 0; ter < 256; ter++){
-                        bool encontrado = false;
-                        if(r->getPaquetesPreparados().size() > 0)
-                        if(!encontrado && r->getPaquetesPreparados().at(p).front().getIDDestinoTerminal() == r->getReceptor().at(ter).getIDTerminal()){
-                            
+                        if(r->getPaquetesPreparados().at(p).front().getIDDestinoTerminal() == r->getReceptor().at(ter).getIDTerminal()){
                             r->getReceptor().at(ter).recibePaquetes(r->getPaquetesPreparados().at(p));
                             r->getPaquetesPreparados().erase(r->getPaquetesPreparados().begin()+p);
-                            if(p > 0) p--;
+                            break;
                         }
                     }
                 }
@@ -241,16 +239,7 @@ void Mapa::envioATerminales(){
             }
 
         }
-
-
-
-
-
     }
-    
-
-
-
     this->armadoDePaginas();
 }
 

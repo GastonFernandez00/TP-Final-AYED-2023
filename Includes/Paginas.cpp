@@ -5,15 +5,19 @@
 //#include <stdio.h>
 using namespace std;
 
-Pagina::Pagina(){ srand(time(nullptr)); setTamanio(rand()); setID(rand()); setIDDestino(); setidDestinoTerminal();}
+Pagina::Pagina(){ setTamanio(0); setID(rand()); setIDDestino(); setidDestinoTerminal();}
 Pagina::Pagina(int n){ srand(time(nullptr)); setTamanio(n); setID(rand()); setIDDestino(); setidDestinoTerminal();}
 
 Pagina::~Pagina(){ }
 
-void Pagina::setTamanio(int n){ tamanio = n%501; }
+void Pagina::setTamanio(int n){
+    random_device rd;
+    uniform_int_distribution<int> dist(1,500);
+    tamanio = dist(rd); 
+}
 int Pagina::getTamanio(){ return tamanio; }
 
-void Pagina::setID(int n){ id_pagina = n%MaximaCantDePaginas; }
+void Pagina::setID(int n){ id_pagina = n; }
 int Pagina::getID(){ return id_pagina; }
 
 void Pagina::setIDDestino(int d){ id_Destino = d%256; }
