@@ -195,31 +195,38 @@ void Mapa::envioEntreRouters(){
 }
 
 void Mapa::RearmadoDePaquetes(){
-    for(int i = 0; i < tamanioCuadradoMapa; i++)
-        for(int j = 0; j < tamanioCuadradoMapa; j++)
+    for(int i = 0; i < tamanioCuadradoMapa; i++) for(int j = 0; j < tamanioCuadradoMapa; j++)
+            
             if(map.at(i).at(j).getIDRouter() != -1 && map.at(i).at(j).getSizeBuffer() > 0){
                 while(map.at(i).at(j).getSizeBuffer() > 0){
-                    //if(map.at(i).at(j).getSizeBuffer() > 0){
-                        bool encontrado = false, index; 
-                        for(int iter = 0; iter < map.at(i).at(j).getPaquetesPreparados().size(); iter++){
-                            if(map.at(i).at(j).getPaquetesPreparados().at(iter).front().getIdPertenencia()
-                            == map.at(i).at(j).getBufferRouter().front().getIdPertenencia()
-                            && encontrado == false){encontrado = true;index = iter;}
+
+                        if(map.at(i).at(j).getPaquetesPreparados().size() <= 0){
+                            queue<Paquete> aux;
+                            aux.push( map.at(i).at(j).getBufferRouter().front());
+                            map.at(i).at(j).getPaquetesPreparados().push_back(aux);
+                            map.at(i).at(j).getBufferRouter().pop();
                         }
+                        else{
+                            bool encontrado = false;
+                            for(int iter = 0; iter < map.at(i).at(j).getPaquetesPreparados().size();iter++){
+                                if(map.at(i).at(j).getPaquetesPreparados().at(iter).front().getIdPertenencia()
+                                == map.at(i).at(j).getBufferRouter().front().getIdPertenencia() && encontrado == false){
+                                    map.at(i).at(j).getPaquetesPreparados().at(iter).push(map.at(i).at(j).getBufferRouter().front());
+                                    map.at(i).at(j).getBufferRouter().pop();
+                                    encontrado = true;
+                                }
+                            }
                             if(encontrado == false){
-                                queue<Paquete> aux; 
-                                aux.push( map.at(i).at(j).getBufferRouter().front());
-                                map.at(i).at(j).getPaquetesPreparados().push_back(aux);
-                                map.at(i).at(j).getBufferRouter().pop();
-                            }
-                            else{
-                                map.at(i).at(j).getPaquetesPreparados().at(index).push(map.at(i).at(j).getBufferRouter().front());
-                                map.at(i).at(j).getBufferRouter().pop();
-                            }
+                                    queue<Paquete> aux;
+                                    aux.push( map.at(i).at(j).getBufferRouter().front());
+                                    map.at(i).at(j).getPaquetesPreparados().push_back(aux);
+                                    map.at(i).at(j).getBufferRouter().pop();
+                                }
                         }
                 }
- //           }
+            }
 }
+
 
 void Mapa::envioATerminales(){
     for(int i = 0; i < tamanioCuadradoMapa; i++) for(int j = 0; j < tamanioCuadradoMapa; j++){
