@@ -1,3 +1,10 @@
+/*     
+        Final Regular Algoritmos y Estructuras de Datos (AYED)
+
+        >Alumno: Fernández, Gastón Emanuel.
+        >Matrícula: 42.386.463.
+        >Carrera: Ingeniería en Computación.
+*/
 #include <iostream>
 #include ".\Includes\Mapa.h"
 using namespace std;
