@@ -7,6 +7,11 @@
 auto comparador_t = [](const auto& a, const auto& b) {
         return a.second < b.second;
 };
+
+auto comparador_t_mayAmen = [](const auto& a, const auto& b) {
+        return a.second > b.second;
+};
+
 using namespace std;
 
 Terminal::Terminal(){  this->setIDTerminal(); }
@@ -101,13 +106,21 @@ void Terminal::rearmarPaginas(queue<Paquete> &p){
     nueva_p.setID(p.front().getIdPertenencia());
     nueva_p.setidDestinoTerminal(p.front().getIDDestinoTerminal());
     nueva_p.setIDDestino(p.front().getIDDestino());
-
+    vector<pair<Paquete,int>> vec;
+    while(p.size() > 0){
+        vec.push_back(pair<Paquete,int>(p.front(),p.front().getPackNumero()));
+        p.pop();
+    }
+    //Organiza el vector, de mayor a menor, teniendo en cuenta el valor
+    //del "Numero de Paquete", que indica qué paquete del total es
+    //Es de mayor a menor, para que los primero esten al final del vector y poder usar pop_back()
+    sort(vec.begin(),vec.end(),comparador_t_mayAmen);
     int tamanio = 0;
     //Mientras la cola tenga paquetes, toma su informacion y se la pasa a la pagina
     //y luego descarta el paquete, para continuar con el que sigue
-    while(p.size() > 0){ 
-        tamanio += p.front().getDato();
-        p.pop();
+    while(vec.size() > 0){ 
+        tamanio += vec.back().first.getDato();
+        vec.pop_back();
     }
     nueva_p.getTamanio() = tamanio;
     paginasDisponibles.push_back(nueva_p);
