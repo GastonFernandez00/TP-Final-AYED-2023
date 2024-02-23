@@ -3,11 +3,11 @@
 using namespace std;
 
 random_device rd;
-uniform_int_distribution<int> dist(0,256);
-uniform_int_distribution<int> paginas(0,1000);
+uniform_int_distribution<int> dist(1,256);
+uniform_int_distribution<int> paginas(1,1000);
 
 
-void printBufferRedir(Mapa m){
+void printBufferRedir(Mapa m){//Imprime los paquetes que se van a redireccionar de cada router
     for(int i = 0; i < m.getMapa().size(); i ++){
         for(int j = 0 ; j < m.getMapa().size(); j++){
             if(m.getMapa().at(i).at(j).getIDRouter() == -1){
@@ -21,7 +21,7 @@ void printBufferRedir(Mapa m){
     }
 }
 
-void printBuffer(Mapa m){
+void printBuffer(Mapa m){//Imprime los paquetes que NO se van a redireccionar de cada router
     for(int i = 0; i < m.getMapa().size(); i ++){
         for(int j = 0 ; j < m.getMapa().size(); j++){
             if(m.getMapa().at(i).at(j).getIDRouter() == -1){
@@ -35,7 +35,7 @@ void printBuffer(Mapa m){
     }
 }
 
-void printPaquetesListos(Mapa m){
+void printPaquetesListos(Mapa m){//Imprime las colas de paquetes que existen en cada router
     for(int i = 0; i < m.getMapa().size(); i ++){
         for(int j = 0 ; j < m.getMapa().size(); j++){
             if(m.getMapa().at(i).at(j).getIDRouter() == -1){
@@ -48,19 +48,6 @@ void printPaquetesListos(Mapa m){
         cout<<endl;
     }
 }
-
-void redirvacio(Mapa m){
-    bool vacio = true;
-    for(int i = 0; i < m.getMapa().size(); i ++){
-        for(int j = 0 ; j < m.getMapa().size(); j++){
-            if(m.getMapa().at(i).at(j).getIDRouter() == -1 &&
-            m.getMapa().at(i).at(j).getSizeBufferRedireccionamiento() > 0){
-                vacio = false;
-                m.getMapa().at(i).at(j).printPosicionRouter();
-            }}}
-           
-}
-
 int main(int argc, char const *argv[]){
 REINICIO:
 
